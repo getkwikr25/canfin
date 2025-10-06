@@ -25,7 +25,19 @@ conductRoutes.post('/detect/unauthorized-conversions', async (c) => {
       return c.json(createApiResponse(null, 'Access denied', requestId), 403)
     }
     
-    const { entity_id, date_range = 30 } = await c.req.json()
+    let requestData;
+    try {
+      requestData = await c.req.json()
+    } catch (jsonError) {
+      return c.json(createApiResponse(null, 'Invalid JSON in request body', requestId), 400)
+    }
+    
+    const { entity_id, date_range = 30 } = requestData
+    // Check if database is available
+    if (!c.env?.DB) {
+      return c.json(createApiResponse(null, 'Database not available', requestId), 503)
+    }
+    
     const db = new DatabaseService(c.env.DB)
     
     // Check access permissions
@@ -48,7 +60,7 @@ conductRoutes.post('/detect/unauthorized-conversions', async (c) => {
     }
     
     // Log regulatory surveillance activity
-    await db.logAction(userPayload.user_id, 'conduct_surveillance', 'unauthorized_conversions', entity_id)
+    await db.logAction(userPayload.user_id, 'conduct_surveillance', 'unauthorized_conversions', entity_id || undefined)
     
     return c.json(createApiResponse(analysis, null, requestId))
     
@@ -92,7 +104,7 @@ conductRoutes.post('/detect/synthetic-customers', async (c) => {
       next_steps: generateInvestigativeSteps(syntheticPatterns)
     }
     
-    await db.logAction(userPayload.user_id, 'fraud_detection', 'synthetic_customers', entity_id)
+    await db.logAction(userPayload.user_id, 'fraud_detection', 'synthetic_customers', entity_id || undefined)
     
     return c.json(createApiResponse(analysis, null, requestId))
     
@@ -131,7 +143,7 @@ conductRoutes.post('/detect/jurisdiction-violations', async (c) => {
       enforcement_recommendations: generateEnforcementActions(jurisdictionViolations)
     }
     
-    await db.logAction(userPayload.user_id, 'cross_jurisdiction_surveillance', 'sales_violations', entity_id)
+    await db.logAction(userPayload.user_id, 'cross_jurisdiction_surveillance', 'sales_violations', entity_id || undefined)
     
     return c.json(createApiResponse(analysis, null, requestId))
     
@@ -170,7 +182,7 @@ conductRoutes.post('/detect/fronting-arrangements', async (c) => {
       supervisory_actions: recommendSupervisoryActions(frontingPatterns)
     }
     
-    await db.logAction(userPayload.user_id, 'fronting_surveillance', 'arrangement_detection', entity_id)
+    await db.logAction(userPayload.user_id, 'fronting_surveillance', 'arrangement_detection', entity_id || undefined)
     
     return c.json(createApiResponse(analysis, null, requestId))
     
@@ -209,7 +221,7 @@ conductRoutes.post('/detect/client-borrowing', async (c) => {
       client_protection_measures: recommendClientProtections(borrowingViolations)
     }
     
-    await db.logAction(userPayload.user_id, 'ethics_surveillance', 'client_borrowing', entity_id)
+    await db.logAction(userPayload.user_id, 'ethics_surveillance', 'client_borrowing', entity_id || undefined)
     
     return c.json(createApiResponse(analysis, null, requestId))
     
@@ -255,7 +267,7 @@ conductRoutes.get('/dashboard/conduct-risk', async (c) => {
       coordination_alerts: conductIntelligence.coordination_needed
     }
     
-    await db.logAction(userPayload.user_id, 'conduct_dashboard_access', 'system', null)
+    await db.logAction(userPayload.user_id, 'conduct_dashboard_access', 'system', undefined)
     
     return c.json(createApiResponse(dashboard, null, requestId))
     

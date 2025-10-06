@@ -163,48 +163,76 @@ app.get('/framework', async (c) => {
 // Submit securities filing
 app.post('/filings', async (c) => {
   const { env } = c
-  const filingData = await c.req.json()
   
   try {
+    // Check if database is available
+    if (!env?.DB) {
+      return c.json({ success: false, error: 'Database not available' }, 503)
+    }
+    
+    let filingData;
+    try {
+      filingData = await c.req.json()
+    } catch (jsonError) {
+      return c.json({ success: false, error: 'Invalid JSON in request body' }, 400)
+    }
+    // Validate required fields
+    if (!filingData.filing_type) {
+      return c.json({ success: false, error: 'Filing type is required' }, 400)
+    }
+    if (!filingData.entity_id) {
+      return c.json({ success: false, error: 'Entity ID is required' }, 400)
+    }
+    
     // Validate filing type
     const filingType = SECURITIES_FILINGS[filingData.filing_type]
     if (!filingType) {
-      return c.json({ success: false, error: 'Invalid securities filing type' })
+      return c.json({ success: false, error: 'Invalid securities filing type' }, 400)
     }
     
-    // Get entity information
+    // Get entity information - use entities table instead of securities_entities
+    // since we need to be compatible with the main database schema
     const entity = await env.DB.prepare(`
-      SELECT * FROM securities_entities WHERE id = ?
+      SELECT * FROM entities WHERE id = ? AND type IN ('bank', 'insurance', 'investment_firm', 'broker_dealer')
     `).bind(filingData.entity_id).first()
     
     if (!entity) {
-      return c.json({ success: false, error: 'Securities entity not found' })
+      return c.json({ success: false, error: 'Securities entity not found or not eligible for securities filings' }, 404)
     }
     
-    // Check filing applicability
-    if (!filingType.applicable_entities.includes(entity.entity_type)) {
+    // Check filing applicability based on entity type mapping
+    const entityTypeMapping = {
+      'bank': 'reporting_issuers',
+      'insurance': 'reporting_issuers', 
+      'investment_firm': 'investment_dealers',
+      'broker_dealer': 'investment_dealers'
+    }
+    
+    const applicableEntityType = entityTypeMapping[entity.type as keyof typeof entityTypeMapping]
+    if (!applicableEntityType || !filingType.applicable_entities.includes(applicableEntityType)) {
       return c.json({ 
         success: false, 
-        error: 'Filing type not applicable to this entity type' 
-      })
+        error: `Filing type '${filingData.filing_type}' not applicable to entity type '${entity.type}'`
+      }, 400)
     }
     
     // Calculate deadline
     const deadline = calculateFilingDeadline(filingType, filingData.reporting_period)
     
-    // Create securities filing
+    // Create securities filing using the standard filings table
     const filingResult = await env.DB.prepare(`
-      INSERT INTO securities_filings (
-        entity_id, filing_type, reporting_period, filing_data,
-        deadline, status, submission_system, created_at
-      ) VALUES (?, ?, ?, ?, ?, 'draft', ?, CURRENT_TIMESTAMP)
+      INSERT INTO filings (
+        entity_id, filing_type, status, data, risk_score
+      ) VALUES (?, ?, 'draft', ?, 5.0)
     `).bind(
       filingData.entity_id,
-      filingData.filing_type,
-      filingData.reporting_period,
-      JSON.stringify(filingData),
-      deadline,
-      filingType.system
+      `securities_${filingData.filing_type}`,
+      JSON.stringify({
+        ...filingData,
+        reporting_period: filingData.reporting_period,
+        deadline: deadline,
+        submission_system: filingType.system
+      })
     ).run()
     
     const filingId = filingResult.meta.last_row_id
@@ -212,15 +240,16 @@ app.post('/filings', async (c) => {
     // Perform securities-specific validation
     const validationResults = await validateSecuritiesFiling(filingData, filingType, entity)
     
-    // Store validation results
+    // Store validation results in filing record
     await env.DB.prepare(`
-      INSERT INTO securities_validations (
-        filing_id, validation_results, validation_status, created_at
-      ) VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+      UPDATE filings SET 
+        validation_errors = ?,
+        status = ?
+      WHERE id = ?
     `).bind(
-      filingId,
       JSON.stringify(validationResults),
-      validationResults.overall_status
+      validationResults.overall_status === 'passed' ? 'validated' : 'validation_failed',
+      filingId
     ).run()
     
     // Auto-submit if validation passes
@@ -241,32 +270,71 @@ app.post('/filings', async (c) => {
     
   } catch (error) {
     console.error('Securities filing error:', error)
-    return c.json({ success: false, error: 'Securities filing failed' })
+    
+    // Handle specific database errors
+    if (error.message && error.message.includes('no such table')) {
+      return c.json({ 
+        success: false, 
+        error: 'Database schema error - required tables not found' 
+      }, 503)
+    }
+    
+    if (error.message && error.message.includes('UNIQUE constraint')) {
+      return c.json({ 
+        success: false, 
+        error: 'Duplicate filing - this filing may already exist' 
+      }, 409)
+    }
+    
+    return c.json({ 
+      success: false, 
+      error: 'Securities filing processing failed',
+      details: 'Please check your request data and try again'
+    }, 500)
   }
 })
 
 // Market surveillance monitoring
 app.post('/surveillance/monitor', async (c) => {
   const { env } = c
-  const { trading_data, entity_id, symbol } = await c.req.json()
   
   try {
+    // Check if database is available
+    if (!env?.DB) {
+      return c.json({ success: false, error: 'Database not available' }, 503)
+    }
+    
+    let requestData;
+    try {
+      requestData = await c.req.json()
+    } catch (jsonError) {
+      return c.json({ success: false, error: 'Invalid JSON in request body' }, 400)
+    }
+    
+    const { trading_data, entity_id, symbol } = requestData
+    
+    // Validate required fields
+    if (!trading_data || !entity_id || !symbol) {
+      return c.json({ 
+        success: false, 
+        error: 'Missing required fields: trading_data, entity_id, symbol' 
+      }, 400)
+    }
     // Analyze trading patterns
     const surveillanceResults = await analyzeTrading(trading_data, symbol)
     
-    // Store surveillance data
+    // Store surveillance data using risk_assessments table
     const surveillanceResult = await env.DB.prepare(`
-      INSERT INTO market_surveillance (
-        entity_id, symbol, trading_date, trading_data,
-        surveillance_results, alert_level, created_at
-      ) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+      INSERT INTO risk_assessments (
+        entity_id, assessment_type, risk_score, risk_factors, 
+        recommendations, created_by
+      ) VALUES (?, 'market_surveillance', ?, ?, ?, 1)
     `).bind(
       entity_id,
-      symbol,
-      trading_data.trading_date,
-      JSON.stringify(trading_data),
-      JSON.stringify(surveillanceResults),
-      surveillanceResults.alert_level
+      surveillanceResults.alert_level === 'high' ? 9.0 : 
+      surveillanceResults.alert_level === 'medium' ? 6.0 : 3.0,
+      JSON.stringify(surveillanceResults.flags),
+      JSON.stringify(surveillanceResults.recommendations)
     ).run()
     
     // Create alerts for significant findings
@@ -286,23 +354,55 @@ app.post('/surveillance/monitor', async (c) => {
     
   } catch (error) {
     console.error('Market surveillance error:', error)
-    return c.json({ success: false, error: 'Market surveillance failed' })
+    
+    if (error.message && error.message.includes('no such table')) {
+      return c.json({ 
+        success: false, 
+        error: 'Database schema error - surveillance tables not found' 
+      }, 503)
+    }
+    
+    return c.json({ 
+      success: false, 
+      error: 'Market surveillance processing failed',
+      details: 'Please check your request data and try again'
+    }, 500)
   }
 })
 
 // Insider trading analysis
 app.post('/insider-analysis', async (c) => {
   const { env } = c
-  const { insider_id, trading_activity, material_events } = await c.req.json()
   
   try {
-    // Get insider information
+    // Check if database is available
+    if (!env?.DB) {
+      return c.json({ success: false, error: 'Database not available' }, 503)
+    }
+    
+    let requestData;
+    try {
+      requestData = await c.req.json()
+    } catch (jsonError) {
+      return c.json({ success: false, error: 'Invalid JSON in request body' }, 400)
+    }
+    
+    const { insider_id, trading_activity, material_events } = requestData
+    
+    // Validate required fields
+    if (!insider_id || !trading_activity) {
+      return c.json({ 
+        success: false, 
+        error: 'Missing required fields: insider_id, trading_activity' 
+      }, 400)
+    }
+    // Get insider information - use users table as proxy since insiders table may not exist
     const insider = await env.DB.prepare(`
-      SELECT * FROM insiders WHERE id = ?
+      SELECT * FROM users WHERE id = ? AND role IN ('insider', 'executive', 'board_member')
     `).bind(insider_id).first()
     
     if (!insider) {
-      return c.json({ success: false, error: 'Insider not found' })
+      return c.json({ success: false, error: 'Insider not found or invalid insider role' }, 404)
     }
     
     // Analyze trading patterns relative to material events
@@ -346,7 +446,19 @@ app.post('/insider-analysis', async (c) => {
     
   } catch (error) {
     console.error('Insider analysis error:', error)
-    return c.json({ success: false, error: 'Insider analysis failed' })
+    
+    if (error.message && error.message.includes('no such table')) {
+      return c.json({ 
+        success: false, 
+        error: 'Database schema error - required tables not found' 
+      }, 503)
+    }
+    
+    return c.json({ 
+      success: false, 
+      error: 'Insider analysis processing failed',
+      details: 'Please check your request data and try again'
+    }, 500)
   }
 })
 
@@ -446,11 +558,10 @@ async function validateSecuritiesFiling(filingData: any, filingType: any, entity
 async function submitToSecuritiesSystem(env: any, filingId: number, system: string, filingData: any) {
   // Update filing status to submitted
   await env.DB.prepare(`
-    UPDATE securities_filings 
-    SET status = 'submitted', submitted_at = CURRENT_TIMESTAMP,
-        external_reference = ?
+    UPDATE filings 
+    SET status = 'submitted'
     WHERE id = ?
-  `).bind(`${system.toUpperCase()}-${Date.now()}`, filingId).run()
+  `).bind(filingId).run()
 }
 
 async function analyzeTrading(tradingData: any, symbol: string) {

@@ -28,21 +28,145 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>()
 
+// Global error handling middleware
+app.onError((err, c) => {
+  console.error('Application error:', err)
+  
+  // Handle specific error types
+  if (err.message.includes('Invalid JSON') || err.message.includes('Unexpected token') || err.message.includes('JSON.parse')) {
+    return c.json({ 
+      success: false, 
+      error: 'Invalid JSON format in request body',
+      details: 'Please check your request body syntax' 
+    }, 400)
+  }
+  
+  if (err.message.includes('Method not allowed') || err.message.includes('405')) {
+    return c.json({ 
+      success: false, 
+      error: 'HTTP method not allowed for this endpoint',
+      details: 'Check the API documentation for supported methods' 
+    }, 405)
+  }
+  
+  // Database connection errors
+  if (err.message.includes('database') || err.message.includes('DB') || err.message.includes('sqlite')) {
+    return c.json({ 
+      success: false, 
+      error: 'Database connection error',
+      details: 'Please try again later' 
+    }, 503)
+  }
+  
+  // Authentication errors
+  if (err.message.includes('Unauthorized') || err.message.includes('403') || err.message.includes('401')) {
+    return c.json({ 
+      success: false, 
+      error: 'Authentication required',
+      details: 'Please login or check your credentials' 
+    }, 401)
+  }
+  
+  // Default to 500 for unhandled errors
+  return c.json({ 
+    success: false, 
+    error: 'Internal server error',
+    details: 'An unexpected error occurred' 
+  }, 500)
+})
+
+// Handle 404 for non-existent routes
+app.notFound((c) => {
+  return c.json({
+    success: false,
+    error: 'Endpoint not found',
+    details: `The requested endpoint ${c.req.method} ${c.req.path} does not exist`,
+    available_endpoints: [
+      'GET /api/health',
+      'POST /api/auth/login',
+      'GET /api/dashboard',
+      'GET /api/entities',
+      'GET /api/filings',
+      'GET /api/risk',
+      'GET /api/conduct',
+      'GET /api/securities'
+    ]
+  }, 404)
+})
+
+// JSON parsing middleware with error handling
+app.use('/api/*', async (c, next) => {
+  if (c.req.method === 'POST' || c.req.method === 'PUT' || c.req.method === 'PATCH') {
+    try {
+      // Pre-validate JSON if request has body
+      const contentType = c.req.header('content-type')
+      if (contentType && contentType.includes('application/json')) {
+        const text = await c.req.text()
+        if (text) {
+          try {
+            JSON.parse(text)
+          } catch (jsonError) {
+            return c.json({
+              success: false,
+              error: 'Invalid JSON format in request body',
+              details: 'Please check your JSON syntax'
+            }, 400)
+          }
+        }
+      }
+    } catch (error) {
+      return c.json({
+        success: false,
+        error: 'Request parsing error',
+        details: 'Unable to parse request body'
+      }, 400)
+    }
+  }
+  await next()
+})
+
 // Enable CORS for all API routes
 app.use('/api/*', cors())
 
 // Serve static files from public directory
 app.use('/static/*', serveStatic({ root: './public' }))
 
-// Health check endpoint
-app.get('/api/health', (c) => {
-  return c.json({
-    success: true,
-    service: 'CFRP Platform',
-    timestamp: new Date().toISOString(),
-    version: '1.0.0',
-    status: 'healthy'
-  })
+// Health check endpoint with comprehensive status
+app.get('/api/health', async (c) => {
+  try {
+    // Test database connection if available
+    let dbStatus = 'unknown'
+    if (c.env?.DB) {
+      try {
+        await c.env.DB.prepare('SELECT 1').first()
+        dbStatus = 'connected'
+      } catch (dbError) {
+        dbStatus = 'disconnected'
+      }
+    }
+    
+    return c.json({
+      success: true,
+      service: 'CFRP Platform',
+      timestamp: new Date().toISOString(),
+      version: '1.0.0',
+      status: 'healthy',
+      components: {
+        database: dbStatus,
+        api: 'operational',
+        authentication: 'operational'
+      }
+    })
+  } catch (error) {
+    return c.json({
+      success: false,
+      service: 'CFRP Platform',
+      timestamp: new Date().toISOString(),
+      version: '1.0.0',
+      status: 'unhealthy',
+      error: 'Health check failed'
+    }, 500)
+  }
 })
 
 // Authentication routes (no auth middleware needed)
@@ -82,6 +206,32 @@ app.route('/api/securities', securitiesAPI)
 app.route('/api/insurance', insuranceAPI)
 app.route('/api/pensions', pensionsAPI)
 app.route('/api/payments', paymentsAPI)
+
+// Handle unsupported HTTP methods on existing API paths (after specific routes)
+// This will catch method mismatches on valid API paths
+app.all('/api/health', (c) => {
+  if (c.req.method !== 'GET') {
+    return c.json({
+      success: false,
+      error: 'Method not allowed',
+      details: `HTTP method ${c.req.method} is not supported for /api/health`,
+      supported_methods: ['GET'],
+      path: c.req.path
+    }, 405)
+  }
+})
+
+app.all('/api/auth/*', (c) => {
+  if (!['GET', 'POST'].includes(c.req.method)) {
+    return c.json({
+      success: false,
+      error: 'Method not allowed', 
+      details: `HTTP method ${c.req.method} is not supported for authentication endpoints`,
+      supported_methods: ['GET', 'POST'],
+      path: c.req.path
+    }, 405)
+  }
+})
 
 // Favicon route to prevent 500 errors
 app.get('/favicon.ico', (c) => {
