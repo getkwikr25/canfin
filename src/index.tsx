@@ -168,6 +168,22 @@ app.get('/', (c) => {
                         </div>
                     </div>
                     <div class="flex items-center space-x-4">
+                        <!-- Language Selector -->
+                        <div class="relative">
+                            <button id="languageToggle" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                                <i class="fas fa-globe mr-2"></i>
+                                <span id="currentLanguage">EN</span>
+                                <i class="fas fa-chevron-down ml-1"></i>
+                            </button>
+                            <div id="languageDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-50">
+                                <a href="#" onclick="CFRP.setLanguage('en')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-flag mr-2"></i>English
+                                </a>
+                                <a href="#" onclick="CFRP.setLanguage('fr')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-flag mr-2"></i>Français
+                                </a>
+                            </div>
+                        </div>
                         <button id="loginBtn" class="bg-cfrp-green hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium">
                             <i class="fas fa-sign-in-alt mr-1"></i>
                             <span data-i18n="login">Login</span>
@@ -211,9 +227,9 @@ app.get('/', (c) => {
                         <div>
                             <h1 id="pageTitle" class="text-3xl font-bold text-gray-900">
                                 <i id="pageTitleIcon" class="fas fa-tachometer-alt mr-3 text-blue-600"></i>
-                                <span id="pageTitleText">Dashboard Overview</span>
+                                <span id="pageTitleText" data-i18n="dashboard_overview">Dashboard Overview</span>
                             </h1>
-                            <p id="pageSubtitle" class="mt-2 text-gray-600">
+                            <p id="pageSubtitle" class="mt-2 text-gray-600" data-i18n="dashboard_subtitle">
                                 Comprehensive regulatory oversight and compliance management platform
                             </p>
                         </div>
@@ -227,7 +243,7 @@ app.get('/', (c) => {
                     <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm font-medium text-gray-600">Total Entities</p>
+                                <p class="text-sm font-medium text-gray-600" data-i18n="total_entities">Total Entities</p>
                                 <p class="text-3xl font-bold text-cfrp-blue" id="totalEntities">-</p>
                             </div>
                             <div class="text-cfrp-blue">
@@ -239,7 +255,7 @@ app.get('/', (c) => {
                     <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm font-medium text-gray-600">Pending Filings</p>
+                                <p class="text-sm font-medium text-gray-600" data-i18n="pending_filings">Pending Filings</p>
                                 <p class="text-3xl font-bold text-cfrp-gold" id="pendingFilings">-</p>
                             </div>
                             <div class="text-cfrp-gold">
@@ -251,7 +267,7 @@ app.get('/', (c) => {
                     <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm font-medium text-gray-600">High Risk Alerts</p>
+                                <p class="text-sm font-medium text-gray-600" data-i18n="high_risk_alerts">High Risk Alerts</p>
                                 <p class="text-3xl font-bold text-red-600" id="riskAlerts">-</p>
                             </div>
                             <div class="text-red-600">
@@ -263,7 +279,7 @@ app.get('/', (c) => {
                     <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm font-medium text-gray-600">Open Cases</p>
+                                <p class="text-sm font-medium text-gray-600" data-i18n="open_cases">Open Cases</p>
                                 <p class="text-3xl font-bold text-cfrp-green" id="openCases">-</p>
                             </div>
                             <div class="text-cfrp-green">
@@ -280,7 +296,7 @@ app.get('/', (c) => {
                         <div class="bg-white rounded-lg shadow">
                             <div class="p-6 text-center">
                                 <div class="spinner mx-auto mb-4"></div>
-                                <p class="text-gray-600">Loading entities...</p>
+                                <p class="text-gray-600" data-i18n="loading_entities">Loading entities...</p>
                             </div>
                         </div>
                     </div>
@@ -290,7 +306,7 @@ app.get('/', (c) => {
                         <div class="bg-white rounded-lg shadow">
                             <div class="p-6 text-center">
                                 <div class="spinner mx-auto mb-4"></div>
-                                <p class="text-gray-600">Loading filings...</p>
+                                <p class="text-gray-600" data-i18n="loading_filings">Loading filings...</p>
                             </div>
                         </div>
                     </div>
@@ -300,7 +316,7 @@ app.get('/', (c) => {
                         <div class="bg-white rounded-lg shadow">
                             <div class="p-6 text-center">
                                 <div class="spinner mx-auto mb-4"></div>
-                                <p class="text-gray-600">Loading alerts...</p>
+                                <p class="text-gray-600" data-i18n="loading_alerts">Loading alerts...</p>
                             </div>
                         </div>
                     </div>
@@ -310,7 +326,7 @@ app.get('/', (c) => {
                         <div class="bg-white rounded-lg shadow">
                             <div class="p-6 text-center">
                                 <div class="spinner mx-auto mb-4"></div>
-                                <p class="text-gray-600">Loading statistics...</p>
+                                <p class="text-gray-600" data-i18n="loading_statistics">Loading statistics...</p>
                             </div>
                         </div>
                     </div>
@@ -363,7 +379,7 @@ app.get('/', (c) => {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-gray-900 mb-6">How CFRP Works</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="how_cfrp_works_description">
                         The Canadian Financial Regulatory Platform transforms how financial institutions interact with regulators, 
                         creating a unified ecosystem for compliance, oversight, and consumer protection.
                     </p>
@@ -376,30 +392,30 @@ app.get('/', (c) => {
                             <h3 class="text-2xl font-bold text-cfrp-blue mb-4">
                                 <i class="fas fa-university mr-3"></i>What is CFRP?
                             </h3>
-                            <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                            <p class="text-gray-700 text-lg leading-relaxed mb-6" data-i18n="cfrp_description">
                                 CFRP is Canada's first unified regulatory technology platform that connects all major financial regulators 
                                 (OSFI, FCAC, FSRA, AMF) with financial institutions through a single, intelligent interface.
                             </p>
                             <div class="space-y-3">
                                 <div class="flex items-center">
                                     <i class="fas fa-check-circle text-green-600 mr-3"></i>
-                                    <span class="text-gray-700">One platform for all regulatory interactions</span>
+                                    <span class="text-gray-700" data-i18n="one_platform_feature">One platform for all regulatory interactions</span>
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fas fa-check-circle text-green-600 mr-3"></i>
-                                    <span class="text-gray-700">AI-powered compliance monitoring</span>
+                                    <span class="text-gray-700" data-i18n="ai_compliance_monitoring">AI-powered compliance monitoring</span>
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fas fa-check-circle text-green-600 mr-3"></i>
-                                    <span class="text-gray-700">Real-time risk assessment and alerts</span>
+                                    <span class="text-gray-700" data-i18n="realtime_risk_assessment">Real-time risk assessment and alerts</span>
                                 </div>
                             </div>
                         </div>
                         <div class="text-center">
                             <div class="bg-gradient-to-br from-cfrp-blue to-blue-800 rounded-lg p-8 text-white">
                                 <i class="fas fa-network-wired text-6xl mb-4 opacity-80"></i>
-                                <h4 class="text-xl font-semibold mb-2">Unified Ecosystem</h4>
-                                <p class="opacity-90">Connecting regulators and institutions across Canada</p>
+                                <h4 class="text-xl font-semibold mb-2" data-i18n="unified_ecosystem">Unified Ecosystem</h4>
+                                <p class="opacity-90" data-i18n="connecting_regulators_text">Connecting regulators and institutions across Canada</p>
                             </div>
                         </div>
                     </div>
@@ -407,7 +423,7 @@ app.get('/', (c) => {
 
                 <!-- How it Works Process -->
                 <div class="mb-16">
-                    <h3 class="text-3xl font-bold text-center text-gray-900 mb-12">The CFRP Process</h3>
+                    <h3 class="text-3xl font-bold text-center text-gray-900 mb-12" data-i18n="cfrp_process">The CFRP Process</h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <!-- Step 1 -->
@@ -418,7 +434,7 @@ app.get('/', (c) => {
                             <div class="bg-white rounded-lg shadow-md p-6 h-full">
                                 <i class="fas fa-upload text-cfrp-blue text-3xl mb-4"></i>
                                 <h4 class="text-xl font-bold mb-3 text-gray-900">Centralized Filing</h4>
-                                <p class="text-gray-600">
+                                <p class="text-gray-600" data-i18n="centralized_filing_description">
                                     Financial institutions use CFRP's unified portal to submit regulatory data. 
                                     Single interface streamlines compliance workflows across multiple agencies.
                                 </p>
@@ -433,7 +449,7 @@ app.get('/', (c) => {
                             <div class="bg-white rounded-lg shadow-md p-6 h-full">
                                 <i class="fas fa-search-plus text-cfrp-green text-3xl mb-4"></i>
                                 <h4 class="text-xl font-bold mb-3 text-gray-900">Risk Analysis</h4>
-                                <p class="text-gray-600">
+                                <p class="text-gray-600" data-i18n="risk_analysis_description">
                                     Advanced algorithms analyze submissions for risk patterns, misconduct indicators, 
                                     and compliance issues using behavioral analytics and pattern recognition.
                                 </p>
@@ -448,7 +464,7 @@ app.get('/', (c) => {
                             <div class="bg-white rounded-lg shadow-md p-6 h-full">
                                 <i class="fas fa-chart-line text-cfrp-gold text-3xl mb-4"></i>
                                 <h4 class="text-xl font-bold mb-3 text-gray-900">Regulatory Oversight</h4>
-                                <p class="text-gray-600">
+                                <p class="text-gray-600" data-i18n="regulatory_oversight_description">
                                     Regulators access comprehensive dashboards, risk alerts, and investigation tools 
                                     for enhanced supervision and proactive consumer protection.
                                 </p>
@@ -459,27 +475,27 @@ app.get('/', (c) => {
 
                 <!-- Key Goals -->
                 <div class="bg-gradient-to-r from-cfrp-blue to-blue-800 rounded-xl text-white p-8 mb-12">
-                    <h3 class="text-3xl font-bold text-center mb-8">Our Goals</h3>
+                    <h3 class="text-3xl font-bold text-center mb-8" data-i18n="our_goals">Our Goals</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div class="text-center">
                             <i class="fas fa-dollar-sign text-4xl mb-4 text-cfrp-gold"></i>
-                            <h4 class="text-lg font-semibold mb-2">Reduce Costs</h4>
-                            <p class="text-sm opacity-90">60% reduction in compliance processing costs</p>
+                            <h4 class="text-lg font-semibold mb-2" data-i18n="reduce_costs">Reduce Costs</h4>
+                            <p class="text-sm opacity-90" data-i18n="reduce_costs_description">60% reduction in compliance processing costs</p>
                         </div>
                         <div class="text-center">
                             <i class="fas fa-clock text-4xl mb-4 text-cfrp-green"></i>
-                            <h4 class="text-lg font-semibold mb-2">Save Time</h4>
-                            <p class="text-sm opacity-90">Eliminate duplicate filings and manual processes</p>
+                            <h4 class="text-lg font-semibold mb-2" data-i18n="save_time">Save Time</h4>
+                            <p class="text-sm opacity-90" data-i18n="save_time_description">Eliminate duplicate filings and manual processes</p>
                         </div>
                         <div class="text-center">
                             <i class="fas fa-users text-4xl mb-4 text-blue-300"></i>
-                            <h4 class="text-lg font-semibold mb-2">Protect Consumers</h4>
-                            <p class="text-sm opacity-90">Enhanced oversight and faster issue detection</p>
+                            <h4 class="text-lg font-semibold mb-2" data-i18n="protect_consumers">Protect Consumers</h4>
+                            <p class="text-sm opacity-90" data-i18n="protect_consumers_description">Enhanced oversight and faster issue detection</p>
                         </div>
                         <div class="text-center">
                             <i class="fas fa-chart-line text-4xl mb-4 text-yellow-300"></i>
-                            <h4 class="text-lg font-semibold mb-2">Improve Markets</h4>
-                            <p class="text-sm opacity-90">Better data leads to stronger financial stability</p>
+                            <h4 class="text-lg font-semibold mb-2" data-i18n="improve_markets">Improve Markets</h4>
+                            <p class="text-sm opacity-90" data-i18n="improve_markets_description">Better data leads to stronger financial stability</p>
                         </div>
                     </div>
                 </div>

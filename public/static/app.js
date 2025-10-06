@@ -9,14 +9,61 @@ const CFRP = {
   apiBaseUrl: '/api',
   currentPage: 'dashboard',
   
+  // Helper function to get translated text
+  t(key) {
+    return window.i18n ? window.i18n.t(key) : key
+  },
+  
+  // Helper function to translate content after dynamic HTML insertion
+  translateContent(container) {
+    if (window.i18n) {
+      window.i18n.translateElement(container)
+    }
+  },
+  
+  // Set language and update UI
+  setLanguage(lang) {
+    if (window.i18n) {
+      window.i18n.setLanguage(lang)
+      // Update language display
+      const currentLanguage = document.getElementById('currentLanguage')
+      if (currentLanguage) {
+        currentLanguage.textContent = lang.toUpperCase()
+      }
+      // Hide dropdown
+      const dropdown = document.getElementById('languageDropdown')
+      if (dropdown) {
+        dropdown.classList.add('hidden')
+      }
+    }
+  },
+  
   // Initialize the application
   async init() {
     console.log('🚀 CFRP Platform Initialized')
+    
+    // Initialize i18n system
+    this.initializeI18n()
+    
     this.setupEventListeners()
     await this.checkAuthStatus()
     this.loadDashboardData()
     // Set initial navigation state
     this.updateNavigationState()
+  },
+
+  // Initialize internationalization
+  initializeI18n() {
+    if (window.i18n) {
+      // Set initial language display
+      const currentLanguage = document.getElementById('currentLanguage')
+      if (currentLanguage) {
+        currentLanguage.textContent = window.i18n.currentLanguage.toUpperCase()
+      }
+      
+      // Translate the entire page
+      window.i18n.translateElement(document.body)
+    }
   },
 
   // Setup event listeners
@@ -26,6 +73,27 @@ const CFRP = {
     if (loginBtn) {
       loginBtn.addEventListener('click', this.showLoginModal.bind(this))
     }
+
+    // Language toggle button
+    const languageToggle = document.getElementById('languageToggle')
+    if (languageToggle) {
+      languageToggle.addEventListener('click', (e) => {
+        e.preventDefault()
+        const dropdown = document.getElementById('languageDropdown')
+        if (dropdown) {
+          dropdown.classList.toggle('hidden')
+        }
+      })
+    }
+
+    // Close language dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      const languageToggle = document.getElementById('languageToggle')
+      const dropdown = document.getElementById('languageDropdown')
+      if (dropdown && languageToggle && !languageToggle.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.add('hidden')
+      }
+    })
 
     // Navigation items
     document.querySelectorAll('nav a').forEach(link => {
@@ -76,7 +144,7 @@ const CFRP = {
       <div class="modal-overlay">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="text-lg font-semibold">Login to CFRP Platform</h3>
+            <h3 class="text-lg font-semibold" data-i18n="login_to_cfrp">Login to CFRP Platform</h3>
             <button onclick="CFRP.closeModal()" class="text-gray-400 hover:text-gray-600">
               <i class="fas fa-times"></i>
             </button>
@@ -84,29 +152,29 @@ const CFRP = {
           <div class="modal-body">
             <form id="loginForm">
               <div class="mb-4">
-                <label class="form-label">Email Address</label>
+                <label class="form-label" data-i18n="email_address">Email Address</label>
                 <input type="email" id="email" class="form-input w-full" required 
-                       placeholder="Enter your email" value="admin@cfrp.ca">
+                       data-i18n-placeholder="enter_email" placeholder="Enter your email" value="admin@cfrp.ca">
               </div>
               <div class="mb-4">
-                <label class="form-label">Password</label>
+                <label class="form-label" data-i18n="password">Password</label>
                 <input type="password" id="password" class="form-input w-full" required 
-                       placeholder="Enter your password" value="demo123">
+                       data-i18n-placeholder="enter_password" placeholder="Enter your password" value="demo123">
               </div>
               <div class="mb-4">
                 <div class="alert alert-info">
-                  <strong>Demo Credentials:</strong><br>
-                  • admin@cfrp.ca / demo123 (Administrator)<br>
-                  • regulator@osfi.ca / demo123 (Regulator)<br>
-                  • compliance@rbc.ca / demo123 (Institution Admin)
+                  <strong data-i18n="demo_credentials">Demo Credentials:</strong><br>
+                  • admin@cfrp.ca / demo123 (<span data-i18n="administrator">Administrator</span>)<br>
+                  • regulator@osfi.ca / demo123 (<span data-i18n="regulator">Regulator</span>)<br>
+                  • compliance@rbc.ca / demo123 (<span data-i18n="institution_admin">Institution Admin</span>)
                 </div>
               </div>
               <div class="flex gap-3">
                 <button type="submit" class="btn btn-primary flex-1">
-                  <i class="fas fa-sign-in-alt"></i> Login
+                  <i class="fas fa-sign-in-alt"></i> <span data-i18n="login">Login</span>
                 </button>
                 <button type="button" onclick="CFRP.closeModal()" class="btn btn-secondary">
-                  Cancel
+                  <span data-i18n="cancel">Cancel</span>
                 </button>
               </div>
             </form>
@@ -116,6 +184,9 @@ const CFRP = {
     `
     
     document.body.insertAdjacentHTML('beforeend', modal)
+    
+    // Translate the newly added modal content
+    this.translateContent(document.querySelector('.modal-overlay'))
     
     // Handle form submission
     document.getElementById('loginForm').addEventListener('submit', this.handleLogin.bind(this))
@@ -414,45 +485,30 @@ const CFRP = {
         <div class="px-6 py-4 border-b border-gray-200">
           <h3 class="text-lg font-semibold text-gray-900">
             <i class="fas fa-building mr-2 text-blue-600"></i>
-            Canadian Financial System Overview
+            <span data-i18n="canadian_financial_system_overview">Canadian Financial System Overview</span>
           </h3>
         </div>
         <div class="p-6">
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="text-center">
               <div class="text-2xl font-bold text-blue-600">36</div>
-              <div class="text-sm text-gray-600">Federal Banks</div>
-              <div class="text-xs text-gray-500">OSFI Regulated</div>
+              <div class="text-sm text-gray-600" data-i18n="federal_banks">Federal Banks</div>
+              <div class="text-xs text-gray-500" data-i18n="osfi_regulated">OSFI Regulated</div>
             </div>
             <div class="text-center">
               <div class="text-2xl font-bold text-green-600">240+</div>
-              <div class="text-sm text-gray-600">Credit Unions</div>
-              <div class="text-xs text-gray-500">Provincial</div>
+              <div class="text-sm text-gray-600" data-i18n="credit_unions">Credit Unions</div>
+              <div class="text-xs text-gray-500" data-i18n="provincial_regulated">Provincial Regulated</div>
             </div>
             <div class="text-center">
               <div class="text-2xl font-bold text-purple-600">280+</div>
-              <div class="text-sm text-gray-600">Insurance Companies</div>
-              <div class="text-xs text-gray-500">Fed + Provincial</div>
+              <div class="text-sm text-gray-600" data-i18n="insurance_companies">Insurance Companies</div>
+              <div class="text-xs text-gray-500" data-i18n="life_pc_regulated">Life & P&C Regulated</div>
             </div>
             <div class="text-center">
               <div class="text-2xl font-bold text-orange-600">190+</div>
-              <div class="text-sm text-gray-600">Investment Firms</div>
-              <div class="text-xs text-gray-500">Securities Regulated</div>
-            </div>
-          </div>
-          <div class="mt-6 p-4 bg-blue-50 rounded-lg">
-            <div class="flex items-start gap-3">
-              <i class="fas fa-info-circle text-blue-600 mt-0.5"></i>
-              <div>
-                <h4 class="font-medium text-blue-900">Public Regulatory Information</h4>
-                <p class="text-sm text-blue-800 mt-1">
-                  Entity counts based on OSFI, FCAC, and provincial regulator public registries. 
-                  Login for detailed regulatory access and institution-specific data.
-                </p>
-                <p class="text-xs text-blue-600 mt-1">
-                  Data sources: OSFI Register, Provincial Credit Union Centrals, CSA National Database
-                </p>
-              </div>
+              <div class="text-sm text-gray-600" data-i18n="investment_dealers">Investment Dealers</div>
+              <div class="text-xs text-gray-500" data-i18n="securities_regulated">Securities Regulated</div>
             </div>
           </div>
         </div>
@@ -460,6 +516,11 @@ const CFRP = {
     `
     
     container.innerHTML = html
+    
+    // Translate the newly added content
+    if (window.i18n) {
+      window.i18n.translateElement(container)
+    }
   },
   
   // Render public filing statistics
@@ -472,41 +533,41 @@ const CFRP = {
         <div class="px-6 py-4 border-b border-gray-200">
           <h3 class="text-lg font-semibold text-gray-900">
             <i class="fas fa-file-alt mr-2 text-green-600"></i>
-            Regulatory Filing Activity
+            <span data-i18n="regulatory_filing_activity">Regulatory Filing Activity</span>
           </h3>
         </div>
         <div class="p-6">
           <div class="space-y-4">
             <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
               <div>
-                <div class="font-medium">Quarterly Returns</div>
-                <div class="text-sm text-gray-600">Q3 2024 submission period</div>
+                <div class="font-medium" data-i18n="quarterly_returns">Quarterly Returns</div>
+                <div class="text-sm text-gray-600" data-i18n="q3_2024_submission">Q3 2024 submission period</div>
               </div>
               <div class="text-right">
                 <div class="text-lg font-bold text-green-600">94.2%</div>
-                <div class="text-xs text-gray-500">Compliance Rate</div>
+                <div class="text-xs text-gray-500" data-i18n="compliance_rate">Compliance Rate</div>
               </div>
             </div>
             
             <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
               <div>
-                <div class="font-medium">Annual Reports</div>
-                <div class="text-sm text-gray-600">2023 annual filings</div>
+                <div class="font-medium" data-i18n="annual_reports">Annual Reports</div>
+                <div class="text-sm text-gray-600" data-i18n="2023_annual_filings">2023 annual filings</div>
               </div>
               <div class="text-right">
                 <div class="text-lg font-bold text-blue-600">98.7%</div>
-                <div class="text-xs text-gray-500">Submission Rate</div>
+                <div class="text-xs text-gray-500" data-i18n="submission_rate">Submission Rate</div>
               </div>
             </div>
             
             <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
               <div>
-                <div class="font-medium">Incident Reports</div>
-                <div class="text-sm text-gray-600">Past 30 days</div>
+                <div class="font-medium" data-i18n="incident_reports">Incident Reports</div>
+                <div class="text-sm text-gray-600" data-i18n="past_30_days">Past 30 days</div>
               </div>
               <div class="text-right">
                 <div class="text-lg font-bold text-orange-600">23</div>
-                <div class="text-xs text-gray-500">Reported</div>
+                <div class="text-xs text-gray-500" data-i18n="reported">Reported</div>
               </div>
             </div>
           </div>
@@ -516,7 +577,7 @@ const CFRP = {
               <i class="fas fa-chart-line text-green-600 mt-0.5"></i>
               <div>
                 <h4 class="font-medium text-green-900">Filing Calendar</h4>
-                <p class="text-sm text-green-800 mt-1">
+                <p class="text-sm text-green-800 mt-1" data-i18n="next_filing_deadline">
                   Next filing deadline: November 15, 2024 (Q3 Liquidity Coverage Reports)
                 </p>
               </div>
@@ -527,6 +588,9 @@ const CFRP = {
     `
     
     container.innerHTML = html
+    
+    // Translate the newly added content
+    this.translateContent(container)
   },
   
   // Render public risk information
@@ -539,7 +603,7 @@ const CFRP = {
         <div class="px-6 py-4 border-b border-gray-200">
           <h3 class="text-lg font-semibold text-gray-900">
             <i class="fas fa-shield-alt mr-2 text-blue-600"></i>
-            System Risk Overview
+            <span data-i18n="system_risk_overview">System Risk Overview</span>
           </h3>
         </div>
         <div class="p-6">
@@ -547,34 +611,34 @@ const CFRP = {
             <div class="p-4 border border-green-200 bg-green-50 rounded-lg">
               <div class="flex items-center gap-3 mb-2">
                 <i class="fas fa-check-circle text-green-600"></i>
-                <span class="font-medium text-green-900">System Stability</span>
+                <span class="font-medium text-green-900" data-i18n="system_stability">System Stability</span>
               </div>
-              <div class="text-2xl font-bold text-green-700">Stable</div>
-              <div class="text-sm text-green-600">Overall financial system health</div>
+              <div class="text-2xl font-bold text-green-700" data-i18n="stable">Stable</div>
+              <div class="text-sm text-green-600" data-i18n="overall_financial_system_health">Overall financial system health</div>
             </div>
             
             <div class="p-4 border border-blue-200 bg-blue-50 rounded-lg">
               <div class="flex items-center gap-3 mb-2">
                 <i class="fas fa-chart-bar text-blue-600"></i>
-                <span class="font-medium text-blue-900">Capital Adequacy</span>
+                <span class="font-medium text-blue-900" data-i18n="capital_adequacy">Capital Adequacy</span>
               </div>
               <div class="text-2xl font-bold text-blue-700">13.8%</div>
-              <div class="text-sm text-blue-600">Average sector ratio</div>
+              <div class="text-sm text-blue-600" data-i18n="average_sector_ratio">Average sector ratio</div>
             </div>
             
             <div class="p-4 border border-yellow-200 bg-yellow-50 rounded-lg">
               <div class="flex items-center gap-3 mb-2">
                 <i class="fas fa-exclamation-triangle text-yellow-600"></i>
-                <span class="font-medium text-yellow-900">Market Volatility</span>
+                <span class="font-medium text-yellow-900" data-i18n="market_volatility">Market Volatility</span>
               </div>
-              <div class="text-2xl font-bold text-yellow-700">Moderate</div>
-              <div class="text-sm text-yellow-600">Current market conditions</div>
+              <div class="text-2xl font-bold text-yellow-700" data-i18n="moderate">Moderate</div>
+              <div class="text-sm text-yellow-600" data-i18n="current_market_conditions">Current market conditions</div>
             </div>
             
             <div class="p-4 border border-purple-200 bg-purple-50 rounded-lg">
               <div class="flex items-center gap-3 mb-2">
                 <i class="fas fa-globe text-purple-600"></i>
-                <span class="font-medium text-purple-900">Global Exposure</span>
+                <span class="font-medium text-purple-900" data-i18n="global_exposure">Global Exposure</span>
               </div>
               <div class="text-2xl font-bold text-purple-700">Managed</div>
               <div class="text-sm text-purple-600">International risk exposure</div>
@@ -586,7 +650,7 @@ const CFRP = {
               <i class="fas fa-info-circle text-orange-600 mt-0.5"></i>
               <div>
                 <h4 class="font-medium text-orange-900">Public Risk Disclosure</h4>
-                <p class="text-sm text-orange-800 mt-1">
+                <p class="text-sm text-orange-800 mt-1" data-i18n="detailed_risk_assessments_text">
                   Detailed risk assessments and specific institution data available to authorized regulatory personnel only.
                 </p>
               </div>
@@ -597,6 +661,9 @@ const CFRP = {
     `
     
     container.innerHTML = html
+    
+    // Translate the newly added content
+    this.translateContent(container)
   },
   
   // Render public system health
@@ -609,13 +676,13 @@ const CFRP = {
         <div class="px-6 py-4 border-b border-gray-200">
           <h3 class="text-lg font-semibold text-gray-900">
             <i class="fas fa-heartbeat mr-2 text-red-600"></i>
-            Regulatory System Health
+            <span data-i18n="regulatory_system_health">Regulatory System Health</span>
           </h3>
         </div>
         <div class="p-6">
           <div class="space-y-4">
             <div class="flex justify-between items-center">
-              <span class="text-sm font-medium">Filing Compliance Rate</span>
+              <span class="text-sm font-medium" data-i18n="filing_compliance_rate">Filing Compliance Rate</span>
               <span class="text-sm font-bold text-green-600">96.4%</span>
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2">
@@ -623,7 +690,7 @@ const CFRP = {
             </div>
             
             <div class="flex justify-between items-center">
-              <span class="text-sm font-medium">System Response Time</span>
+              <span class="text-sm font-medium" data-i18n="system_response_time">System Response Time</span>
               <span class="text-sm font-bold text-blue-600">< 2.1s</span>
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2">
@@ -631,7 +698,7 @@ const CFRP = {
             </div>
             
             <div class="flex justify-between items-center">
-              <span class="text-sm font-medium">Data Accuracy</span>
+              <span class="text-sm font-medium" data-i18n="data_accuracy">Data Accuracy</span>
               <span class="text-sm font-bold text-purple-600">99.2%</span>
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2">
@@ -642,17 +709,17 @@ const CFRP = {
           <div class="mt-6 grid grid-cols-2 gap-4 text-center">
             <div>
               <div class="text-lg font-bold text-gray-900">5</div>
-              <div class="text-xs text-gray-600">Regulatory Agencies</div>
+              <div class="text-xs text-gray-600" data-i18n="regulatory_agencies">Regulatory Agencies</div>
             </div>
             <div>
               <div class="text-lg font-bold text-gray-900">24/7</div>
-              <div class="text-xs text-gray-600">Monitoring</div>
+              <div class="text-xs text-gray-600" data-i18n="monitoring">Monitoring</div>
             </div>
           </div>
           
           <div class="mt-4 p-3 bg-gray-100 rounded-lg text-center">
             <p class="text-sm text-gray-600">
-              Last updated: ${new Date().toLocaleDateString('en-CA', {
+              <span data-i18n="last_updated">Last updated:</span> ${new Date().toLocaleDateString('en-CA', {
                 year: 'numeric', 
                 month: 'short', 
                 day: 'numeric',
@@ -666,6 +733,9 @@ const CFRP = {
     `
     
     container.innerHTML = html
+    
+    // Translate the newly added content
+    this.translateContent(container)
   },
 
   // Load entities data
@@ -7465,6 +7535,18 @@ const CFRP = {
       messagesDiv.innerHTML = Array.from(allFeedback).map(fb => fb.innerHTML).join('')
     } else {
       validationSection.style.display = 'none'
+    }
+  },
+
+  // Helper function to get translated text
+  t(key) {
+    return window.i18n ? window.i18n.t(key) : key
+  },
+
+  // Helper function to translate content after dynamic HTML insertion
+  translateContent(container) {
+    if (window.i18n) {
+      window.i18n.translateElement(container)
     }
   },
 

@@ -1,27 +1,32 @@
-// Internationalization (i18n) System for CFRP Platform
-// Supports English and French as required by Canadian federal law and Quebec regulations
+// Comprehensive Internationalization (i18n) System for CFRP Platform
+// Complete bilingual support for English and French as required by Canadian federal law
 
 class CFRPI18n {
   constructor() {
     this.currentLanguage = this.detectLanguage()
     this.translations = {
       en: {
-        // Navigation & Core
+        // ==================
+        // CORE NAVIGATION & BRANDING
+        // ==================
         platform_name: 'Canadian Financial Regulatory Platform',
         platform_abbrev: 'CFRP',
         hero_subtitle: 'From Compliance Burden to Regulatory Intelligence',
         get_started: 'Get Started',
         documentation: 'Documentation',
         dashboard: 'Dashboard',
-        entities: 'Entities', 
+        entities: 'Entities',
         filings: 'Filings',
         risk: 'Risk',
         cases: 'Cases',
         conduct: 'Conduct',
+        specialized_modules: 'Modules',
         login: 'Login',
         logout: 'Logout',
         
-        // Dashboard
+        // ==================
+        // DASHBOARD CONTENT
+        // ==================
         dashboard_overview: 'Dashboard Overview',
         dashboard_subtitle: 'Comprehensive regulatory oversight and compliance management platform',
         total_entities: 'Total Entities',
@@ -29,10 +34,85 @@ class CFRPI18n {
         high_risk_alerts: 'High Risk Alerts',
         open_cases: 'Open Cases',
         recent_filings: 'Recent Filings',
+        loading_entities: 'Loading entities...',
+        loading_filings: 'Loading filings...',
+        loading_alerts: 'Loading alerts...',
+        loading_statistics: 'Loading statistics...',
         
-        // Entities
+        // Dashboard Cards
+        canadian_financial_system_overview: 'Canadian Financial System Overview',
+        federal_banks: 'Federal Banks',
+        osfi_regulated: 'OSFI Regulated',
+        credit_unions: 'Credit Unions',
+        provincial_regulated: 'Provincial Regulated',
+        insurance_companies: 'Insurance Companies',
+        life_pc_regulated: 'Life & P&C Regulated',
+        investment_dealers: 'Investment Dealers',
+        securities_regulated: 'Securities Regulated',
+        
+        // ==================
+        // HOW CFRP WORKS SECTION
+        // ==================
+        how_cfrp_works: 'How CFRP Works',
+        how_cfrp_subtitle: 'The Canadian Financial Regulatory Platform transforms how financial institutions interact with regulators, creating a unified ecosystem for compliance, oversight, and consumer protection.',
+        what_is_cfrp: 'What is CFRP?',
+        what_is_cfrp_description: 'CFRP is Canada\'s first unified regulatory technology platform that connects all major financial regulators (OSFI, FCAC, FSRA, AMF) with financial institutions through a single, intelligent interface.',
+        unified_ecosystem: 'Unified Ecosystem',
+        unified_ecosystem_subtitle: 'Connecting regulators and institutions across Canada',
+        
+        // CFRP Process
+        cfrp_process: 'The CFRP Process',
+        step_1_title: 'Centralized Filing',
+        step_1_description: 'Financial institutions use CFRP\'s unified portal to submit regulatory data. Single interface streamlines compliance workflows across multiple agencies.',
+        step_2_title: 'Risk Analysis',
+        step_2_description: 'Advanced algorithms analyze submissions for risk patterns, misconduct indicators, and compliance issues using behavioral analytics and pattern recognition.',
+        step_3_title: 'Regulatory Oversight',
+        step_3_description: 'Regulators access comprehensive dashboards, risk alerts, and investigation tools for enhanced supervision and proactive consumer protection.',
+        
+        // Goals
+        our_goals: 'Our Goals',
+        reduce_costs: 'Reduce Costs',
+        reduce_costs_subtitle: '60% reduction in compliance processing costs',
+        save_time: 'Save Time',
+        save_time_subtitle: 'Eliminate duplicate filings and manual processes',
+        protect_consumers: 'Protect Consumers',
+        protect_consumers_subtitle: 'Enhanced oversight and faster issue detection',
+        improve_markets: 'Improve Markets',
+        improve_markets_subtitle: 'Better data leads to stronger financial stability',
+        
+        // Who Uses CFRP
+        for_financial_institutions: 'For Financial Institutions',
+        banks_credit_unions: 'Banks & Credit Unions: Submit regulatory reports once for all agencies',
+        insurance_companies_desc: 'Insurance Companies: Streamlined compliance across provinces',
+        investment_firms: 'Investment Firms: Real-time risk monitoring and alerts',
+        
+        for_regulators: 'For Regulators',
+        for_regulators_desc: 'Unified oversight tools, cross-agency coordination, advanced analytics, and consumer protection capabilities.',
+        enhanced_supervision: 'Enhanced Supervision',
+        enhanced_supervision_desc: 'Real-time monitoring, risk assessment, and coordinated regulatory response across all Canadian financial regulators.',
+        
+        // ==================
+        // DEMO INSTRUCTIONS
+        // ==================
+        how_to_use_platform: 'How to Use CFRP Platform',
+        step_1_login: 'Login with demo credentials (e.g., compliance@rbc.ca / demo123)',
+        step_2_navigate: 'Use navigation menu to explore: Dashboard • Filings • Entities • Risk',
+        step_3_filing: 'As RBC user, click "New Filing" to submit regulatory data',
+        step_4_review: 'As regulator (regulator@osfi.ca), review filings and create cases',
+        demo_environment_setup: 'Demo Environment Setup',
+        demo_environment_desc: 'Need sample data? Click the buttons below to populate the system with realistic Canadian financial data.',
+        create_sample_users: 'Create Sample Users',
+        create_sample_entities: 'Create Sample Entities',
+        create_sample_filings: 'Create Sample Filings',
+        create_sample_cases: 'Create Sample Cases',
+        
+        // ==================
+        // ENTITIES MANAGEMENT
+        // ==================
         entity_management: 'Entity Management',
         registered_entities: 'Registered Entities',
+        regulated_entities_management: 'Regulated Entities Management',
+        regulated_entities_subtitle: 'Comprehensive view and management of all regulated financial institutions',
         entity_name: 'Entity Name',
         entity_type: 'Entity Type',
         jurisdiction: 'Jurisdiction',
@@ -42,56 +122,124 @@ class CFRPI18n {
         add_entity: 'Add Entity',
         edit_entity: 'Edit Entity',
         view_details: 'View Details',
+        export_all: 'Export All',
+        advanced_filters: 'Advanced Filters',
         
-        // Filings
+        // ==================
+        // FILINGS MANAGEMENT
+        // ==================
         regulatory_filings: 'Regulatory Filings',
+        filings_subtitle: 'Track and manage regulatory submissions and compliance reports',
         filing_type: 'Filing Type',
         reporting_period: 'Reporting Period',
         submitted: 'Submitted',
         risk_score: 'Risk Score',
         new_filing: 'New Filing',
         submit_filing: 'Submit Filing',
+        filing_schedule: 'Filing Schedule',
+        filing_analytics: 'Filing Analytics',
         quarterly_return: 'Quarterly Return',
         annual_report: 'Annual Report',
+        capital_adequacy: 'Capital Adequacy Report',
+        liquidity_report: 'Liquidity Report',
         risk_report: 'Risk Assessment Report',
         
-        // Risk Management
+        // Filing Form
+        select_filing_type: 'Select Filing Type',
+        financial_data_required: 'Financial Data Required',
+        tier1_ratio: 'Tier 1 Capital Ratio',
+        tier1_ratio_percent: 'Tier 1 Capital Ratio (%)',
+        leverage_ratio: 'Leverage Ratio',
+        leverage_ratio_percent: 'Leverage Ratio (%)',
+        liquidity_coverage_ratio: 'Liquidity Coverage Ratio',
+        total_assets: 'Total Assets',
+        total_assets_cad_millions: 'Total Assets (CAD millions)',
+        consumer_complaints: 'Consumer Complaints',
+        consumer_complaints_period: 'Consumer Complaints (this period)',
+        operational_losses: 'Operational Losses',
+        operational_losses_cad: 'Operational Losses (CAD)',
+        additional_notes: 'Additional Notes',
+        optional_notes: 'Optional notes about this filing...',
+        
+        // ==================
+        // RISK MANAGEMENT
+        // ==================
         risk_management: 'Risk Management',
+        risk_subtitle: 'Monitor and assess regulatory compliance risks across all entities',
         risk_assessment: 'Risk Assessment',
         compliance_status: 'Compliance Status',
         tier1_capital: 'Tier 1 Capital Ratio',
-        leverage_ratio: 'Leverage Ratio',
+        leverage_ratio_full: 'Leverage Ratio',
         liquidity_coverage: 'Liquidity Coverage Ratio',
+        risk_scan: 'Risk Scan',
+        risk_analytics: 'Risk Analytics',
+        risk_settings: 'Risk Settings',
         
-        // Compliance & Conduct
-        compliance_monitoring: 'Compliance Monitoring',
+        // ==================
+        // CASES MANAGEMENT
+        // ==================
+        cases_management: 'Cases Management',
+        investigation_cases: 'Investigation Cases',
+        cases_subtitle: 'Manage regulatory investigations and enforcement actions',
+        new_case: 'New Case',
+        case_search: 'Case Search',
+        case_analytics: 'Case Analytics',
+        case_title: 'Case Title',
+        case_type: 'Case Type',
+        priority: 'Priority',
+        lead_investigator: 'Lead Investigator',
+        case_description: 'Case Description',
+        compliance_review: 'Compliance Review',
+        formal_investigation: 'Formal Investigation',
+        enforcement_action: 'Enforcement Action',
+        
+        // ==================
+        // CONDUCT ANALYSIS
+        // ==================
+        conduct_analysis: 'Conduct Analysis',
+        conduct_subtitle: 'Advanced misconduct detection and regulatory compliance monitoring',
         misconduct_detection: 'Misconduct Detection',
         consumer_protection: 'Consumer Protection',
         regulatory_breaches: 'Regulatory Breaches',
+        run_analysis: 'Run Analysis',
+        compliance_check: 'Compliance Check',
+        trend_analysis: 'Trend Analysis',
         
-        // Agencies
-        agencies: {
-          osfi: 'Office of the Superintendent of Financial Institutions',
-          fcac: 'Financial Consumer Agency of Canada',
-          fsra: 'Financial Services Regulatory Authority of Ontario',
-          amf: 'Autorité des marchés financiers du Québec',
-          bcfsa: 'BC Financial Services Authority',
-          asic: 'Alberta Securities Investment Commission'
-        },
+        // Specialized Detection Types
+        synthetic_customers: 'Synthetic Customers',
+        jurisdiction_violations: 'Jurisdiction Violations',
+        fronting_arrangements: 'Fronting Arrangements',
+        client_borrowing_violations: 'Client Borrowing Violations',
         
-        // Entity Types
-        entity_types: {
-          chartered_bank: 'Chartered Bank',
-          credit_union: 'Credit Union',
-          life_insurance: 'Life Insurance Company',
-          pc_insurance: 'Property & Casualty Insurance Company',
-          trust_company: 'Trust Company',
-          loan_company: 'Loan Company',
-          investment_dealer: 'Investment Dealer',
-          mutual_fund_dealer: 'Mutual Fund Dealer'
-        },
+        // ==================
+        // SPECIALIZED MODULES
+        // ==================
+        insurance_module: 'Insurance Regulation',
+        pensions_module: 'Pensions Regulation',
+        payments_module: 'Payments & Fintech',
+        securities_module: 'Securities Regulation',
         
-        // Actions & Buttons  
+        // Insurance
+        insurance_oversight: 'Insurance Regulatory Oversight',
+        solvency_monitoring: 'Solvency Monitoring',
+        mct_ratios: 'MCT Ratios',
+        
+        // Pensions
+        pension_oversight: 'Pension Plan Oversight',
+        funding_analysis: 'Funding Analysis',
+        
+        // Payments
+        payment_oversight: 'Payment Service Provider Oversight',
+        aml_compliance: 'AML Compliance',
+        
+        // Securities
+        securities_oversight: 'Securities Market Oversight',
+        market_surveillance: 'Market Surveillance',
+        
+        // ==================
+        // COMMON UI ELEMENTS
+        // ==================
+        // Actions & Buttons
         save: 'Save',
         cancel: 'Cancel',
         close: 'Close',
@@ -103,6 +251,14 @@ class CFRPI18n {
         edit: 'Edit',
         download: 'Download',
         export: 'Export',
+        refresh: 'Refresh',
+        search: 'Search',
+        filter: 'Filter',
+        clear: 'Clear',
+        reset: 'Reset',
+        back: 'Back',
+        next: 'Next',
+        previous: 'Previous',
         
         // Status Labels
         active: 'Active',
@@ -111,36 +267,63 @@ class CFRPI18n {
         approved: 'Approved',
         rejected: 'Rejected',
         under_review: 'Under Review',
-        compliant: 'Compliant',
-        non_compliant: 'Non-Compliant',
+        completed: 'Completed',
+        in_progress: 'In Progress',
+        high: 'High',
+        medium: 'Medium',
+        low: 'Low',
+        critical: 'Critical',
+        
+        // Time & Dates
+        today: 'Today',
+        yesterday: 'Yesterday',
+        this_week: 'This Week',
+        this_month: 'This Month',
+        this_quarter: 'This Quarter',
+        this_year: 'This Year',
         
         // Messages
+        no_data_available: 'No data available',
         loading: 'Loading...',
-        no_data: 'No data available',
+        please_wait: 'Please wait...',
+        operation_completed: 'Operation completed successfully',
         error_occurred: 'An error occurred',
-        success_save: 'Saved successfully',
-        confirm_delete: 'Are you sure you want to delete this item?',
+        unauthorized: 'Unauthorized access',
         
-        // Provinces
-        provinces: {
-          on: 'Ontario',
-          qc: 'Quebec',
-          bc: 'British Columbia', 
-          ab: 'Alberta',
-          sk: 'Saskatchewan',
-          mb: 'Manitoba',
-          ns: 'Nova Scotia',
-          nb: 'New Brunswick',
-          pe: 'Prince Edward Island',
-          nl: 'Newfoundland and Labrador',
-          nt: 'Northwest Territories',
-          nu: 'Nunavut',
-          yt: 'Yukon'
+        // ==================
+        // REGULATORY AGENCIES
+        // ==================
+        agencies: {
+          osfi: 'Office of the Superintendent of Financial Institutions',
+          fcac: 'Financial Consumer Agency of Canada',
+          fsra: 'Financial Services Regulatory Authority of Ontario',
+          amf: 'Autorité des marchés financiers du Québec',
+          bcfsa: 'BC Financial Services Authority',
+          asic: 'Alberta Securities Investment Commission',
+          ciro: 'Canadian Investment Regulatory Organization'
+        },
+        
+        // ==================
+        // ENTITY TYPES
+        // ==================
+        entity_types: {
+          chartered_bank: 'Chartered Bank',
+          credit_union: 'Credit Union',
+          life_insurance: 'Life Insurance Company',
+          pc_insurance: 'Property & Casualty Insurance Company',
+          trust_company: 'Trust Company',
+          loan_company: 'Loan Company',
+          investment_dealer: 'Investment Dealer',
+          mutual_fund_dealer: 'Mutual Fund Dealer',
+          pension_plan: 'Pension Plan',
+          payment_processor: 'Payment Processor'
         }
       },
       
       fr: {
-        // Navigation & Core / Navigation et Base
+        // ==================
+        // NAVIGATION ET MARQUE PRINCIPALE
+        // ==================
         platform_name: 'Plateforme canadienne de réglementation financière',
         platform_abbrev: 'PCRF',
         hero_subtitle: 'Du fardeau de conformité à l\'intelligence réglementaire',
@@ -152,10 +335,13 @@ class CFRPI18n {
         risk: 'Risque',
         cases: 'Cas',
         conduct: 'Conduite',
+        specialized_modules: 'Modules',
         login: 'Connexion',
         logout: 'Déconnexion',
         
-        // Dashboard / Tableau de bord
+        // ==================
+        // CONTENU DU TABLEAU DE BORD
+        // ==================
         dashboard_overview: 'Aperçu du tableau de bord',
         dashboard_subtitle: 'Plateforme complète de supervision réglementaire et de gestion de la conformité',
         total_entities: 'Entités totales',
@@ -163,10 +349,85 @@ class CFRPI18n {
         high_risk_alerts: 'Alertes à haut risque',
         open_cases: 'Cas ouverts',
         recent_filings: 'Dépôts récents',
+        loading_entities: 'Chargement des entités...',
+        loading_filings: 'Chargement des dépôts...',
+        loading_alerts: 'Chargement des alertes...',
+        loading_statistics: 'Chargement des statistiques...',
         
-        // Entities / Entités
+        // Cartes du tableau de bord
+        canadian_financial_system_overview: 'Aperçu du système financier canadien',
+        federal_banks: 'Banques fédérales',
+        osfi_regulated: 'Régulées par le BSIF',
+        credit_unions: 'Coopératives de crédit',
+        provincial_regulated: 'Régulées provincialement',
+        insurance_companies: 'Compagnies d\'assurance',
+        life_pc_regulated: 'Vie et IARD régulées',
+        investment_dealers: 'Courtiers en placement',
+        securities_regulated: 'Régulés par les valeurs mobilières',
+        
+        // ==================
+        // SECTION COMMENT FONCTIONNE PCRF
+        // ==================
+        how_cfrp_works: 'Comment fonctionne PCRF',
+        how_cfrp_subtitle: 'La Plateforme canadienne de réglementation financière transforme la façon dont les institutions financières interagissent avec les régulateurs, créant un écosystème unifié pour la conformité, la surveillance et la protection des consommateurs.',
+        what_is_cfrp: 'Qu\'est-ce que PCRF?',
+        what_is_cfrp_description: 'PCRF est la première plateforme technologique réglementaire unifiée du Canada qui connecte tous les principaux régulateurs financiers (BSIF, ACFC, ARSF, AMF) avec les institutions financières via une interface intelligente unique.',
+        unified_ecosystem: 'Écosystème unifié',
+        unified_ecosystem_subtitle: 'Connecter les régulateurs et les institutions à travers le Canada',
+        
+        // Processus PCRF
+        cfrp_process: 'Le processus PCRF',
+        step_1_title: 'Dépôt centralisé',
+        step_1_description: 'Les institutions financières utilisent le portail unifié de PCRF pour soumettre les données réglementaires. Une interface unique rationalise les flux de travail de conformité à travers plusieurs agences.',
+        step_2_title: 'Analyse des risques',
+        step_2_description: 'Des algorithmes avancés analysent les soumissions pour détecter les modèles de risque, les indicateurs d\'inconduite et les problèmes de conformité en utilisant l\'analytique comportementale et la reconnaissance de formes.',
+        step_3_title: 'Surveillance réglementaire',
+        step_3_description: 'Les régulateurs accèdent à des tableaux de bord complets, des alertes de risque et des outils d\'enquête pour une supervision améliorée et une protection proactive des consommateurs.',
+        
+        // Objectifs
+        our_goals: 'Nos objectifs',
+        reduce_costs: 'Réduire les coûts',
+        reduce_costs_subtitle: 'Réduction de 60% des coûts de traitement de la conformité',
+        save_time: 'Économiser du temps',
+        save_time_subtitle: 'Éliminer les dépôts en double et les processus manuels',
+        protect_consumers: 'Protéger les consommateurs',
+        protect_consumers_subtitle: 'Surveillance renforcée et détection plus rapide des problèmes',
+        improve_markets: 'Améliorer les marchés',
+        improve_markets_subtitle: 'De meilleures données conduisent à une stabilité financière plus forte',
+        
+        // Qui utilise PCRF
+        for_financial_institutions: 'Pour les institutions financières',
+        banks_credit_unions: 'Banques et coopératives de crédit : Soumettre les rapports réglementaires une fois pour toutes les agences',
+        insurance_companies_desc: 'Compagnies d\'assurance : Conformité rationalisée à travers les provinces',
+        investment_firms: 'Sociétés d\'investissement : Surveillance des risques en temps réel et alertes',
+        
+        for_regulators: 'Pour les régulateurs',
+        for_regulators_desc: 'Outils de surveillance unifiés, coordination inter-agences, analytique avancée et capacités de protection des consommateurs.',
+        enhanced_supervision: 'Supervision renforcée',
+        enhanced_supervision_desc: 'Surveillance en temps réel, évaluation des risques et réponse réglementaire coordonnée à travers tous les régulateurs financiers canadiens.',
+        
+        // ==================
+        // INSTRUCTIONS DE DÉMONSTRATION
+        // ==================
+        how_to_use_platform: 'Comment utiliser la plateforme PCRF',
+        step_1_login: 'Connectez-vous avec les identifiants de démonstration (ex: compliance@rbc.ca / demo123)',
+        step_2_navigate: 'Utilisez le menu de navigation pour explorer : Tableau de bord • Dépôts • Entités • Risque',
+        step_3_filing: 'En tant qu\'utilisateur RBC, cliquez sur "Nouveau dépôt" pour soumettre des données réglementaires',
+        step_4_review: 'En tant que régulateur (regulator@osfi.ca), examinez les dépôts et créez des cas',
+        demo_environment_setup: 'Configuration de l\'environnement de démonstration',
+        demo_environment_desc: 'Besoin de données d\'exemple? Cliquez sur les boutons ci-dessous pour remplir le système avec des données financières canadiennes réalistes.',
+        create_sample_users: 'Créer des utilisateurs d\'exemple',
+        create_sample_entities: 'Créer des entités d\'exemple',
+        create_sample_filings: 'Créer des dépôts d\'exemple',
+        create_sample_cases: 'Créer des cas d\'exemple',
+        
+        // ==================
+        // GESTION DES ENTITÉS
+        // ==================
         entity_management: 'Gestion des entités',
         registered_entities: 'Entités enregistrées',
+        regulated_entities_management: 'Gestion des entités réglementées',
+        regulated_entities_subtitle: 'Vue complète et gestion de toutes les institutions financières réglementées',
         entity_name: 'Nom de l\'entité',
         entity_type: 'Type d\'entité',
         jurisdiction: 'Juridiction',
@@ -176,56 +437,124 @@ class CFRPI18n {
         add_entity: 'Ajouter une entité',
         edit_entity: 'Modifier l\'entité',
         view_details: 'Voir les détails',
+        export_all: 'Exporter tout',
+        advanced_filters: 'Filtres avancés',
         
-        // Filings / Dépôts
+        // ==================
+        // GESTION DES DÉPÔTS
+        // ==================
         regulatory_filings: 'Dépôts réglementaires',
+        filings_subtitle: 'Suivre et gérer les soumissions réglementaires et les rapports de conformité',
         filing_type: 'Type de dépôt',
         reporting_period: 'Période de déclaration',
         submitted: 'Soumis',
         risk_score: 'Score de risque',
         new_filing: 'Nouveau dépôt',
         submit_filing: 'Soumettre le dépôt',
+        filing_schedule: 'Calendrier des dépôts',
+        filing_analytics: 'Analytique des dépôts',
         quarterly_return: 'Rendement trimestriel',
         annual_report: 'Rapport annuel',
+        capital_adequacy: 'Rapport d\'adéquation du capital',
+        liquidity_report: 'Rapport de liquidité',
         risk_report: 'Rapport d\'évaluation des risques',
         
-        // Risk Management / Gestion des risques
+        // Formulaire de dépôt
+        select_filing_type: 'Sélectionner le type de dépôt',
+        financial_data_required: 'Données financières requises',
+        tier1_ratio: 'Ratio de capital de niveau 1',
+        tier1_ratio_percent: 'Ratio de capital de niveau 1 (%)',
+        leverage_ratio: 'Ratio de levier',
+        leverage_ratio_percent: 'Ratio de levier (%)',
+        liquidity_coverage_ratio: 'Ratio de couverture de liquidité',
+        total_assets: 'Actifs totaux',
+        total_assets_cad_millions: 'Actifs totaux (millions CAD)',
+        consumer_complaints: 'Plaintes des consommateurs',
+        consumer_complaints_period: 'Plaintes des consommateurs (cette période)',
+        operational_losses: 'Pertes opérationnelles',
+        operational_losses_cad: 'Pertes opérationnelles (CAD)',
+        additional_notes: 'Notes supplémentaires',
+        optional_notes: 'Notes optionnelles sur ce dépôt...',
+        
+        // ==================
+        // GESTION DES RISQUES
+        // ==================
         risk_management: 'Gestion des risques',
+        risk_subtitle: 'Surveiller et évaluer les risques de conformité réglementaire à travers toutes les entités',
         risk_assessment: 'Évaluation des risques',
         compliance_status: 'Statut de conformité',
-        tier1_capital: 'Ratio de capital de catégorie 1',
-        leverage_ratio: 'Ratio de levier',
+        tier1_capital: 'Ratio de capital de niveau 1',
+        leverage_ratio_full: 'Ratio de levier',
         liquidity_coverage: 'Ratio de couverture de liquidité',
+        risk_scan: 'Analyse des risques',
+        risk_analytics: 'Analytique des risques',
+        risk_settings: 'Paramètres des risques',
         
-        // Compliance & Conduct / Conformité et conduite
-        compliance_monitoring: 'Surveillance de la conformité',
+        // ==================
+        // GESTION DES CAS
+        // ==================
+        cases_management: 'Gestion des cas',
+        investigation_cases: 'Cas d\'enquête',
+        cases_subtitle: 'Gérer les enquêtes réglementaires et les actions d\'application',
+        new_case: 'Nouveau cas',
+        case_search: 'Recherche de cas',
+        case_analytics: 'Analytique des cas',
+        case_title: 'Titre du cas',
+        case_type: 'Type de cas',
+        priority: 'Priorité',
+        lead_investigator: 'Enquêteur principal',
+        case_description: 'Description du cas',
+        compliance_review: 'Examen de conformité',
+        formal_investigation: 'Enquête formelle',
+        enforcement_action: 'Action d\'application',
+        
+        // ==================
+        // ANALYSE DE CONDUITE
+        // ==================
+        conduct_analysis: 'Analyse de conduite',
+        conduct_subtitle: 'Détection avancée d\'inconduite et surveillance de la conformité réglementaire',
         misconduct_detection: 'Détection d\'inconduite',
         consumer_protection: 'Protection des consommateurs',
         regulatory_breaches: 'Violations réglementaires',
+        run_analysis: 'Exécuter l\'analyse',
+        compliance_check: 'Vérification de conformité',
+        trend_analysis: 'Analyse des tendances',
         
-        // Agencies / Organismes
-        agencies: {
-          osfi: 'Bureau du surintendant des institutions financières',
-          fcac: 'Agence de la consommation en matière financière du Canada',
-          fsra: 'Autorité de réglementation des services financiers de l\'Ontario',
-          amf: 'Autorité des marchés financiers du Québec',
-          bcfsa: 'Autorité des services financiers de la Colombie-Britannique',
-          asic: 'Commission des valeurs mobilières de l\'Alberta'
-        },
+        // Types de détection spécialisés
+        synthetic_customers: 'Clients synthétiques',
+        jurisdiction_violations: 'Violations de juridiction',
+        fronting_arrangements: 'Arrangements de façade',
+        client_borrowing_violations: 'Violations d\'emprunt client',
         
-        // Entity Types / Types d'entités
-        entity_types: {
-          chartered_bank: 'Banque à charte',
-          credit_union: 'Caisse de crédit',
-          life_insurance: 'Compagnie d\'assurance-vie',
-          pc_insurance: 'Compagnie d\'assurance IARD',
-          trust_company: 'Société de fiducie',
-          loan_company: 'Société de prêt',
-          investment_dealer: 'Courtier en placement',
-          mutual_fund_dealer: 'Courtier en fonds mutuels'
-        },
+        // ==================
+        // MODULES SPÉCIALISÉS
+        // ==================
+        insurance_module: 'Réglementation d\'assurance',
+        pensions_module: 'Réglementation des pensions',
+        payments_module: 'Paiements et fintech',
+        securities_module: 'Réglementation des valeurs mobilières',
         
-        // Actions & Buttons / Actions et boutons
+        // Assurance
+        insurance_oversight: 'Surveillance réglementaire d\'assurance',
+        solvency_monitoring: 'Surveillance de la solvabilité',
+        mct_ratios: 'Ratios TCM',
+        
+        // Pensions
+        pension_oversight: 'Surveillance des régimes de pension',
+        funding_analysis: 'Analyse du financement',
+        
+        // Paiements
+        payment_oversight: 'Surveillance des fournisseurs de services de paiement',
+        aml_compliance: 'Conformité LBC',
+        
+        // Valeurs mobilières
+        securities_oversight: 'Surveillance du marché des valeurs mobilières',
+        market_surveillance: 'Surveillance du marché',
+        
+        // ==================
+        // ÉLÉMENTS D'INTERFACE COMMUNE
+        // ==================
+        // Actions et boutons
         save: 'Enregistrer',
         cancel: 'Annuler',
         close: 'Fermer',
@@ -237,39 +566,72 @@ class CFRPI18n {
         edit: 'Modifier',
         download: 'Télécharger',
         export: 'Exporter',
+        refresh: 'Actualiser',
+        search: 'Rechercher',
+        filter: 'Filtrer',
+        clear: 'Effacer',
+        reset: 'Réinitialiser',
+        back: 'Retour',
+        next: 'Suivant',
+        previous: 'Précédent',
         
-        // Status Labels / Étiquettes de statut
+        // Étiquettes de statut
         active: 'Actif',
         inactive: 'Inactif',
         pending: 'En attente',
         approved: 'Approuvé',
         rejected: 'Rejeté',
-        under_review: 'En révision',
-        compliant: 'Conforme',
-        non_compliant: 'Non conforme',
+        under_review: 'En cours d\'examen',
+        completed: 'Terminé',
+        in_progress: 'En cours',
+        high: 'Élevé',
+        medium: 'Moyen',
+        low: 'Faible',
+        critical: 'Critique',
+        
+        // Temps et dates
+        today: 'Aujourd\'hui',
+        yesterday: 'Hier',
+        this_week: 'Cette semaine',
+        this_month: 'Ce mois-ci',
+        this_quarter: 'Ce trimestre',
+        this_year: 'Cette année',
         
         // Messages
+        no_data_available: 'Aucune donnée disponible',
         loading: 'Chargement...',
-        no_data: 'Aucune donnée disponible',
+        please_wait: 'Veuillez patienter...',
+        operation_completed: 'Opération terminée avec succès',
         error_occurred: 'Une erreur s\'est produite',
-        success_save: 'Enregistré avec succès',
-        confirm_delete: 'Êtes-vous sûr de vouloir supprimer cet élément ?',
+        unauthorized: 'Accès non autorisé',
         
-        // Provinces
-        provinces: {
-          on: 'Ontario',
-          qc: 'Québec',
-          bc: 'Colombie-Britannique',
-          ab: 'Alberta',
-          sk: 'Saskatchewan',
-          mb: 'Manitoba',
-          ns: 'Nouvelle-Écosse',
-          nb: 'Nouveau-Brunswick',
-          pe: 'Île-du-Prince-Édouard',
-          nl: 'Terre-Neuve-et-Labrador',
-          nt: 'Territoires du Nord-Ouest',
-          nu: 'Nunavut',
-          yt: 'Yukon'
+        // ==================
+        // ORGANISMES DE RÉGLEMENTATION
+        // ==================
+        agencies: {
+          osfi: 'Bureau du surintendant des institutions financières',
+          fcac: 'Agence de la consommation en matière financière du Canada',
+          fsra: 'Autorité de réglementation des services financiers de l\'Ontario',
+          amf: 'Autorité des marchés financiers du Québec',
+          bcfsa: 'Autorité des services financiers de la Colombie-Britannique',
+          asic: 'Commission des valeurs mobilières de l\'Alberta',
+          ciro: 'Organisme canadien de réglementation des investissements'
+        },
+        
+        // ==================
+        // TYPES D'ENTITÉS
+        // ==================
+        entity_types: {
+          chartered_bank: 'Banque à charte',
+          credit_union: 'Coopérative de crédit',
+          life_insurance: 'Compagnie d\'assurance-vie',
+          pc_insurance: 'Compagnie d\'assurance IARD',
+          trust_company: 'Société de fiducie',
+          loan_company: 'Société de prêt',
+          investment_dealer: 'Courtier en placement',
+          mutual_fund_dealer: 'Courtier en fonds mutuels',
+          pension_plan: 'Régime de pension',
+          payment_processor: 'Processeur de paiement'
         }
       }
     }
@@ -293,44 +655,29 @@ class CFRPI18n {
     return 'en'
   }
   
-  // Get translation for a key
-  t(key, params = {}) {
+  // Get translation
+  t(key) {
     const keys = key.split('.')
-    let value = this.translations[this.currentLanguage]
+    let result = this.translations[this.currentLanguage]
     
     for (const k of keys) {
-      if (value && typeof value === 'object') {
-        value = value[k]
+      if (result && typeof result === 'object' && k in result) {
+        result = result[k]
       } else {
+        // Fallback to English if key not found in current language
+        result = this.translations['en']
+        for (const fallbackKey of keys) {
+          if (result && typeof result === 'object' && fallbackKey in result) {
+            result = result[fallbackKey]
+          } else {
+            return key // Return key itself if not found
+          }
+        }
         break
       }
     }
     
-    // Fallback to English if translation not found
-    if (!value && this.currentLanguage !== 'en') {
-      let englishValue = this.translations.en
-      for (const k of keys) {
-        if (englishValue && typeof englishValue === 'object') {
-          englishValue = englishValue[k]
-        } else {
-          break
-        }
-      }
-      value = englishValue
-    }
-    
-    // Return key if no translation found
-    if (!value) {
-      return key
-    }
-    
-    // Replace parameters in translation
-    let result = value
-    Object.keys(params).forEach(param => {
-      result = result.replace(`{${param}}`, params[param])
-    })
-    
-    return result
+    return result || key
   }
   
   // Change language
@@ -347,37 +694,38 @@ class CFRPI18n {
     }
   }
   
-  // Get current language
-  getCurrentLanguage() {
-    return this.currentLanguage
-  }
-  
-  // Update page elements with translations
+  // Update all page elements
   updatePageLanguage() {
-    // Update elements with data-i18n attribute
+    // Update document title
+    const titleElement = document.querySelector('[data-i18n-document-title]')
+    if (titleElement) {
+      const titleKey = titleElement.getAttribute('data-i18n-document-title')
+      document.title = this.t(titleKey)
+    }
+    
+    // Update all elements with data-i18n attribute
     document.querySelectorAll('[data-i18n]').forEach(element => {
       const key = element.getAttribute('data-i18n')
       element.textContent = this.t(key)
     })
     
-    // Update elements with data-i18n-placeholder attribute
+    // Update all elements with data-i18n-html attribute (for HTML content)
+    document.querySelectorAll('[data-i18n-html]').forEach(element => {
+      const key = element.getAttribute('data-i18n-html')
+      element.innerHTML = this.t(key)
+    })
+    
+    // Update placeholders
     document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
       const key = element.getAttribute('data-i18n-placeholder')
       element.placeholder = this.t(key)
     })
     
-    // Update elements with data-i18n-title attribute
+    // Update titles (tooltips)
     document.querySelectorAll('[data-i18n-title]').forEach(element => {
       const key = element.getAttribute('data-i18n-title')
       element.title = this.t(key)
     })
-    
-    // Update document title
-    const titleElement = document.querySelector('[data-i18n-document-title]')
-    if (titleElement) {
-      const key = titleElement.getAttribute('data-i18n-document-title')
-      document.title = this.t(key)
-    }
     
     // Update page direction for RTL languages (future use)
     document.documentElement.lang = this.currentLanguage
@@ -387,6 +735,42 @@ class CFRPI18n {
     if (languageSelector) {
       languageSelector.value = this.currentLanguage
     }
+    
+    // Update language label
+    const languageLabel = document.querySelector('label[for="languageSelector"]')
+    if (languageLabel) {
+      languageLabel.innerHTML = `
+        <i class="fas fa-globe mr-1"></i>
+        ${this.currentLanguage === 'fr' ? 'Langue' : 'Language'}:
+      `
+    }
+  }
+  
+  // Translate dynamic content
+  translateElement(element) {
+    // Translate data-i18n attributes
+    element.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n')
+      el.textContent = this.t(key)
+    })
+    
+    // Translate data-i18n-html attributes
+    element.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html')
+      el.innerHTML = this.t(key)
+    })
+    
+    // Translate placeholders
+    element.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder')
+      el.placeholder = this.t(key)
+    })
+    
+    // Translate titles
+    element.querySelectorAll('[data-i18n-title]').forEach(el => {
+      const key = el.getAttribute('data-i18n-title')
+      el.title = this.t(key)
+    })
   }
   
   // Initialize internationalization
@@ -411,43 +795,6 @@ class CFRPI18n {
       childList: true,
       subtree: true
     })
-  }
-  
-  // Translate a specific element and its children
-  translateElement(element) {
-    // Translate the element itself
-    if (element.hasAttribute && element.hasAttribute('data-i18n')) {
-      const key = element.getAttribute('data-i18n')
-      element.textContent = this.t(key)
-    }
-    
-    if (element.hasAttribute && element.hasAttribute('data-i18n-placeholder')) {
-      const key = element.getAttribute('data-i18n-placeholder')
-      element.placeholder = this.t(key)
-    }
-    
-    if (element.hasAttribute && element.hasAttribute('data-i18n-title')) {
-      const key = element.getAttribute('data-i18n-title')
-      element.title = this.t(key)
-    }
-    
-    // Translate child elements
-    if (element.querySelectorAll) {
-      element.querySelectorAll('[data-i18n]').forEach(child => {
-        const key = child.getAttribute('data-i18n')
-        child.textContent = this.t(key)
-      })
-      
-      element.querySelectorAll('[data-i18n-placeholder]').forEach(child => {
-        const key = child.getAttribute('data-i18n-placeholder')
-        child.placeholder = this.t(key)
-      })
-      
-      element.querySelectorAll('[data-i18n-title]').forEach(child => {
-        const key = child.getAttribute('data-i18n-title')
-        child.title = this.t(key)
-      })
-    }
   }
   
   // Add language selector to navigation
@@ -490,13 +837,11 @@ class CFRPI18n {
   }
   
   // Format currency according to locale
-  formatCurrency(amount, currency = 'CAD') {
+  formatCurrency(amount) {
     const locale = this.currentLanguage === 'fr' ? 'fr-CA' : 'en-CA'
     return new Intl.NumberFormat(locale, {
       style: 'currency',
-      currency: currency,
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
+      currency: 'CAD'
     }).format(amount)
   }
   
