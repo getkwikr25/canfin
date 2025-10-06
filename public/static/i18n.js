@@ -833,8 +833,8 @@ class CFRPI18n {
   init() {
     this.updatePageLanguage()
     
-    // Add language selector if not exists
-    this.addLanguageSelector()
+    // Don't add automatic language selector - we have our own custom one
+    // this.addLanguageSelector()
     
     // Listen for dynamic content changes
     const observer = new MutationObserver((mutations) => {

@@ -23,11 +23,16 @@ const CFRP = {
   
   // Set language and update UI
   setLanguage(lang) {
-    console.log('Setting language to:', lang)
+    console.log('🌍 Setting language to:', lang)
     
     if (window.i18n) {
-      console.log('i18n system found, setting language...')
+      console.log('✅ i18n system found, setting language...')
+      
+      // Set the language
       window.i18n.setLanguage(lang)
+      
+      // Force update the page language immediately 
+      window.i18n.updatePageLanguage()
       
       // Update language display
       const currentLanguage = document.getElementById('currentLanguage')
@@ -41,9 +46,33 @@ const CFRP = {
         dropdown.classList.add('hidden')
       }
       
-      console.log('Language set to:', window.i18n.currentLanguage)
+      console.log('✅ Language set to:', window.i18n.currentLanguage)
+      
+      // Force retranslate dynamic content 
+      this.retranslateAllDynamicContent()
+      
     } else {
-      console.error('i18n system not found!')
+      console.error('❌ i18n system not found!')
+    }
+  },
+
+  // Force retranslation of all dynamic content
+  retranslateAllDynamicContent() {
+    console.log('🔄 Retranslating all dynamic content...')
+    
+    // Retranslate all containers with dynamic content
+    const containers = ['entitiesContainer', 'filingsContainer', 'alertsContainer', 'statsContainer']
+    containers.forEach(containerId => {
+      const container = document.getElementById(containerId)
+      if (container && window.i18n) {
+        window.i18n.translateElement(container)
+      }
+    })
+    
+    // Retranslate any modal content if present
+    const modal = document.querySelector('.modal-overlay')
+    if (modal && window.i18n) {
+      window.i18n.translateElement(modal)
     }
   },
   
@@ -66,22 +95,34 @@ const CFRP = {
   // Initialize internationalization
   initializeI18n() {
     if (window.i18n) {
+      console.log('🌍 Initializing i18n system...')
+      console.log('Current language:', window.i18n.currentLanguage)
+      
       // Set initial language display
       const currentLanguage = document.getElementById('currentLanguage')
       if (currentLanguage) {
         currentLanguage.textContent = window.i18n.currentLanguage.toUpperCase()
+        console.log('Updated language display to:', window.i18n.currentLanguage.toUpperCase())
       }
       
       // Translate the entire page initially
       window.i18n.updatePageLanguage()
+      console.log('✅ Initial page translation completed')
       
       // Listen for language change events
       document.addEventListener('languageChanged', (e) => {
+        console.log('🔄 Language change event received:', e.detail.language)
         const currentLanguage = document.getElementById('currentLanguage')
         if (currentLanguage) {
           currentLanguage.textContent = e.detail.language.toUpperCase()
         }
       })
+      
+      // Test complete - language switching works via console
+      // Users can now click the dropdown to switch languages
+      
+    } else {
+      console.error('❌ i18n system not found during initialization!')
     }
   },
 
