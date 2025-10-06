@@ -174,6 +174,16 @@ const CFRP = {
       heroSection.style.display = 'none'
     }
     
+    // Show demo buttons only for admin and regulator users
+    const demoButtonsSection = document.getElementById('demoButtonsSection')
+    if (demoButtonsSection && this.user) {
+      if (this.user.role === 'admin' || this.user.role === 'regulator') {
+        demoButtonsSection.style.display = 'block'
+      } else {
+        demoButtonsSection.style.display = 'none'
+      }
+    }
+    
     // Show dashboard content and hide features
     const dashboardContent = document.getElementById('dashboardContent')
     const featuresContent = document.getElementById('featuresContent')
@@ -188,6 +198,12 @@ const CFRP = {
     const heroSection = document.getElementById('heroSection')
     if (heroSection) {
       heroSection.style.display = 'block'
+    }
+    
+    // Hide demo buttons for public users
+    const demoButtonsSection = document.getElementById('demoButtonsSection')
+    if (demoButtonsSection) {
+      demoButtonsSection.style.display = 'none'
     }
     
     // Show dashboard content and features for public users

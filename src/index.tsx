@@ -260,23 +260,26 @@ app.get('/', (c) => {
                                 <p><strong>Step 4:</strong> As regulator (regulator@osfi.ca), review filings and create cases</p>
                             </div>
                             
-                            <h4 class="text-md font-medium text-blue-900 mb-2">Demo Environment Setup</h4>
-                            <p class="text-blue-800 mb-4">
-                                Need sample data? Click the buttons below to populate the system with realistic Canadian financial data.
-                            </p>
-                            <div class="flex flex-wrap gap-3">
-                                <button onclick="CFRP.createSampleData('users')" class="btn btn-primary">
-                                    <i class="fas fa-users"></i> Create Sample Users
-                                </button>
-                                <button onclick="CFRP.createSampleData('entities')" class="btn btn-primary">
-                                    <i class="fas fa-building"></i> Create Sample Entities
-                                </button>
-                                <button onclick="CFRP.createSampleData('filings')" class="btn btn-primary">
-                                    <i class="fas fa-file-alt"></i> Create Sample Filings
-                                </button>
-                                <button onclick="CFRP.createSampleData('cases')" class="btn btn-primary">
-                                    <i class="fas fa-folder"></i> Create Sample Cases
-                                </button>
+                            <!-- Demo buttons only shown for authenticated admin/regulator users -->
+                            <div id="demoButtonsSection" style="display: none;">
+                                <h4 class="text-md font-medium text-blue-900 mb-2">Demo Environment Setup</h4>
+                                <p class="text-blue-800 mb-4">
+                                    Need sample data? Click the buttons below to populate the system with realistic Canadian financial data.
+                                </p>
+                                <div class="flex flex-wrap gap-3">
+                                    <button onclick="CFRP.createSampleData('users')" class="btn btn-primary">
+                                        <i class="fas fa-users"></i> Create Sample Users
+                                    </button>
+                                    <button onclick="CFRP.createSampleData('entities')" class="btn btn-primary">
+                                        <i class="fas fa-building"></i> Create Sample Entities
+                                    </button>
+                                    <button onclick="CFRP.createSampleData('filings')" class="btn btn-primary">
+                                        <i class="fas fa-file-alt"></i> Create Sample Filings
+                                    </button>
+                                    <button onclick="CFRP.createSampleData('cases')" class="btn btn-primary">
+                                        <i class="fas fa-folder"></i> Create Sample Cases
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
