@@ -365,35 +365,91 @@ class CFRPI18n {
         investment_dealers: 'Courtiers en placement',
         securities_regulated: 'Régulés par les valeurs mobilières',
         
+        // ==================  
+        // CONTENU DYNAMIQUE ET STATISTIQUES
+        // ==================
+        regulatory_filing_activity: 'Activité de dépôt réglementaire',
+        quarterly_returns: 'Rendements trimestriels',
+        q3_2024_submission: 'Période de soumission Q3 2024',
+        compliance_rate: 'Taux de conformité',
+        annual_reports: 'Rapports annuels',
+        2023_annual_filings: 'Dépôts annuels 2023',
+        submission_rate: 'Taux de soumission',
+        incident_reports: 'Rapports d\'incident',
+        past_30_days: '30 derniers jours',
+        reported: 'Signalés',
+        filing_calendar: 'Calendrier de dépôt',
+        next_filing_deadline: 'Prochaine échéance de dépôt : 15 novembre 2024 (Rapports de couverture de liquidité Q3)',
+        
+        // Aperçu des risques du système
+        system_risk_overview: 'Aperçu des risques du système',
+        system_stability: 'Stabilité du système',
+        stable: 'Stable',
+        overall_financial_system_health: 'Santé globale du système financier',
+        capital_adequacy: 'Adéquation du capital',
+        average_sector_ratio: 'Ratio moyen du secteur',
+        market_volatility: 'Volatilité du marché',
+        moderate: 'Modérée',
+        current_market_conditions: 'Conditions actuelles du marché',
+        global_exposure: 'Exposition mondiale',
+        managed: 'Gérée',
+        international_risk_exposure: 'Exposition au risque international',
+        public_risk_disclosure: 'Divulgation publique des risques',
+        detailed_risk_assessments_text: 'Les évaluations détaillées des risques et les données spécifiques des institutions ne sont disponibles qu\'au personnel réglementaire autorisé.',
+        
+        // Santé du système réglementaire
+        regulatory_system_health: 'Santé du système réglementaire',
+        filing_compliance_rate: 'Taux de conformité des dépôts',
+        system_response_time: 'Temps de réponse du système',
+        data_accuracy: 'Précision des données',
+        regulatory_agencies: 'Agences réglementaires',
+        monitoring: 'Surveillance',
+        last_updated: 'Dernière mise à jour',
+        
+        // Modal de connexion
+        login_to_cfrp: 'Se connecter à la plateforme PCRF',
+        email_address: 'Adresse courriel',
+        enter_email: 'Entrez votre courriel',
+        password: 'Mot de passe',
+        enter_password: 'Entrez votre mot de passe',
+        demo_credentials: 'Identifiants de démonstration',
+        administrator: 'Administrateur',
+        regulator: 'Régulateur',
+        institution_admin: 'Administrateur d\'institution',
+        cancel: 'Annuler',
+        
         // ==================
         // SECTION COMMENT FONCTIONNE PCRF
         // ==================
         how_cfrp_works: 'Comment fonctionne PCRF',
-        how_cfrp_subtitle: 'La Plateforme canadienne de réglementation financière transforme la façon dont les institutions financières interagissent avec les régulateurs, créant un écosystème unifié pour la conformité, la surveillance et la protection des consommateurs.',
+        how_cfrp_works_description: 'La Plateforme canadienne de réglementation financière transforme la façon dont les institutions financières interagissent avec les régulateurs, créant un écosystème unifié pour la conformité, la surveillance et la protection des consommateurs.',
         what_is_cfrp: 'Qu\'est-ce que PCRF?',
-        what_is_cfrp_description: 'PCRF est la première plateforme technologique réglementaire unifiée du Canada qui connecte tous les principaux régulateurs financiers (BSIF, ACFC, ARSF, AMF) avec les institutions financières via une interface intelligente unique.',
+        cfrp_description: 'PCRF est la première plateforme technologique réglementaire unifiée du Canada qui connecte tous les principaux régulateurs financiers (BSIF, ACFC, ARSF, AMF) avec les institutions financières via une interface intelligente unique.',
+        one_platform_feature: 'Une plateforme pour toutes les interactions réglementaires',
+        ai_compliance_monitoring: 'Surveillance de conformité alimentée par l\'IA',
+        realtime_risk_assessment: 'Évaluation des risques et alertes en temps réel',
         unified_ecosystem: 'Écosystème unifié',
-        unified_ecosystem_subtitle: 'Connecter les régulateurs et les institutions à travers le Canada',
+        connecting_regulators_text: 'Connecter les régulateurs et les institutions à travers le Canada',
         
         // Processus PCRF
         cfrp_process: 'Le processus PCRF',
-        step_1_title: 'Dépôt centralisé',
-        step_1_description: 'Les institutions financières utilisent le portail unifié de PCRF pour soumettre les données réglementaires. Une interface unique rationalise les flux de travail de conformité à travers plusieurs agences.',
-        step_2_title: 'Analyse des risques',
-        step_2_description: 'Des algorithmes avancés analysent les soumissions pour détecter les modèles de risque, les indicateurs d\'inconduite et les problèmes de conformité en utilisant l\'analytique comportementale et la reconnaissance de formes.',
-        step_3_title: 'Surveillance réglementaire',
-        step_3_description: 'Les régulateurs accèdent à des tableaux de bord complets, des alertes de risque et des outils d\'enquête pour une supervision améliorée et une protection proactive des consommateurs.',
+        centralized_filing: 'Dépôt centralisé',
+        centralized_filing_description: 'Les institutions financières utilisent le portail unifié de PCRF pour soumettre les données réglementaires. Une interface unique rationalise les flux de travail de conformité à travers plusieurs agences.',
+        risk_analysis: 'Analyse des risques',
+        risk_analysis_description: 'Des algorithmes avancés analysent les soumissions pour détecter les modèles de risque, les indicateurs d\'inconduite et les problèmes de conformité en utilisant l\'analytique comportementale et la reconnaissance de formes.',
+        regulatory_oversight: 'Surveillance réglementaire',
+        regulatory_oversight_description: 'Les régulateurs accèdent à des tableaux de bord complets, des alertes de risque et des outils d\'enquête pour une supervision améliorée et une protection proactive des consommateurs.',
         
         // Objectifs
         our_goals: 'Nos objectifs',
         reduce_costs: 'Réduire les coûts',
-        reduce_costs_subtitle: 'Réduction de 60% des coûts de traitement de la conformité',
+        reduce_costs_description: 'Réduction de 60% des coûts de traitement de la conformité',
         save_time: 'Économiser du temps',
-        save_time_subtitle: 'Éliminer les dépôts en double et les processus manuels',
+        save_time_description: 'Éliminer les dépôts en double et les processus manuels',
         protect_consumers: 'Protéger les consommateurs',
-        protect_consumers_subtitle: 'Surveillance renforcée et détection plus rapide des problèmes',
+        protect_consumers_description: 'Surveillance renforcée et détection plus rapide des problèmes',
         improve_markets: 'Améliorer les marchés',
-        improve_markets_subtitle: 'De meilleures données conduisent à une stabilité financière plus forte',
+        improve_markets_description: 'De meilleures données conduisent à une stabilité financière plus forte',
         
         // Qui utilise PCRF
         for_financial_institutions: 'Pour les institutions financières',
