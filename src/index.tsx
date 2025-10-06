@@ -379,7 +379,7 @@ app.get('/', (c) => {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-gray-900 mb-6">How CFRP Works</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="how_cfrp_works_description">
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="how_cfrp_subtitle">
                         The Canadian Financial Regulatory Platform transforms how financial institutions interact with regulators, 
                         creating a unified ecosystem for compliance, oversight, and consumer protection.
                     </p>
@@ -392,22 +392,22 @@ app.get('/', (c) => {
                             <h3 class="text-2xl font-bold text-cfrp-blue mb-4">
                                 <i class="fas fa-university mr-3"></i>What is CFRP?
                             </h3>
-                            <p class="text-gray-700 text-lg leading-relaxed mb-6" data-i18n="cfrp_description">
+                            <p class="text-gray-700 text-lg leading-relaxed mb-6" data-i18n="what_is_cfrp_description">
                                 CFRP is Canada's first unified regulatory technology platform that connects all major financial regulators 
                                 (OSFI, FCAC, FSRA, AMF) with financial institutions through a single, intelligent interface.
                             </p>
                             <div class="space-y-3">
                                 <div class="flex items-center">
                                     <i class="fas fa-check-circle text-green-600 mr-3"></i>
-                                    <span class="text-gray-700" data-i18n="one_platform_feature">One platform for all regulatory interactions</span>
+                                    <span class="text-gray-700" data-i18n="unified_ecosystem">One platform for all regulatory interactions</span>
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fas fa-check-circle text-green-600 mr-3"></i>
-                                    <span class="text-gray-700" data-i18n="ai_compliance_monitoring">AI-powered compliance monitoring</span>
+                                    <span class="text-gray-700" data-i18n="step_2_description">AI-powered compliance monitoring</span>
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fas fa-check-circle text-green-600 mr-3"></i>
-                                    <span class="text-gray-700" data-i18n="realtime_risk_assessment">Real-time risk assessment and alerts</span>
+                                    <span class="text-gray-700" data-i18n="step_3_description">Real-time risk assessment and alerts</span>
                                 </div>
                             </div>
                         </div>

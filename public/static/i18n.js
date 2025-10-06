@@ -39,6 +39,44 @@ class CFRPI18n {
         loading_alerts: 'Loading alerts...',
         loading_statistics: 'Loading statistics...',
         
+        // Dynamic Dashboard Content
+        regulatory_filing_activity: 'Regulatory Filing Activity',
+        quarterly_returns: 'Quarterly Returns', 
+        q3_2024_submission: 'Q3 2024 Submission Period',
+        compliance_rate: 'Compliance Rate',
+        annual_reports: 'Annual Reports',
+        '2023_annual_filings': '2023 Annual Filings',
+        submission_rate: 'Submission Rate',
+        incident_reports: 'Incident Reports',
+        past_30_days: 'Past 30 Days',
+        reported: 'Reported',
+        filing_calendar: 'Filing Calendar',
+        next_filing_deadline: 'Next Filing Deadline: November 15, 2024 (Q3 Liquidity Coverage Reports)',
+        
+        // System Risk Overview
+        system_risk_overview: 'System Risk Overview',
+        system_stability: 'System Stability',
+        stable: 'Stable',
+        overall_financial_system_health: 'Overall financial system health',
+        average_sector_ratio: 'Average sector ratio',
+        market_volatility: 'Market Volatility',
+        moderate: 'Moderate',
+        current_market_conditions: 'Current market conditions',
+        global_exposure: 'Global Exposure',
+        managed: 'Managed',
+        international_risk_exposure: 'International risk exposure',
+        public_risk_disclosure: 'Public Risk Disclosure',
+        detailed_risk_assessments_text: 'Detailed risk assessments and institution-specific data are available only to authorized regulatory personnel.',
+        
+        // Regulatory System Health
+        regulatory_system_health: 'Regulatory System Health',
+        filing_compliance_rate: 'Filing Compliance Rate',
+        system_response_time: 'System Response Time',
+        data_accuracy: 'Data Accuracy',
+        regulatory_agencies: 'Regulatory Agencies',
+        monitoring: 'Monitoring',
+        last_updated: 'Last Updated',
+        
         // Dashboard Cards
         canadian_financial_system_overview: 'Canadian Financial System Overview',
         federal_banks: 'Federal Banks',
@@ -55,30 +93,43 @@ class CFRPI18n {
         // ==================
         how_cfrp_works: 'How CFRP Works',
         how_cfrp_subtitle: 'The Canadian Financial Regulatory Platform transforms how financial institutions interact with regulators, creating a unified ecosystem for compliance, oversight, and consumer protection.',
+        how_cfrp_works_description: 'The Canadian Financial Regulatory Platform transforms how financial institutions interact with regulators, creating a unified ecosystem for compliance, oversight, and consumer protection.',
         what_is_cfrp: 'What is CFRP?',
         what_is_cfrp_description: 'CFRP is Canada\'s first unified regulatory technology platform that connects all major financial regulators (OSFI, FCAC, FSRA, AMF) with financial institutions through a single, intelligent interface.',
+        cfrp_description: 'CFRP is Canada\'s first unified regulatory technology platform that connects all major financial regulators (OSFI, FCAC, FSRA, AMF) with financial institutions through a single, intelligent interface.',
+        one_platform_feature: 'One platform for all regulatory interactions',
+        ai_compliance_monitoring: 'AI-powered compliance monitoring',
+        realtime_risk_assessment: 'Real-time risk assessment and alerts',
         unified_ecosystem: 'Unified Ecosystem',
         unified_ecosystem_subtitle: 'Connecting regulators and institutions across Canada',
+        connecting_regulators_text: 'Connecting regulators and institutions across Canada',
         
         // CFRP Process
         cfrp_process: 'The CFRP Process',
         step_1_title: 'Centralized Filing',
         step_1_description: 'Financial institutions use CFRP\'s unified portal to submit regulatory data. Single interface streamlines compliance workflows across multiple agencies.',
+        centralized_filing_description: 'Financial institutions use CFRP\'s unified portal to submit regulatory data. Single interface streamlines compliance workflows across multiple agencies.',
         step_2_title: 'Risk Analysis',
         step_2_description: 'Advanced algorithms analyze submissions for risk patterns, misconduct indicators, and compliance issues using behavioral analytics and pattern recognition.',
+        risk_analysis_description: 'Advanced algorithms analyze submissions for risk patterns, misconduct indicators, and compliance issues using behavioral analytics and pattern recognition.',
         step_3_title: 'Regulatory Oversight',
         step_3_description: 'Regulators access comprehensive dashboards, risk alerts, and investigation tools for enhanced supervision and proactive consumer protection.',
+        regulatory_oversight_description: 'Regulators access comprehensive dashboards, risk alerts, and investigation tools for enhanced supervision and proactive consumer protection.',
         
         // Goals
         our_goals: 'Our Goals',
         reduce_costs: 'Reduce Costs',
         reduce_costs_subtitle: '60% reduction in compliance processing costs',
+        reduce_costs_description: '60% reduction in compliance processing costs',
         save_time: 'Save Time',
         save_time_subtitle: 'Eliminate duplicate filings and manual processes',
+        save_time_description: 'Eliminate duplicate filings and manual processes',
         protect_consumers: 'Protect Consumers',
         protect_consumers_subtitle: 'Enhanced oversight and faster issue detection',
+        protect_consumers_description: 'Enhanced oversight and faster issue detection',
         improve_markets: 'Improve Markets',
         improve_markets_subtitle: 'Better data leads to stronger financial stability',
+        improve_markets_description: 'Better data leads to stronger financial stability',
         
         // Who Uses CFRP
         for_financial_institutions: 'For Financial Institutions',
@@ -430,6 +481,13 @@ class CFRPI18n {
         realtime_risk_assessment: 'Évaluation des risques et alertes en temps réel',
         unified_ecosystem: 'Écosystème unifié',
         connecting_regulators_text: 'Connecter les régulateurs et les institutions à travers le Canada',
+        centralized_filing_description: 'Les institutions financières utilisent le portail unifié de PCRF pour soumettre les données réglementaires. Une interface unique rationalise les flux de travail de conformité à travers plusieurs agences.',
+        risk_analysis_description: 'Des algorithmes avancés analysent les soumissions pour détecter les modèles de risque, les indicateurs d\'inconduite et les problèmes de conformité en utilisant l\'analytique comportementale et la reconnaissance de formes.',
+        regulatory_oversight_description: 'Les régulateurs accèdent à des tableaux de bord complets, des alertes de risque et des outils d\'enquête pour une supervision améliorée et une protection proactive des consommateurs.',
+        reduce_costs_description: 'Réduction de 60% des coûts de traitement de la conformité',
+        save_time_description: 'Éliminer les dépôts en double et les processus manuels',
+        protect_consumers_description: 'Surveillance renforcée et détection plus rapide des problèmes',
+        improve_markets_description: 'De meilleures données conduisent à une stabilité financière plus forte',
         
         // Processus PCRF
         cfrp_process: 'Le processus PCRF',

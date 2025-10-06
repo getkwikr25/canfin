@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Translation Test</title>
+</head>
+<body>
+    <script>
+        // Open the CFRP platform and test language switching
+        console.log('Loading CFRP platform...');
+        
+        setTimeout(() => {
+            if (window.i18n) {
+                console.log('🧪 Testing translation system...');
+                console.log('Current language:', window.i18n.currentLanguage);
+                
+                // Test translation retrieval
+                console.log('🔍 Testing translation retrieval:');
+                console.log('platform_name (EN):', window.i18n.t('platform_name'));
+                
+                // Switch to French
+                console.log('🔄 Switching to French...');
+                window.i18n.setLanguage('fr');
+                
+                setTimeout(() => {
+                    console.log('Current language after switch:', window.i18n.currentLanguage);
+                    console.log('platform_name (FR):', window.i18n.t('platform_name'));
+                    
+                    // Check if DOM was updated
+                    const platformNameElement = document.querySelector('[data-i18n="platform_name"]');
+                    if (platformNameElement) {
+                        console.log('DOM element text content:', platformNameElement.textContent);
+                        console.log('Should be:', window.i18n.t('platform_name'));
+                    } else {
+                        console.log('❌ No element with data-i18n="platform_name" found');
+                    }
+                    
+                    // List all elements with data-i18n
+                    const allI18nElements = document.querySelectorAll('[data-i18n]');
+                    console.log('📋 Total elements with data-i18n:', allI18nElements.length);
+                    
+                    if (allI18nElements.length > 0) {
+                        console.log('First 3 elements with data-i18n:');
+                        for (let i = 0; i < Math.min(3, allI18nElements.length); i++) {
+                            const el = allI18nElements[i];
+                            const key = el.getAttribute('data-i18n');
+                            console.log(`  ${i+1}. data-i18n="${key}" → text: "${el.textContent}" | expected: "${window.i18n.t(key)}"`);
+                        }
+                    }
+                }, 500);
+                
+            } else {
+                console.log('❌ i18n system not available');
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
