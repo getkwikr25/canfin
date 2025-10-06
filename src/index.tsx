@@ -252,9 +252,17 @@ app.get('/', (c) => {
                             <i class="fas fa-info-circle text-blue-600 text-xl"></i>
                         </div>
                         <div class="flex-1">
-                            <h3 class="text-lg font-semibold text-blue-900 mb-2">Demo Environment Setup</h3>
+                            <h3 class="text-lg font-semibold text-blue-900 mb-2">🚀 How to Use CFRP Platform</h3>
+                            <div class="text-blue-800 mb-4 space-y-2">
+                                <p><strong>Step 1:</strong> <a href="#" onclick="CFRP.showLoginModal()" class="text-blue-600 hover:underline">Login</a> with demo credentials (e.g., compliance@rbc.ca / demo123)</p>
+                                <p><strong>Step 2:</strong> Use navigation menu to explore: <strong>Dashboard</strong> • <strong>Filings</strong> • <strong>Entities</strong> • <strong>Risk</strong></p>
+                                <p><strong>Step 3:</strong> As RBC user, click <strong>"New Filing"</strong> to submit regulatory data</p>
+                                <p><strong>Step 4:</strong> As regulator (regulator@osfi.ca), review filings and create cases</p>
+                            </div>
+                            
+                            <h4 class="text-md font-medium text-blue-900 mb-2">Demo Environment Setup</h4>
                             <p class="text-blue-800 mb-4">
-                                This is a demonstration of the CFRP platform. Click the buttons below to populate the system with sample data.
+                                Need sample data? Click the buttons below to populate the system with realistic Canadian financial data.
                             </p>
                             <div class="flex flex-wrap gap-3">
                                 <button onclick="CFRP.createSampleData('users')" class="btn btn-primary">

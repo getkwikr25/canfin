@@ -2733,6 +2733,90 @@ const CFRP = {
     }
     
     return entityNames[entityId] || `Entity ${entityId}`
+  },
+
+  // Create sample data for demo purposes
+  async createSampleData(type) {
+    if (!this.user || (this.user.role !== 'admin' && this.user.role !== 'regulator')) {
+      this.showAlert('error', 'Only administrators and regulators can create sample data')
+      return
+    }
+
+    try {
+      const response = await fetch(`${this.apiBaseUrl}/${type}/demo/create-sample-${type}`, {
+        method: 'POST',
+        credentials: 'include'
+      })
+      
+      const data = await response.json()
+      
+      if (data.success) {
+        this.showAlert('success', `Sample ${type} created successfully! Added ${data.data.count || 'multiple'} records.`)
+        // Refresh the dashboard to show new data
+        this.loadDashboardData()
+      } else {
+        this.showAlert('error', data.error || `Failed to create sample ${type}`)
+      }
+    } catch (error) {
+      console.error(`Create sample ${type} error:`, error)
+      this.showAlert('error', 'Network error. Please try again.')
+    }
+  },
+
+  // Add detailed click handlers for entity rows
+  showEntityDetails(entityId, entityName) {
+    this.showAlert('info', `Loading details for ${entityName}...`)
+    
+    // You can expand this to show a detailed modal
+    const modal = `
+      <div class="modal-overlay">
+        <div class="modal-content max-w-4xl">
+          <div class="modal-header">
+            <h3 class="text-lg font-semibold">${entityName} - Entity Details</h3>
+            <button onclick="CFRP.closeModal()" class="text-gray-400 hover:text-gray-600">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="grid grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-medium mb-3">Entity Information</h4>
+                <div class="space-y-2 text-sm">
+                  <div><strong>Entity ID:</strong> ${entityId}</div>
+                  <div><strong>Type:</strong> Bank</div>
+                  <div><strong>Jurisdiction:</strong> Federal</div>
+                  <div><strong>Status:</strong> Active</div>
+                </div>
+              </div>
+              <div>
+                <h4 class="font-medium mb-3">Quick Actions</h4>
+                <div class="space-y-2">
+                  <button class="btn btn-primary w-full" onclick="CFRP.closeModal(); CFRP.showFilingModal()">
+                    <i class="fas fa-plus mr-2"></i>Submit New Filing
+                  </button>
+                  <button class="btn btn-secondary w-full" onclick="CFRP.closeModal(); CFRP.showFilingStatus()">
+                    <i class="fas fa-search mr-2"></i>View Filing History
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button onclick="CFRP.closeModal()" class="btn btn-secondary">Close</button>
+          </div>
+        </div>
+      </div>
+    `
+    
+    document.body.insertAdjacentHTML('beforeend', modal)
+  },
+
+  // Add click handler for filing rows
+  showFilingDetails(filingId, filingType) {
+    this.showAlert('info', `Loading details for Filing #${filingId}...`)
+    
+    // Add detailed filing information modal here
+    // For now, just show a simple alert
   }
 }
 
