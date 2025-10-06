@@ -7,21 +7,31 @@ export class DatabaseService {
 
   // Entity operations
   async createEntity(entity: Omit<Entity, 'id' | 'created_at' | 'updated_at'>): Promise<Entity> {
-    const result = await this.db.prepare(`
+    // Insert the entity
+    const insertResult = await this.db.prepare(`
       INSERT INTO entities (name, type, jurisdiction, registration_number, status, risk_score)
       VALUES (?, ?, ?, ?, ?, ?)
-      RETURNING *
     `).bind(
       entity.name,
       entity.type,
       entity.jurisdiction,
       entity.registration_number,
-      entity.status,
-      entity.risk_score
-    ).first<Entity>()
+      entity.status || 'active',
+      entity.risk_score || 5.0
+    ).run()
+
+    if (!insertResult.success) {
+      throw new Error('Failed to create entity')
+    }
+
+    // Get the inserted entity by ID
+    const entityId = insertResult.meta.last_row_id
+    const result = await this.db.prepare(`
+      SELECT * FROM entities WHERE id = ?
+    `).bind(entityId).first<Entity>()
 
     if (!result) {
-      throw new Error('Failed to create entity')
+      throw new Error('Failed to retrieve created entity')
     }
     return result
   }
@@ -77,23 +87,33 @@ export class DatabaseService {
 
   // Filing operations
   async createFiling(filing: Omit<Filing, 'id' | 'submitted_at'>): Promise<Filing> {
-    const result = await this.db.prepare(`
+    // Insert the filing
+    const insertResult = await this.db.prepare(`
       INSERT INTO filings (entity_id, filing_type, status, data, file_url, validation_errors, risk_score, reviewer_id)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-      RETURNING *
     `).bind(
       filing.entity_id,
       filing.filing_type,
       filing.status,
       JSON.stringify(filing.data),
-      filing.file_url,
-      JSON.stringify(filing.validation_errors),
+      filing.file_url || null,
+      JSON.stringify(filing.validation_errors || []),
       filing.risk_score,
-      filing.reviewer_id
-    ).first<Filing>()
+      filing.reviewer_id || null
+    ).run()
+
+    if (!insertResult.success) {
+      throw new Error('Failed to create filing')
+    }
+
+    // Get the inserted filing by ID
+    const filingId = insertResult.meta.last_row_id
+    const result = await this.db.prepare(`
+      SELECT * FROM filings WHERE id = ?
+    `).bind(filingId).first<Filing>()
 
     if (!result) {
-      throw new Error('Failed to create filing')
+      throw new Error('Failed to retrieve created filing')
     }
     return result
   }
@@ -168,21 +188,31 @@ export class DatabaseService {
 
   // User operations
   async createUser(user: Omit<User, 'id' | 'created_at'>): Promise<User> {
-    const result = await this.db.prepare(`
+    // Insert the user
+    const insertResult = await this.db.prepare(`
       INSERT INTO users (email, name, role, agency, entity_id, is_active)
       VALUES (?, ?, ?, ?, ?, ?)
-      RETURNING *
     `).bind(
       user.email,
       user.name,
       user.role,
-      user.agency,
-      user.entity_id,
-      user.is_active
-    ).first<User>()
+      user.agency || null,
+      user.entity_id || null,
+      user.is_active !== undefined ? user.is_active : true
+    ).run()
+
+    if (!insertResult.success) {
+      throw new Error('Failed to create user')
+    }
+
+    // Get the inserted user by ID
+    const userId = insertResult.meta.last_row_id
+    const result = await this.db.prepare(`
+      SELECT * FROM users WHERE id = ?
+    `).bind(userId).first<User>()
 
     if (!result) {
-      throw new Error('Failed to create user')
+      throw new Error('Failed to retrieve created user')
     }
     return result
   }
@@ -208,24 +238,34 @@ export class DatabaseService {
 
   // Case operations
   async createCase(caseData: Omit<Case, 'id' | 'created_at' | 'updated_at'>): Promise<Case> {
-    const result = await this.db.prepare(`
+    // Insert the case
+    const insertResult = await this.db.prepare(`
       INSERT INTO cases (entity_id, filing_id, case_type, priority, status, title, description, assigned_to, created_by)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-      RETURNING *
     `).bind(
       caseData.entity_id,
-      caseData.filing_id,
+      caseData.filing_id || null,
       caseData.case_type,
-      caseData.priority,
-      caseData.status,
+      caseData.priority || 'medium',
+      caseData.status || 'open',
       caseData.title,
       caseData.description,
-      caseData.assigned_to,
+      caseData.assigned_to || null,
       caseData.created_by
-    ).first<Case>()
+    ).run()
+
+    if (!insertResult.success) {
+      throw new Error('Failed to create case')
+    }
+
+    // Get the inserted case by ID
+    const caseId = insertResult.meta.last_row_id
+    const result = await this.db.prepare(`
+      SELECT * FROM cases WHERE id = ?
+    `).bind(caseId).first<Case>()
 
     if (!result) {
-      throw new Error('Failed to create case')
+      throw new Error('Failed to retrieve created case')
     }
     return result
   }

@@ -2087,6 +2087,212 @@ const CFRP = {
     }
   },
 
+  // Show filing submission modal
+  showFilingModal() {
+    const entityName = this.getEntityName(this.user?.entity_id)
+    
+    const modal = `
+      <div class="modal-overlay">
+        <div class="modal-content max-w-2xl">
+          <div class="modal-header">
+            <h3 class="text-lg font-semibold">Submit New Regulatory Filing</h3>
+            <button onclick="CFRP.closeModal()" class="text-gray-400 hover:text-gray-600">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="filingForm">
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label class="form-label">Institution</label>
+                  <input type="text" class="form-input w-full" value="${entityName}" readonly>
+                </div>
+                <div>
+                  <label class="form-label">Filing Type</label>
+                  <select id="filingType" class="form-input w-full" required>
+                    <option value="">Select filing type...</option>
+                    <option value="quarterly_return">Quarterly Return</option>
+                    <option value="annual_report">Annual Report</option>
+                    <option value="incident_report">Incident Report</option>
+                    <option value="capital_adequacy">Capital Adequacy Report</option>
+                    <option value="liquidity_coverage">Liquidity Coverage Report</option>
+                    <option value="consumer_complaint">Consumer Complaint Report</option>
+                    <option value="cyber_incident">Cyber Incident Report</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-3 gap-4 mb-4">
+                <div>
+                  <label class="form-label">Reporting Period</label>
+                  <input type="text" id="reportingPeriod" class="form-input w-full" placeholder="2024-Q3" required>
+                </div>
+                <div>
+                  <label class="form-label">Currency</label>
+                  <select id="currency" class="form-input w-full" required>
+                    <option value="">Select currency...</option>
+                    <option value="CAD" selected>CAD</option>
+                    <option value="USD">USD</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label">Quarter/Year</label>
+                  <input type="text" id="quarterYear" class="form-input w-full" placeholder="Q3 2024">
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label">Financial Data</label>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="text-sm text-gray-600">Total Assets (CAD)</label>
+                    <input type="number" id="totalAssets" class="form-input w-full" placeholder="1500000000000" step="0.01" required>
+                  </div>
+                  <div>
+                    <label class="text-sm text-gray-600">Total Deposits (CAD)</label>
+                    <input type="number" id="totalDeposits" class="form-input w-full" placeholder="1200000000000" step="0.01">
+                  </div>
+                  <div>
+                    <label class="text-sm text-gray-600">Capital Ratio (%)</label>
+                    <input type="number" id="capitalRatio" class="form-input w-full" placeholder="12.5" step="0.01" required>
+                  </div>
+                  <div>
+                    <label class="text-sm text-gray-600">Leverage Ratio (%)</label>
+                    <input type="number" id="leverageRatio" class="form-input w-full" placeholder="4.2" step="0.01">
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex gap-3">
+                <button type="submit" class="btn btn-primary flex-1">
+                  <i class="fas fa-upload mr-2"></i>Submit Filing
+                </button>
+                <button type="button" onclick="CFRP.closeModal()" class="btn btn-secondary">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    `
+    
+    document.body.insertAdjacentHTML('beforeend', modal)
+    
+    // Handle form submission
+    document.getElementById('filingForm').addEventListener('submit', this.handleFilingSubmission.bind(this))
+  },
+
+  // Handle filing form submission
+  async handleFilingSubmission(e) {
+    e.preventDefault()
+    
+    const filingType = document.getElementById('filingType').value
+    const reportingPeriod = document.getElementById('reportingPeriod').value
+    const currency = document.getElementById('currency').value
+    const totalAssets = parseFloat(document.getElementById('totalAssets').value)
+    const totalDeposits = parseFloat(document.getElementById('totalDeposits').value) || 0
+    const capitalRatio = parseFloat(document.getElementById('capitalRatio').value)
+    const leverageRatio = parseFloat(document.getElementById('leverageRatio').value) || 0
+    
+    try {
+      const response = await fetch(`${this.apiBaseUrl}/filings/submit`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          entity_id: this.user.entity_id,
+          filing_type: filingType,
+          data: {
+            reporting_period: reportingPeriod,
+            currency: currency,
+            total_assets: totalAssets,
+            total_deposits: totalDeposits,
+            capital_ratio: capitalRatio,
+            leverage_ratio: leverageRatio
+          }
+        })
+      })
+      
+      const data = await response.json()
+      
+      if (data.success) {
+        this.closeModal()
+        this.showAlert('success', `Filing submitted successfully! Filing ID: ${data.data.id}`)
+        // Refresh the filings view
+        this.loadInstitutionFilings()
+      } else {
+        this.showAlert('error', data.error || 'Filing submission failed')
+      }
+    } catch (error) {
+      console.error('Filing submission error:', error)
+      this.showAlert('error', 'Network error. Please try again.')
+    }
+  },
+
+  // Show filing status modal
+  async showFilingStatus() {
+    try {
+      // Get recent filings for this entity
+      const response = await fetch(`${this.apiBaseUrl}/filings?entity_id=${this.user.entity_id}&limit=10`, {
+        credentials: 'include'
+      })
+      
+      const data = await response.json()
+      
+      if (!data.success) {
+        this.showAlert('error', 'Failed to load filing status')
+        return
+      }
+      
+      const filings = data.data || []
+      const filingsHtml = filings.length > 0 ? 
+        filings.map(filing => `
+          <div class="border border-gray-200 rounded-lg p-4">
+            <div class="flex justify-between items-start mb-2">
+              <h4 class="font-medium">Filing #${filing.id} - ${filing.filing_type_display}</h4>
+              <span class="status-badge status-${filing.status}">${filing.status_display}</span>
+            </div>
+            <div class="text-sm text-gray-600 space-y-1">
+              <div>Submitted: ${new Date(filing.submitted_at).toLocaleDateString()}</div>
+              <div>Risk Level: ${filing.risk_level}</div>
+              ${filing.validation_errors && filing.validation_errors.length > 0 ? 
+                `<div class="text-red-600">⚠️ ${filing.validation_errors.length} validation issue(s)</div>` : 
+                ''}
+            </div>
+          </div>
+        `).join('') :
+        '<div class="text-center text-gray-500 py-8">No filings found</div>'
+      
+      const modal = `
+        <div class="modal-overlay">
+          <div class="modal-content max-w-3xl">
+            <div class="modal-header">
+              <h3 class="text-lg font-semibold">Filing Status Tracker</h3>
+              <button onclick="CFRP.closeModal()" class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div class="modal-body max-h-96 overflow-y-auto">
+              <div class="space-y-4">
+                ${filingsHtml}
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button onclick="CFRP.closeModal()" class="btn btn-secondary">Close</button>
+            </div>
+          </div>
+        </div>
+      `
+      
+      document.body.insertAdjacentHTML('beforeend', modal)
+      
+    } catch (error) {
+      console.error('Filing status error:', error)
+      this.showAlert('error', 'Network error. Please try again.')
+    }
+  },
+
   // Show alert notification
   showAlert(type, message) {
     const alert = document.createElement('div')
@@ -2392,10 +2598,10 @@ const CFRP = {
               Q3 2024 Capital Return due November 15, 2024 (15 days remaining)
             </div>
             <div class="grid grid-cols-3 gap-4">
-              <button class="btn btn-primary">
+              <button class="btn btn-primary" onclick="CFRP.showFilingModal()">
                 <i class="fas fa-plus mr-2"></i>New Filing
               </button>
-              <button class="btn btn-secondary">
+              <button class="btn btn-secondary" onclick="CFRP.showFilingStatus()">
                 <i class="fas fa-search mr-2"></i>Track Status
               </button>
               <button class="btn btn-secondary">
@@ -2506,6 +2712,27 @@ const CFRP = {
     if (filingsContainer) filingsContainer.innerHTML = viewerMessage
     if (alertsContainer) alertsContainer.innerHTML = viewerMessage  
     if (statsContainer) statsContainer.innerHTML = viewerMessage
+  },
+
+  // Helper function to get entity name by ID
+  getEntityName(entityId) {
+    if (!entityId) return 'Unknown Institution'
+    
+    const entityNames = {
+      1: 'Royal Bank of Canada',
+      2: 'Toronto-Dominion Bank', 
+      3: 'Bank of Nova Scotia',
+      4: 'Bank of Montreal',
+      5: 'Canadian Imperial Bank of Commerce',
+      6: 'Desjardins Group',
+      7: 'Vancity Credit Union',
+      8: 'Manulife Financial Corporation',
+      9: 'Sun Life Financial Inc.',
+      10: 'Great-West Lifeco Inc.',
+      11: 'Questrade Inc.'
+    }
+    
+    return entityNames[entityId] || `Entity ${entityId}`
   }
 }
 
