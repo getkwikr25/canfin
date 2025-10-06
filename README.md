@@ -31,6 +31,8 @@ CFRP is a **working regulatory platform** that enables real financial supervisio
 **📄 Filings**: Submit and track regulatory submissions  
 **🏢 Entities**: Manage financial institution profiles
 **⚠️ Risk**: View risk assessments and alerts
+**🛡️ Conduct**: Advanced misconduct detection and consumer protection
+**🧩 Modules**: Specialized regulatory modules (Insurance, Pensions, Payments, Provincial, Securities)
 
 ### **Step 3: Try Real Business Functions**
 
@@ -74,6 +76,21 @@ CFRP is a **working regulatory platform** that enables real financial supervisio
 - ✅ Automatic flagging of problematic submissions
 - ✅ Risk trend analysis and historical tracking
 - ✅ Regulatory alerts and notifications
+
+**🛡️ Advanced Misconduct Detection**:
+- ✅ Unauthorized policy conversion monitoring
+- ✅ Synthetic customer identity detection  
+- ✅ Cross-jurisdictional sales violation tracking
+- ✅ Fronting arrangement network analysis
+- ✅ Client borrowing ethics monitoring
+- ✅ Consumer protection intelligence dashboard
+
+**🧩 Specialized Regulatory Modules**:
+- ✅ **Insurance Module**: OSFI, FSRA, AMF, BCFSA coverage with MCT ratios and solvency monitoring
+- ✅ **Pensions Module**: Federal/provincial pension oversight, funding analysis, investment performance
+- ✅ **Payments Module**: Bank of Canada, Payments Canada, FCAC regulation of PSPs and fintech
+- ✅ **Provincial Regulators**: Multi-jurisdiction coordination with full French language support
+- ✅ **Securities Module**: OSC, AMF Securities, CIRO with SEDAR+ integration and market surveillance
 
 **👥 Role-Based Access Control**:
 - ✅ Institution-specific data access (RBC sees only RBC data)
@@ -149,6 +166,30 @@ Click **demo buttons** at bottom of page to populate with realistic Canadian ban
 - `GET /api/risk/scores/{entityId}` - Risk history ✅
 - `GET /api/risk/alerts` - Risk notifications ✅
 
+**Conduct Monitoring**:
+- `POST /api/conduct/detect/unauthorized-conversions` - Policy conversion detection ✅
+- `POST /api/conduct/detect/synthetic-customers` - Fake customer analysis ✅
+- `POST /api/conduct/detect/jurisdiction-violations` - Cross-border violations ✅
+- `POST /api/conduct/detect/fronting-arrangements` - Hidden control structures ✅
+- `POST /api/conduct/detect/client-borrowing` - Ethics violations ✅
+- `GET /api/conduct/dashboard/conduct-risk` - Comprehensive intelligence ✅
+
+**Specialized Modules**:
+- `GET /api/insurance/regulators` - Insurance regulator coverage ✅
+- `POST /api/insurance/filings` - Submit insurance regulatory filings ✅
+- `POST /api/insurance/analyze` - Real-time insurance compliance analysis ✅
+- `GET /api/pensions/regulators` - Pension regulator coverage ✅ 
+- `POST /api/pensions/filings` - Submit pension plan filings ✅
+- `POST /api/pensions/funding/monitor` - Funding status monitoring ✅
+- `GET /api/payments/regulators` - Payment system regulator coverage ✅
+- `POST /api/payments/filings` - Submit payment service filings ✅
+- `POST /api/payments/aml/check` - AML compliance analysis ✅
+- `GET /api/provincial/regulators` - Provincial regulator integration ✅
+- `POST /api/provincial/coordinate` - Cross-jurisdictional coordination ✅
+- `GET /api/securities/regulators` - Securities regulator coverage ✅
+- `POST /api/securities/filings` - Submit securities regulatory filings ✅
+- `POST /api/securities/surveillance` - Market surveillance analysis ✅
+
 **Entity Management**:
 - `GET /api/entities` - List regulated institutions ✅
 - `PUT /api/entities/{id}` - Update entity information ✅
@@ -185,6 +226,21 @@ Click **demo buttons** at bottom of page to populate with realistic Canadian ban
 6. **Cross-institution analysis** reveals sector trend
 
 **Real Value**: Proactive risk detection prevents systemic issues, automated alerts enable early intervention.
+
+### **Scenario 3: Advanced Misconduct Detection**
+
+**Business Context**: FCAC receives consumer complaints about unauthorized policy conversions at a major insurance company.
+
+**User Journey**:
+1. **FCAC Regulator** launches unauthorized conversion detection analysis
+2. **AI algorithms** scan transaction patterns across the institution
+3. **System identifies** 47 policy conversions lacking proper consent documentation  
+4. **Pattern analysis** reveals clustering around bonus payment periods
+5. **Cross-correlation** with consumer complaints shows 94% match rate
+6. **Enforcement recommendations** generated with specific compliance actions
+7. **Multi-agency coordination** triggered with OSFI and provincial regulators
+
+**Real Value**: Advanced pattern recognition protects consumers from misconduct, coordinated enforcement ensures comprehensive regulatory response.
 
 ---
 
@@ -257,6 +313,14 @@ npm run db:console:local
 - Role-based dashboards and access controls
 - Comprehensive API layer with error handling
 - Real-time data processing and storage
+
+### ✅ **Specialized Modules (Complete)**
+- **Insurance Regulation**: Complete coverage of Canadian insurance regulatory landscape
+- **Pensions Oversight**: Federal and provincial pension plan supervision
+- **Payments & Fintech**: Payment service providers and digital currency regulation
+- **Provincial Coordination**: Multi-jurisdiction filing and cross-border regulatory coordination
+- **Securities Regulation**: Investment industry oversight with market surveillance
+- **Bilingual Support**: Full French/English interface for Canadian market requirements
 
 ### 🔄 **Enhancement Opportunities**
 - Advanced AI/ML integration for sophisticated risk analysis

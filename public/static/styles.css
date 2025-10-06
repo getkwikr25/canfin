@@ -476,6 +476,37 @@
   }
 }
 
+/* Filings page special layout */
+.filings-layout {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .filings-layout {
+    grid-template-columns: 2fr 1fr;
+  }
+  
+  .filings-layout #filingsContainer {
+    grid-column: 1;
+    grid-row: 1 / 4;
+  }
+  
+  .filings-layout #entitiesContainer {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  
+  .filings-layout #alertsContainer {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  
+  .filings-layout #statsContainer {
+    grid-column: 2;
+    grid-row: 3;
+  }
+}
+
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   :root {

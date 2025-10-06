@@ -6,7 +6,17 @@ import { entityRoutes } from './api/entities'
 import { filingRoutes } from './api/filings'
 import { riskRoutes } from './api/risk'
 import { caseRoutes } from './api/cases'
+import { conductRoutes } from './api/conduct'
 import { userRoutes } from './api/users'
+import distributionAPI from './api/distribution'
+import realtimeAnalysisAPI from './api/realtime-analysis'
+import workflowCoordinationAPI from './api/workflow-coordination'
+import complianceFlaggingAPI from './api/compliance-flagging'
+import provincialRegulatorsAPI from './api/provincial-regulators'
+import securitiesAPI from './api/securities'
+import insuranceAPI from './api/insurance'
+import pensionsAPI from './api/pensions'
+import paymentsAPI from './api/payments'
 
 // Type definitions for Cloudflare bindings
 type Bindings = {
@@ -42,11 +52,31 @@ app.use('/api/entities/*', authMiddleware)
 app.use('/api/filings/*', authMiddleware)
 app.use('/api/risk/*', authMiddleware)
 app.use('/api/cases/*', authMiddleware)
+app.use('/api/conduct/*', authMiddleware)
+app.use('/api/distribution/*', authMiddleware)
+app.use('/api/realtime/*', authMiddleware)
+app.use('/api/workflow/*', authMiddleware)
+app.use('/api/compliance/*', authMiddleware)
+app.use('/api/provincial/*', authMiddleware)
+app.use('/api/securities/*', authMiddleware)
+app.use('/api/insurance/*', authMiddleware)
+app.use('/api/pensions/*', authMiddleware)
+app.use('/api/payments/*', authMiddleware)
 
 app.route('/api/entities', entityRoutes)
 app.route('/api/filings', filingRoutes)
 app.route('/api/risk', riskRoutes)
 app.route('/api/cases', caseRoutes)
+app.route('/api/conduct', conductRoutes)
+app.route('/api/distribution', distributionAPI)
+app.route('/api/realtime', realtimeAnalysisAPI)
+app.route('/api/workflow', workflowCoordinationAPI)
+app.route('/api/compliance', complianceFlaggingAPI)
+app.route('/api/provincial', provincialRegulatorsAPI)
+app.route('/api/securities', securitiesAPI)
+app.route('/api/insurance', insuranceAPI)
+app.route('/api/pensions', pensionsAPI)
+app.route('/api/payments', paymentsAPI)
 
 // Favicon route to prevent 500 errors
 app.get('/favicon.ico', (c) => {
@@ -61,7 +91,7 @@ app.get('/', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CFRP - Canadian Financial Regulatory Platform</title>
+        <title data-i18n-document-title="platform_name">CFRP - Canadian Financial Regulatory Platform</title>
         <meta name="description" content="Unified SupTech Platform for Canada's Financial Regulators">
         
         <!-- Tailwind CSS -->
@@ -72,6 +102,9 @@ app.get('/', (c) => {
         
         <!-- Custom styles -->
         <link href="/static/styles.css" rel="stylesheet">
+        
+        <!-- Internationalization -->
+        <script src="/static/i18n.js"></script>
         
         <!-- Configure Tailwind theme -->
         <script>
@@ -96,30 +129,43 @@ app.get('/', (c) => {
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center">
                         <i class="fas fa-university text-2xl mr-3"></i>
-                        <div class="text-xl font-bold">CFRP</div>
-                        <div class="hidden md:block ml-2 text-sm opacity-90">
+                        <div class="text-xl font-bold" data-i18n="platform_abbrev">CFRP</div>
+                        <div class="hidden md:block ml-2 text-sm opacity-90" data-i18n="platform_name">
                             Canadian Financial Regulatory Platform
                         </div>
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
                             <a href="#dashboard" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                                <i class="fas fa-tachometer-alt mr-1"></i>Dashboard
+                                <i class="fas fa-tachometer-alt mr-1"></i>
+                                <span data-i18n="dashboard">Dashboard</span>
                             </a>
                             <a href="#filings" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                                <i class="fas fa-file-alt mr-1"></i>Filings
+                                <i class="fas fa-file-alt mr-1"></i>
+                                <span data-i18n="filings">Filings</span>
                             </a>
                             <a href="#entities" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                                <i class="fas fa-building mr-1"></i>Entities
+                                <i class="fas fa-building mr-1"></i>
+                                <span data-i18n="entities">Entities</span>
                             </a>
                             <a href="#risk" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                                <i class="fas fa-exclamation-triangle mr-1"></i>Risk
+                                <i class="fas fa-exclamation-triangle mr-1"></i>
+                                <span data-i18n="risk">Risk</span>
+                            </a>
+                            <a href="#conduct" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                                <i class="fas fa-shield-alt mr-1"></i>
+                                <span data-i18n="conduct">Conduct</span>
+                            </a>
+                            <a href="#" onclick="CFRP.showSpecializedModulesMenu()" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium bg-blue-700">
+                                <i class="fas fa-layer-group mr-1"></i>
+                                <span data-i18n="specialized_modules">Modules</span>
                             </a>
                         </div>
                     </div>
                     <div>
                         <button id="loginBtn" class="bg-cfrp-green hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium">
-                            <i class="fas fa-sign-in-alt mr-1"></i>Login
+                            <i class="fas fa-sign-in-alt mr-1"></i>
+                            <span data-i18n="login">Login</span>
                         </button>
                     </div>
                 </div>
@@ -131,17 +177,19 @@ app.get('/', (c) => {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6">
-                        Canadian Financial<br>Regulatory Platform
+                        <span data-i18n="platform_name">Canadian Financial<br>Regulatory Platform</span>
                     </h1>
                     <p class="text-xl md:text-2xl mb-8 opacity-90">
-                        From Compliance Burden to Regulatory Intelligence
+                        <span data-i18n="hero_subtitle">From Compliance Burden to Regulatory Intelligence</span>
                     </p>
                     <div class="flex flex-col md:flex-row gap-4 justify-center">
                         <button class="bg-cfrp-green hover:bg-green-600 text-white px-8 py-3 rounded-lg text-lg font-medium">
-                            <i class="fas fa-rocket mr-2"></i>Get Started
+                            <i class="fas fa-rocket mr-2"></i>
+                            <span data-i18n="get_started">Get Started</span>
                         </button>
                         <button class="border-2 border-white text-white hover:bg-white hover:text-cfrp-blue px-8 py-3 rounded-lg text-lg font-medium">
-                            <i class="fas fa-book mr-2"></i>Documentation
+                            <i class="fas fa-book mr-2"></i>
+                            <span data-i18n="documentation">Documentation</span>
                         </button>
                     </div>
                 </div>
@@ -151,6 +199,24 @@ app.get('/', (c) => {
         <!-- Dashboard Content (public and authenticated access) -->
         <div id="dashboardContent" class="py-16" style="display: block;">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Page Header with Dynamic Title -->
+                <div id="pageHeader" class="mb-8 pb-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 id="pageTitle" class="text-3xl font-bold text-gray-900">
+                                <i id="pageTitleIcon" class="fas fa-tachometer-alt mr-3 text-blue-600"></i>
+                                <span id="pageTitleText">Dashboard Overview</span>
+                            </h1>
+                            <p id="pageSubtitle" class="mt-2 text-gray-600">
+                                Comprehensive regulatory oversight and compliance management platform
+                            </p>
+                        </div>
+                        <div id="pageActions" class="flex gap-3">
+                            <!-- Dynamic page-specific actions will be inserted here -->
+                        </div>
+                    </div>
+                </div>
                 <!-- Quick Stats -->
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                     <div class="bg-white rounded-lg shadow p-6">
@@ -287,13 +353,210 @@ app.get('/', (c) => {
             </div>
         </div>
 
+        <!-- How it Works Section -->
+        <div class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">How CFRP Works</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        The Canadian Financial Regulatory Platform transforms how financial institutions interact with regulators, 
+                        creating a unified ecosystem for compliance, oversight, and consumer protection.
+                    </p>
+                </div>
+
+                <!-- What is CFRP -->
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-12">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-2xl font-bold text-cfrp-blue mb-4">
+                                <i class="fas fa-university mr-3"></i>What is CFRP?
+                            </h3>
+                            <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                                CFRP is Canada's first unified regulatory technology platform that connects all major financial regulators 
+                                (OSFI, FCAC, FSRA, AMF) with financial institutions through a single, intelligent interface.
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-600 mr-3"></i>
+                                    <span class="text-gray-700">One platform for all regulatory interactions</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-600 mr-3"></i>
+                                    <span class="text-gray-700">AI-powered compliance monitoring</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-600 mr-3"></i>
+                                    <span class="text-gray-700">Real-time risk assessment and alerts</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-gradient-to-br from-cfrp-blue to-blue-800 rounded-lg p-8 text-white">
+                                <i class="fas fa-network-wired text-6xl mb-4 opacity-80"></i>
+                                <h4 class="text-xl font-semibold mb-2">Unified Ecosystem</h4>
+                                <p class="opacity-90">Connecting regulators and institutions across Canada</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How it Works Process -->
+                <div class="mb-16">
+                    <h3 class="text-3xl font-bold text-center text-gray-900 mb-12">The CFRP Process</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Step 1 -->
+                        <div class="text-center">
+                            <div class="bg-cfrp-blue text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                                1
+                            </div>
+                            <div class="bg-white rounded-lg shadow-md p-6 h-full">
+                                <i class="fas fa-upload text-cfrp-blue text-3xl mb-4"></i>
+                                <h4 class="text-xl font-bold mb-3 text-gray-900">Centralized Filing</h4>
+                                <p class="text-gray-600">
+                                    Financial institutions use CFRP's unified portal to submit regulatory data. 
+                                    Single interface streamlines compliance workflows across multiple agencies.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="text-center">
+                            <div class="bg-cfrp-green text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                                2
+                            </div>
+                            <div class="bg-white rounded-lg shadow-md p-6 h-full">
+                                <i class="fas fa-search-plus text-cfrp-green text-3xl mb-4"></i>
+                                <h4 class="text-xl font-bold mb-3 text-gray-900">Risk Analysis</h4>
+                                <p class="text-gray-600">
+                                    Advanced algorithms analyze submissions for risk patterns, misconduct indicators, 
+                                    and compliance issues using behavioral analytics and pattern recognition.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="text-center">
+                            <div class="bg-cfrp-gold text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                                3
+                            </div>
+                            <div class="bg-white rounded-lg shadow-md p-6 h-full">
+                                <i class="fas fa-chart-line text-cfrp-gold text-3xl mb-4"></i>
+                                <h4 class="text-xl font-bold mb-3 text-gray-900">Regulatory Oversight</h4>
+                                <p class="text-gray-600">
+                                    Regulators access comprehensive dashboards, risk alerts, and investigation tools 
+                                    for enhanced supervision and proactive consumer protection.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Goals -->
+                <div class="bg-gradient-to-r from-cfrp-blue to-blue-800 rounded-xl text-white p-8 mb-12">
+                    <h3 class="text-3xl font-bold text-center mb-8">Our Goals</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <i class="fas fa-dollar-sign text-4xl mb-4 text-cfrp-gold"></i>
+                            <h4 class="text-lg font-semibold mb-2">Reduce Costs</h4>
+                            <p class="text-sm opacity-90">60% reduction in compliance processing costs</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-clock text-4xl mb-4 text-cfrp-green"></i>
+                            <h4 class="text-lg font-semibold mb-2">Save Time</h4>
+                            <p class="text-sm opacity-90">Eliminate duplicate filings and manual processes</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-users text-4xl mb-4 text-blue-300"></i>
+                            <h4 class="text-lg font-semibold mb-2">Protect Consumers</h4>
+                            <p class="text-sm opacity-90">Enhanced oversight and faster issue detection</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-chart-line text-4xl mb-4 text-yellow-300"></i>
+                            <h4 class="text-lg font-semibold mb-2">Improve Markets</h4>
+                            <p class="text-sm opacity-90">Better data leads to stronger financial stability</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Who Uses CFRP -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Financial Institutions -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-bold text-cfrp-blue mb-6">
+                            <i class="fas fa-building mr-3"></i>For Financial Institutions
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-arrow-right text-cfrp-green mr-3 mt-1"></i>
+                                <div>
+                                    <strong>Banks & Credit Unions:</strong> Submit regulatory reports once for all agencies
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-arrow-right text-cfrp-green mr-3 mt-1"></i>
+                                <div>
+                                    <strong>Insurance Companies:</strong> Streamlined compliance across provinces
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-arrow-right text-cfrp-green mr-3 mt-1"></i>
+                                <div>
+                                    <strong>Investment Firms:</strong> Real-time risk monitoring and alerts
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-arrow-right text-cfrp-green mr-3 mt-1"></i>
+                                <div>
+                                    <strong>Fintech Companies:</strong> Simplified regulatory navigation
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Regulators -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-bold text-cfrp-blue mb-6">
+                            <i class="fas fa-university mr-3"></i>For Regulators
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-arrow-right text-cfrp-blue mr-3 mt-1"></i>
+                                <div>
+                                    <strong>OSFI:</strong> Enhanced prudential supervision with AI insights
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-arrow-right text-cfrp-blue mr-3 mt-1"></i>
+                                <div>
+                                    <strong>FCAC:</strong> Improved consumer protection monitoring
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-arrow-right text-cfrp-blue mr-3 mt-1"></i>
+                                <div>
+                                    <strong>Provincial Regulators:</strong> Unified data sharing and collaboration
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-arrow-right text-cfrp-blue mr-3 mt-1"></i>
+                                <div>
+                                    <strong>All Agencies:</strong> Real-time compliance intelligence
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Features Grid (shown when not logged in) -->
         <div id="featuresContent" class="py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Unified Regulatory Intelligence</h2>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Platform Features</h2>
                     <p class="text-xl text-gray-600">
-                        Single platform for all Canadian financial regulatory interactions
+                        Comprehensive tools for modern financial regulation
                     </p>
                 </div>
                 
