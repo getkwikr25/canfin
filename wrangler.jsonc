@@ -1,0 +1,33 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cfrp",
+  "compatibility_date": "2024-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "pages_build_output_dir": "./dist",
+  
+  // D1 Database for regulatory data
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cfrp-db",
+      "database_id": "your-database-id-here"
+    }
+  ],
+
+  // KV Namespace for caching and sessions
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "your-kv-id-here",
+      "preview_id": "your-kv-preview-id-here"
+    }
+  ],
+
+  // R2 Bucket for file storage
+  "r2_buckets": [
+    {
+      "binding": "R2",
+      "bucket_name": "cfrp-files"
+    }
+  ]
+}

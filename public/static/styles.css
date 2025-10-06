@@ -1,0 +1,490 @@
+/* Canadian Financial Regulatory Platform (CFRP) - Custom Styles */
+
+/* Custom CSS Variables for CFRP Brand Colors */
+:root {
+  --cfrp-blue: #0052CC;
+  --cfrp-blue-dark: #003d99;
+  --cfrp-blue-light: #e6f0ff;
+  --cfrp-green: #00C881;
+  --cfrp-green-dark: #00a06b;
+  --cfrp-green-light: #e6fff7;
+  --cfrp-gold: #FFD500;
+  --cfrp-gold-dark: #ccaa00;
+  --cfrp-gold-light: #fffacc;
+  --cfrp-gray: #F9FAFB;
+  --cfrp-gray-dark: #6B7280;
+  --cfrp-red: #EF4444;
+  --cfrp-red-light: #FEF2F2;
+}
+
+/* Loading spinner */
+.spinner {
+  border: 3px solid var(--cfrp-gray);
+  border-radius: 50%;
+  border-top: 3px solid var(--cfrp-blue);
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Risk score indicators */
+.risk-low {
+  background-color: var(--cfrp-green-light);
+  color: var(--cfrp-green-dark);
+}
+
+.risk-medium {
+  background-color: var(--cfrp-gold-light);
+  color: var(--cfrp-gold-dark);
+}
+
+.risk-high {
+  background-color: #FED7AA;
+  color: #EA580C;
+}
+
+.risk-critical {
+  background-color: var(--cfrp-red-light);
+  color: var(--cfrp-red);
+}
+
+/* Status badges */
+.status-pending {
+  background-color: var(--cfrp-gold-light);
+  color: var(--cfrp-gold-dark);
+}
+
+.status-validated {
+  background-color: var(--cfrp-green-light);
+  color: var(--cfrp-green-dark);
+}
+
+.status-flagged {
+  background-color: var(--cfrp-red-light);
+  color: var(--cfrp-red);
+}
+
+.status-approved {
+  background-color: var(--cfrp-blue-light);
+  color: var(--cfrp-blue);
+}
+
+.status-rejected {
+  background-color: #F3F4F6;
+  color: var(--cfrp-gray-dark);
+}
+
+/* Entity type indicators */
+.entity-bank {
+  background-color: var(--cfrp-blue-light);
+  color: var(--cfrp-blue);
+  border-left: 4px solid var(--cfrp-blue);
+}
+
+.entity-credit-union {
+  background-color: var(--cfrp-green-light);
+  color: var(--cfrp-green-dark);
+  border-left: 4px solid var(--cfrp-green);
+}
+
+.entity-insurer {
+  background-color: #EDE9FE;
+  color: #7C3AED;
+  border-left: 4px solid #7C3AED;
+}
+
+.entity-investment-firm {
+  background-color: var(--cfrp-gold-light);
+  color: var(--cfrp-gold-dark);
+  border-left: 4px solid var(--cfrp-gold);
+}
+
+.entity-trust-company {
+  background-color: #FEF2F2;
+  color: #DC2626;
+  border-left: 4px solid #DC2626;
+}
+
+/* Priority indicators */
+.priority-low {
+  color: var(--cfrp-gray-dark);
+}
+
+.priority-medium {
+  color: var(--cfrp-blue);
+}
+
+.priority-high {
+  color: #EA580C;
+}
+
+.priority-urgent {
+  color: var(--cfrp-red);
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Data table styles */
+.data-table {
+  border-collapse: collapse;
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.data-table th {
+  background-color: var(--cfrp-gray);
+  color: var(--cfrp-gray-dark);
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.data-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.data-table tbody tr:hover {
+  background-color: var(--cfrp-blue-light);
+}
+
+/* Form styles */
+.form-input {
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--cfrp-blue);
+  box-shadow: 0 0 0 3px var(--cfrp-blue-light);
+}
+
+.form-input.error {
+  border-color: var(--cfrp-red);
+}
+
+.form-label {
+  display: block;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.form-error {
+  color: var(--cfrp-red);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Button styles */
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--cfrp-blue);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--cfrp-blue-dark);
+}
+
+.btn-success {
+  background-color: var(--cfrp-green);
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: var(--cfrp-green-dark);
+}
+
+.btn-warning {
+  background-color: var(--cfrp-gold);
+  color: #1F2937;
+}
+
+.btn-warning:hover {
+  background-color: var(--cfrp-gold-dark);
+}
+
+.btn-danger {
+  background-color: var(--cfrp-red);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #DC2626;
+}
+
+.btn-secondary {
+  background-color: #F3F4F6;
+  color: var(--cfrp-gray-dark);
+  border: 1px solid #D1D5DB;
+}
+
+.btn-secondary:hover {
+  background-color: #E5E7EB;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  padding: 20px;
+  border-bottom: 1px solid #E5E7EB;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  padding: 20px;
+  border-top: 1px solid #E5E7EB;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* Alert styles */
+.alert {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.alert-info {
+  background-color: var(--cfrp-blue-light);
+  color: var(--cfrp-blue);
+  border-left: 4px solid var(--cfrp-blue);
+}
+
+.alert-success {
+  background-color: var(--cfrp-green-light);
+  color: var(--cfrp-green-dark);
+  border-left: 4px solid var(--cfrp-green);
+}
+
+.alert-warning {
+  background-color: var(--cfrp-gold-light);
+  color: var(--cfrp-gold-dark);
+  border-left: 4px solid var(--cfrp-gold);
+}
+
+.alert-error {
+  background-color: var(--cfrp-red-light);
+  color: var(--cfrp-red);
+  border-left: 4px solid var(--cfrp-red);
+}
+
+/* Progress bar */
+.progress-bar {
+  background-color: #E5E7EB;
+  border-radius: 9999px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background-color: var(--cfrp-blue);
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+  cursor: help;
+}
+
+.tooltip:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1F2937;
+  color: white;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 100;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .data-table {
+    font-size: 12px;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 8px 12px;
+  }
+  
+  .modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .data-table {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .data-table th,
+  .data-table td {
+    border: 1px solid #000;
+  }
+}
+
+/* Accessibility enhancements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles for keyboard navigation */
+.btn:focus,
+.form-input:focus {
+  outline: 2px solid var(--cfrp-blue);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .risk-low,
+  .risk-medium,
+  .risk-high,
+  .risk-critical,
+  .status-pending,
+  .status-validated,
+  .status-flagged,
+  .status-approved,
+  .status-rejected {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cfrp-gray: #1F2937;
+    --cfrp-gray-dark: #D1D5DB;
+  }
+  
+  body {
+    background-color: #111827;
+    color: #F9FAFB;
+  }
+  
+  .data-table {
+    background-color: #1F2937;
+    color: #F9FAFB;
+  }
+  
+  .data-table th {
+    background-color: #374151;
+  }
+  
+  .modal-content {
+    background-color: #1F2937;
+    color: #F9FAFB;
+  }
+}
