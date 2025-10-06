@@ -37,9 +37,9 @@ export async function verifyToken(token: string): Promise<JWTPayload | null> {
 
 // Authentication middleware
 export async function authMiddleware(c: Context, next: Next) {
-  // Skip auth for health check and auth routes
+  // Skip auth for health check and specific auth routes
   const path = c.req.path
-  if (path === '/api/health' || path.startsWith('/api/auth/')) {
+  if (path === '/api/health' || path === '/api/auth/login' || path === '/api/auth/logout') {
     await next()
     return
   }

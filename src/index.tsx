@@ -38,11 +38,20 @@ app.get('/api/health', (c) => {
 app.route('/api/auth', userRoutes)
 
 // Protected API routes
-app.use('/api/*', authMiddleware)
+app.use('/api/entities/*', authMiddleware)
+app.use('/api/filings/*', authMiddleware)
+app.use('/api/risk/*', authMiddleware)
+app.use('/api/cases/*', authMiddleware)
+
 app.route('/api/entities', entityRoutes)
 app.route('/api/filings', filingRoutes)
 app.route('/api/risk', riskRoutes)
 app.route('/api/cases', caseRoutes)
+
+// Favicon route to prevent 500 errors
+app.get('/favicon.ico', (c) => {
+  return c.text('', 204)
+})
 
 // Main dashboard route
 app.get('/', (c) => {
@@ -404,6 +413,10 @@ app.get('/', (c) => {
         <!-- JavaScript Libraries -->
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+          // Ensure CFRP object exists for inline handlers
+          window.CFRP = window.CFRP || {};
+        </script>
         <script src="/static/app.js"></script>
     </body>
     </html>

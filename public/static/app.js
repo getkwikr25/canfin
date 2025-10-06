@@ -22,12 +22,12 @@ const CFRP = {
     // Login button
     const loginBtn = document.getElementById('loginBtn')
     if (loginBtn) {
-      loginBtn.addEventListener('click', this.showLoginModal)
+      loginBtn.addEventListener('click', this.showLoginModal.bind(this))
     }
 
     // Navigation items
     document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', this.handleNavigation)
+      link.addEventListener('click', this.handleNavigation.bind(this))
     })
 
     // Modal close handlers
@@ -112,7 +112,7 @@ const CFRP = {
     document.body.insertAdjacentHTML('beforeend', modal)
     
     // Handle form submission
-    document.getElementById('loginForm').addEventListener('submit', this.handleLogin)
+    document.getElementById('loginForm').addEventListener('submit', this.handleLogin.bind(this))
   },
 
   // Handle login form submission
@@ -664,9 +664,21 @@ const CFRP = {
   // Handle navigation
   handleNavigation(e) {
     e.preventDefault()
-    const href = e.target.getAttribute('href')
+    const href = e.currentTarget.getAttribute('href')
     console.log('Navigate to:', href)
-    // In a real SPA, would handle routing here
+    
+    // Simple client-side navigation simulation
+    if (href === '#dashboard' || href === '/') {
+      this.showAlert('info', 'Dashboard - Current page')
+    } else if (href === '#filings') {
+      this.showAlert('info', 'Filings section - Login required for full access')
+    } else if (href === '#entities') {
+      this.showAlert('info', 'Entities section - Login required for full access')  
+    } else if (href === '#risk') {
+      this.showAlert('info', 'Risk Analytics - Login required for full access')
+    } else {
+      this.showAlert('info', `Navigation to: ${href}`)
+    }
   },
 
   // Close modal

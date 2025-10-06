@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
+import { getCookie } from 'hono/cookie'
 import { DatabaseService } from '../lib/database'
-import { generateToken, hashPassword, verifyPassword, setAuthCookie, clearAuthCookie } from '../lib/auth'
+import { generateToken, hashPassword, verifyPassword, verifyToken, setAuthCookie, clearAuthCookie } from '../lib/auth'
 import { createApiResponse, validateRequiredFields, validateEmail } from '../lib/utils'
 import { LoginRequest, User, UserRole } from '../types'
 
@@ -82,10 +83,21 @@ userRoutes.get('/profile', async (c) => {
   const requestId = `profile_${Date.now()}`
   
   try {
-    const userPayload = c.get('user')
+    // Check for authentication manually since this route needs custom handling
+    const token = getCookie(c, 'cfrp_token') || c.req.header('Authorization')?.replace('Bearer ', '')
+    
+    if (!token) {
+      return c.json(createApiResponse(null, 'Authentication required', requestId), 401)
+    }
+
+    const payload = await verifyToken(token)
+    if (!payload) {
+      return c.json(createApiResponse(null, 'Invalid or expired token', requestId), 401)
+    }
+
     const db = new DatabaseService(c.env.DB)
     
-    const user = await db.getUser(userPayload.user_id)
+    const user = await db.getUser(payload.user_id)
     if (!user) {
       return c.json(createApiResponse(null, 'User not found', requestId), 404)
     }
