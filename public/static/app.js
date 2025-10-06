@@ -76,6 +76,67 @@ const CFRP = {
     }
   },
   
+  // Show quick tutorial for new users
+  showQuickTutorial() {
+    const modal = `
+      <div class="modal-overlay">
+        <div class="modal-content max-w-lg">
+          <div class="modal-header">
+            <h3 class="text-lg font-semibold">
+              <i class="fas fa-graduation-cap mr-2 text-blue-600"></i>Welcome to CFRP Platform
+            </h3>
+            <button onclick="CFRP.closeModal()" class="text-gray-400 hover:text-gray-600">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="text-gray-600 mb-4">Here's how to get started with the platform:</p>
+            
+            <div class="space-y-3">
+              <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                <i class="fas fa-mouse-pointer text-blue-600 mr-3"></i>
+                <div>
+                  <div class="font-medium">Navigate Sections</div>
+                  <div class="text-sm text-gray-600">Click Dashboard, Filings, Entities, Risk, Cases in the top menu</div>
+                </div>
+              </div>
+              
+              <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                <i class="fas fa-upload text-green-600 mr-3"></i>
+                <div>
+                  <div class="font-medium">Submit Filings</div>
+                  <div class="text-sm text-gray-600">Go to Filings section and click "New Filing" to submit regulatory data</div>
+                </div>
+              </div>
+              
+              <div class="flex items-center p-3 bg-purple-50 rounded-lg">
+                <i class="fas fa-globe text-purple-600 mr-3"></i>
+                <div>
+                  <div class="font-medium">Switch Languages</div>
+                  <div class="text-sm text-gray-600">Click the globe icon to switch between English and French</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-6 flex gap-3">
+              <button onclick="CFRP.closeModal(); CFRP.handleNavigation({preventDefault: () => {}, currentTarget: {getAttribute: () => '#filings'}})" 
+                      class="btn btn-primary flex-1">
+                <i class="fas fa-rocket mr-1"></i>Try Filing Submission
+              </button>
+              <button onclick="CFRP.closeModal()" class="btn btn-secondary">
+                Got it!
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+    document.body.insertAdjacentHTML('beforeend', modal)
+    
+    // Translate the modal content
+    this.translateContent(document.querySelector('.modal-overlay'))
+  },
+  
   // Initialize the application
   async init() {
     console.log('🚀 CFRP Platform Initialized')
@@ -273,7 +334,12 @@ const CFRP = {
         this.user = data.data.user
         this.closeModal()
         this.updateUIForLoggedInUser()
-        this.showAlert('success', 'Login successful! Welcome to CFRP Platform.')
+        this.showAlert('success', `Welcome ${data.data.user.name}! You're now logged in as ${data.data.user.role}. Try navigating to different sections or creating a new filing.`)
+        
+        // Show quick tutorial for first-time users
+        setTimeout(() => {
+          this.showQuickTutorial()
+        }, 2000)
         this.loadDashboardData()
       } else {
         this.showAlert('error', data.error || 'Login failed')
@@ -1219,6 +1285,9 @@ const CFRP = {
     e.preventDefault()
     const href = e.currentTarget.getAttribute('href')
     console.log('Navigate to:', href)
+    
+    // Show immediate visual feedback
+    this.showAlert('info', `Loading ${href.replace('#', '').charAt(0).toUpperCase() + href.replace('#', '').slice(1)} section...`)
     
     // Update current page state
     const oldPage = this.currentPage
