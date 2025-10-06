@@ -220,6 +220,20 @@
   cursor: pointer;
 }
 
+.btn-icon {
+  padding: 6px;
+  border-radius: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  width: 28px;
+  height: 28px;
+}
+
 .btn-primary {
   background-color: var(--cfrp-blue);
   color: white;

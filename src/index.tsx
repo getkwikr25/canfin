@@ -103,16 +103,16 @@ app.get('/', (c) => {
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="#" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">
+                            <a href="#dashboard" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                                 <i class="fas fa-tachometer-alt mr-1"></i>Dashboard
                             </a>
-                            <a href="#" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">
+                            <a href="#filings" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                                 <i class="fas fa-file-alt mr-1"></i>Filings
                             </a>
-                            <a href="#" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">
+                            <a href="#entities" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                                 <i class="fas fa-building mr-1"></i>Entities
                             </a>
-                            <a href="#" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">
+                            <a href="#risk" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                                 <i class="fas fa-exclamation-triangle mr-1"></i>Risk
                             </a>
                         </div>
@@ -127,7 +127,7 @@ app.get('/', (c) => {
         </nav>
 
         <!-- Hero Section -->
-        <div class="bg-gradient-to-r from-cfrp-blue to-blue-800 text-white py-16">
+        <div id="heroSection" class="bg-gradient-to-r from-cfrp-blue to-blue-800 text-white py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6">
@@ -148,8 +148,8 @@ app.get('/', (c) => {
             </div>
         </div>
 
-        <!-- Dashboard Content (shown when logged in) -->
-        <div id="dashboardContent" class="py-16" style="display: none;">
+        <!-- Dashboard Content (public and authenticated access) -->
+        <div id="dashboardContent" class="py-16" style="display: block;">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Quick Stats -->
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
