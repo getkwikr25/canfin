@@ -373,7 +373,7 @@ class CFRPI18n {
         q3_2024_submission: 'Période de soumission Q3 2024',
         compliance_rate: 'Taux de conformité',
         annual_reports: 'Rapports annuels',
-        2023_annual_filings: 'Dépôts annuels 2023',
+        '2023_annual_filings': 'Dépôts annuels 2023',
         submission_rate: 'Taux de soumission',
         incident_reports: 'Rapports d\'incident',
         past_30_days: '30 derniers jours',

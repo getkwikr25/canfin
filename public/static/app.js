@@ -23,18 +23,27 @@ const CFRP = {
   
   // Set language and update UI
   setLanguage(lang) {
+    console.log('Setting language to:', lang)
+    
     if (window.i18n) {
+      console.log('i18n system found, setting language...')
       window.i18n.setLanguage(lang)
+      
       // Update language display
       const currentLanguage = document.getElementById('currentLanguage')
       if (currentLanguage) {
         currentLanguage.textContent = lang.toUpperCase()
       }
+      
       // Hide dropdown
       const dropdown = document.getElementById('languageDropdown')
       if (dropdown) {
         dropdown.classList.add('hidden')
       }
+      
+      console.log('Language set to:', window.i18n.currentLanguage)
+    } else {
+      console.error('i18n system not found!')
     }
   },
   
@@ -42,8 +51,10 @@ const CFRP = {
   async init() {
     console.log('🚀 CFRP Platform Initialized')
     
-    // Initialize i18n system
-    this.initializeI18n()
+    // Wait a moment for i18n to be ready
+    setTimeout(() => {
+      this.initializeI18n()
+    }, 100)
     
     this.setupEventListeners()
     await this.checkAuthStatus()
@@ -61,8 +72,16 @@ const CFRP = {
         currentLanguage.textContent = window.i18n.currentLanguage.toUpperCase()
       }
       
-      // Translate the entire page
-      window.i18n.translateElement(document.body)
+      // Translate the entire page initially
+      window.i18n.updatePageLanguage()
+      
+      // Listen for language change events
+      document.addEventListener('languageChanged', (e) => {
+        const currentLanguage = document.getElementById('currentLanguage')
+        if (currentLanguage) {
+          currentLanguage.textContent = e.detail.language.toUpperCase()
+        }
+      })
     }
   },
 
