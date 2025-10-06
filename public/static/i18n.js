@@ -452,23 +452,24 @@ class CFRPI18n {
   
   // Add language selector to navigation
   addLanguageSelector() {
-    const nav = document.querySelector('nav .flex.items-center.justify-between')
+    const nav = document.querySelector('nav')
     if (!nav) return
     
-    const rightSection = nav.querySelector('.flex:last-child') || nav.lastElementChild
+    // Find the right section with login button
+    const rightSection = nav.querySelector('.flex.items-center.space-x-4')
     if (!rightSection) return
     
     // Check if selector already exists
     if (document.getElementById('languageSelector')) return
     
     const languageContainer = document.createElement('div')
-    languageContainer.className = 'flex items-center mr-4'
+    languageContainer.className = 'flex items-center'
     languageContainer.innerHTML = `
       <label for="languageSelector" class="text-white text-sm mr-2">
         <i class="fas fa-globe mr-1"></i>
         ${this.currentLanguage === 'fr' ? 'Langue' : 'Language'}:
       </label>
-      <select id="languageSelector" class="text-sm border border-blue-300 rounded px-2 py-1 bg-white">
+      <select id="languageSelector" class="text-sm border border-blue-300 rounded px-2 py-1 bg-white text-gray-800">
         <option value="en" ${this.currentLanguage === 'en' ? 'selected' : ''}>English</option>
         <option value="fr" ${this.currentLanguage === 'fr' ? 'selected' : ''}>Français</option>
       </select>
