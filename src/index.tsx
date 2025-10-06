@@ -167,7 +167,7 @@ app.get('/', (c) => {
                             </a>
                         </div>
                     </div>
-                    <div>
+                    <div class="flex items-center space-x-4">
                         <button id="loginBtn" class="bg-cfrp-green hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium">
                             <i class="fas fa-sign-in-alt mr-1"></i>
                             <span data-i18n="login">Login</span>
