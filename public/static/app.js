@@ -5380,7 +5380,7 @@ const CFRP = {
 
   async scheduleRegulatoryBriefing() {
     this.showAlert('info', 'Scheduling comprehensive regulatory briefing with cross-module analytics and trend analysis...')
-  }
+  },
 
   // Format currency
   formatCurrency(amount) {
@@ -5390,6 +5390,15 @@ const CFRP = {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     }).format(amount)
+  },
+
+  // Format date
+  formatDate(dateString) {
+    return new Date(dateString).toLocaleDateString('en-CA', {
+      year: 'numeric',
+      month: 'short', 
+      day: 'numeric'
+    })
   },
 
   // Format date

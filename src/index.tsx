@@ -17,6 +17,7 @@ import securitiesAPI from './api/securities'
 import insuranceAPI from './api/insurance'
 import pensionsAPI from './api/pensions'
 import paymentsAPI from './api/payments'
+import dashboardAPI from './api/dashboard'
 
 // Type definitions for Cloudflare bindings
 type Bindings = {
@@ -47,7 +48,11 @@ app.get('/api/health', (c) => {
 // Authentication routes (no auth middleware needed)
 app.route('/api/auth', userRoutes)
 
+// Dashboard routes (mixed public/protected)
+app.route('/api/dashboard', dashboardAPI)
+
 // Protected API routes
+app.use('/api/dashboard/stats', authMiddleware)
 app.use('/api/entities/*', authMiddleware)
 app.use('/api/filings/*', authMiddleware)
 app.use('/api/risk/*', authMiddleware)
