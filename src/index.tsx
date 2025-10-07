@@ -247,6 +247,7 @@ app.get('/', (c) => {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title data-i18n-document-title="platform_name">CFRP - Canadian Financial Regulatory Platform</title>
+        <!-- Deployment fix: Updated 2025-10-07 -->
         <meta name="description" content="Unified SupTech Platform for Canada's Financial Regulators">
         
         <!-- Tailwind CSS -->
