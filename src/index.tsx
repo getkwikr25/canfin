@@ -311,7 +311,7 @@ app.get('/', (c) => {
                                 <i class="fas fa-shield-alt mr-1"></i>
                                 <span data-i18n="conduct">Conduct</span>
                             </a>
-                            <a href="#" onclick="CFRP.showSpecializedModulesMenu()" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium bg-blue-700">
+                            <a href="#modules" class="text-blue-100 hover:bg-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                                 <i class="fas fa-layer-group mr-1"></i>
                                 <span data-i18n="specialized_modules">Modules</span>
                             </a>

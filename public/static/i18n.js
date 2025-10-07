@@ -368,7 +368,79 @@ class CFRPI18n {
           mutual_fund_dealer: 'Mutual Fund Dealer',
           pension_plan: 'Pension Plan',
           payment_processor: 'Payment Processor'
-        }
+        },
+        
+        // ==================
+        // SPECIALIZED MODULES
+        // ==================
+        insurance_regulation: 'Insurance Regulation',
+        pensions_regulation: 'Pensions Regulation', 
+        payments_fintech: 'Payments & Fintech',
+        provincial_regulators: 'Provincial Regulators',
+        securities_regulation: 'Securities Regulation',
+        integrated_dashboard: 'Integrated Dashboard',
+        
+        federal_provincial_coverage: 'Federal & Provincial Coverage',
+        risk_assessment_mct: 'Risk Assessment & MCT',
+        market_conduct_reports: 'Market Conduct Reports',
+        solvency_monitoring: 'Solvency Monitoring',
+        
+        pension_plan_oversight: 'Pension Plan Oversight',
+        funding_analysis: 'Funding Analysis',
+        investment_performance: 'Investment Performance',
+        actuarial_reports: 'Actuarial Reports',
+        
+        payment_service_providers: 'Payment Service Providers',
+        aml_kyc_compliance: 'AML/KYC Compliance',
+        crypto_exchanges: 'Crypto Exchanges',
+        transaction_monitoring: 'Transaction Monitoring',
+        
+        multi_jurisdiction_filing: 'Multi-Jurisdiction Filing',
+        cross_border_coordination: 'Cross-Border Coordination',
+        french_language_support: 'French Language Support',
+        provincial_compliance: 'Provincial Compliance',
+        
+        sedar_plus_integration: 'SEDAR+ Integration',
+        market_surveillance: 'Market Surveillance',
+        insider_trading_detection: 'Insider Trading Detection',
+        investment_funds: 'Investment Funds',
+        
+        all_modules_combined: 'All Modules Combined',
+        cross_module_analytics: 'Cross-Module Analytics',
+        unified_reporting: 'Unified Reporting',
+        regulatory_intelligence: 'Regulatory Intelligence',
+        complete_coverage: 'Complete Coverage',
+        
+        active_modules: 'Active Modules',
+        coverage_rate: 'Coverage Rate',
+        monitoring: 'Monitoring',
+        powered: 'Powered',
+        
+        run_comprehensive_risk_assessment: 'Run Comprehensive Risk Assessment',
+        generate_cross_module_report: 'Generate Cross-Module Report',
+        configure_module_alerts: 'Configure Module Alerts',
+        
+        module_documentation: 'Module Documentation & Help',
+        getting_started: 'Getting Started',
+        modules_getting_started_text: 'Click on any module above to access specialized regulatory tools. Each module provides comprehensive coverage for its regulatory domain.',
+        modules_overview: 'Modules Overview',
+        integration_guide: 'Integration Guide',
+        troubleshooting: 'Troubleshooting',
+        
+        public_modules_description: 'CFRP provides specialized regulatory modules covering all aspects of Canada\'s financial regulatory framework. Login to access detailed module functionality.',
+        who_uses_modules: 'Who Uses These Modules',
+        financial_institutions: 'Financial Institutions',
+        streamlined_compliance: 'Streamlined compliance across multiple regulatory jurisdictions',
+        regulatory_agencies: 'Regulatory Agencies',
+        enhanced_oversight: 'Enhanced oversight with unified data sharing and coordination',
+        compliance_teams: 'Compliance Teams',
+        comprehensive_tools: 'Comprehensive tools for regulatory monitoring and reporting',
+        
+        access_information: 'Access Information',
+        authentication_required: 'Authentication Required',
+        modules_login_required: 'Access to specialized regulatory modules requires authentication. Please login to access full functionality.',
+        login_to_access_modules: 'Login to Access Modules',
+        unified_view: 'Unified View'
       },
       
       fr: {
@@ -746,7 +818,79 @@ class CFRPI18n {
           mutual_fund_dealer: 'Courtier en fonds mutuels',
           pension_plan: 'Régime de pension',
           payment_processor: 'Processeur de paiement'
-        }
+        },
+        
+        // ==================
+        // MODULES SPÉCIALISÉS
+        // ==================
+        insurance_regulation: 'Réglementation des assurances',
+        pensions_regulation: 'Réglementation des pensions',
+        payments_fintech: 'Paiements et technologie financière',
+        provincial_regulators: 'Régulateurs provinciaux',
+        securities_regulation: 'Réglementation des valeurs mobilières',
+        integrated_dashboard: 'Tableau de bord intégré',
+        
+        federal_provincial_coverage: 'Couverture fédérale et provinciale',
+        risk_assessment_mct: 'Évaluation des risques et TCM',
+        market_conduct_reports: 'Rapports de conduite du marché',
+        solvency_monitoring: 'Surveillance de la solvabilité',
+        
+        pension_plan_oversight: 'Surveillance des régimes de retraite',
+        funding_analysis: 'Analyse du financement',
+        investment_performance: 'Performance des investissements',
+        actuarial_reports: 'Rapports actuariels',
+        
+        payment_service_providers: 'Fournisseurs de services de paiement',
+        aml_kyc_compliance: 'Conformité LBC/CVD',
+        crypto_exchanges: 'Bourses de cryptomonnaies',
+        transaction_monitoring: 'Surveillance des transactions',
+        
+        multi_jurisdiction_filing: 'Dépôt multijuridictionnel',
+        cross_border_coordination: 'Coordination transfrontalière',
+        french_language_support: 'Support en français',
+        provincial_compliance: 'Conformité provinciale',
+        
+        sedar_plus_integration: 'Intégration SEDAR+',
+        market_surveillance: 'Surveillance du marché',
+        insider_trading_detection: 'Détection des délits d\'initiés',
+        investment_funds: 'Fonds d\'investissement',
+        
+        all_modules_combined: 'Tous les modules combinés',
+        cross_module_analytics: 'Analyses inter-modules',
+        unified_reporting: 'Rapports unifiés',
+        regulatory_intelligence: 'Intelligence réglementaire',
+        complete_coverage: 'Couverture complète',
+        
+        active_modules: 'Modules actifs',
+        coverage_rate: 'Taux de couverture',
+        monitoring: 'Surveillance',
+        powered: 'Alimenté par',
+        
+        run_comprehensive_risk_assessment: 'Effectuer une évaluation complète des risques',
+        generate_cross_module_report: 'Générer un rapport inter-modules',
+        configure_module_alerts: 'Configurer les alertes des modules',
+        
+        module_documentation: 'Documentation et aide des modules',
+        getting_started: 'Commencer',
+        modules_getting_started_text: 'Cliquez sur n\'importe quel module ci-dessus pour accéder aux outils réglementaires spécialisés. Chaque module fournit une couverture complète pour son domaine réglementaire.',
+        modules_overview: 'Aperçu des modules',
+        integration_guide: 'Guide d\'intégration',
+        troubleshooting: 'Dépannage',
+        
+        public_modules_description: 'PCRF fournit des modules réglementaires spécialisés couvrant tous les aspects du cadre réglementaire financier du Canada. Connectez-vous pour accéder aux fonctionnalités détaillées des modules.',
+        who_uses_modules: 'Qui utilise ces modules',
+        financial_institutions: 'Institutions financières',
+        streamlined_compliance: 'Conformité rationalisée dans plusieurs juridictions réglementaires',
+        regulatory_agencies: 'Organismes de réglementation',
+        enhanced_oversight: 'Surveillance renforcée avec partage de données unifié et coordination',
+        compliance_teams: 'Équipes de conformité',
+        comprehensive_tools: 'Outils complets pour la surveillance et les rapports réglementaires',
+        
+        access_information: 'Information d\'accès',
+        authentication_required: 'Authentification requise',
+        modules_login_required: 'L\'accès aux modules réglementaires spécialisés nécessite une authentification. Veuillez vous connecter pour accéder à toutes les fonctionnalités.',
+        login_to_access_modules: 'Se connecter pour accéder aux modules',
+        unified_view: 'Vue unifiée'
       }
     }
   }
