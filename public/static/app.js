@@ -4597,9 +4597,9 @@ const CFRP = {
           </h3>
           <p class="text-sm text-gray-600 mb-4">Complete coverage of specialized regulatory domains</p>
         </div>
-        <div class="grid grid-cols-6 gap-3">
+        <div class="flex gap-3">
               <!-- Insurance Module -->
-              <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden" onclick="CFRP.showInsuranceModule()">
+              <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden flex-1 min-w-0" onclick="CFRP.showInsuranceModule()">
                 <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
@@ -4617,7 +4617,8 @@ const CFRP = {
               </div>
               
               <!-- Pensions Module -->
-              <div class="flex-1 min-w-0 bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showPensionsModule()">
+              <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden flex-1 min-w-0" onclick="CFRP.showPensionsModule()">
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
                     <i class="fas fa-piggy-bank"></i>
@@ -4631,10 +4632,12 @@ const CFRP = {
                   <div class="flex items-center" data-i18n="investment_performance"><i class="fas fa-check text-green-600 mr-2"></i>Investment Performance</div>
                   <div class="flex items-center" data-i18n="actuarial_reports"><i class="fas fa-check text-green-600 mr-2"></i>Actuarial Reports</div>
                 </div>
+                </div>
               </div>
               
               <!-- Payments Module -->
-              <div class="flex-1 min-w-0 bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showPaymentsModule()">
+              <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden flex-1 min-w-0" onclick="CFRP.showPaymentsModule()">
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
                     <i class="fas fa-credit-card"></i>
@@ -4648,10 +4651,12 @@ const CFRP = {
                   <div class="flex items-center" data-i18n="crypto_exchanges"><i class="fas fa-check text-purple-600 mr-2"></i>Crypto Exchanges</div>
                   <div class="flex items-center" data-i18n="transaction_monitoring"><i class="fas fa-check text-purple-600 mr-2"></i>Transaction Monitoring</div>
                 </div>
+                </div>
               </div>
               
               <!-- Provincial Regulators Module -->
-              <div class="flex-1 min-w-0 bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showProvincialRegulatorsModule()">
+              <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden flex-1 min-w-0" onclick="CFRP.showProvincialRegulatorsModule()">
+                <div class="bg-gradient-to-br from-red-50 to-red-100 p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
                     <i class="fas fa-university"></i>
@@ -4665,10 +4670,12 @@ const CFRP = {
                   <div class="flex items-center" data-i18n="french_language_support"><i class="fas fa-check text-red-600 mr-2"></i>🇫🇷 French Language Support</div>
                   <div class="flex items-center" data-i18n="provincial_compliance"><i class="fas fa-check text-red-600 mr-2"></i>Provincial Compliance</div>
                 </div>
+                </div>
               </div>
               
               <!-- Securities Module -->
-              <div class="flex-1 min-w-0 bg-gradient-to-br from-yellow-50 to-yellow-100 border border-yellow-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showSecuritiesModule()">
+              <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden flex-1 min-w-0" onclick="CFRP.showSecuritiesModule()">
+                <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
                     <i class="fas fa-chart-bar"></i>
@@ -4682,10 +4689,12 @@ const CFRP = {
                   <div class="flex items-center" data-i18n="insider_trading_detection"><i class="fas fa-check text-yellow-600 mr-2"></i>Insider Trading Detection</div>
                   <div class="flex items-center" data-i18n="investment_funds"><i class="fas fa-check text-yellow-600 mr-2"></i>Investment Funds</div>
                 </div>
+                </div>
               </div>
               
               <!-- Comprehensive Dashboard -->
-              <div class="flex-1 min-w-0 bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showComprehensiveModulesDashboard()">
+              <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden flex-1 min-w-0" onclick="CFRP.showComprehensiveModulesDashboard()">
+                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
                     <i class="fas fa-tachometer-alt"></i>
