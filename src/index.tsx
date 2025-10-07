@@ -1,6 +1,5 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import { serveStatic } from 'hono/cloudflare-workers'
 import { authMiddleware } from './lib/auth'
 import { entityRoutes } from './api/entities'
 import { filingRoutes } from './api/filings'
@@ -128,8 +127,8 @@ app.use('/api/*', async (c, next) => {
 // Enable CORS for all API routes
 app.use('/api/*', cors())
 
-// Serve static files from public directory
-app.use('/static/*', serveStatic({ root: './public' }))
+// Static files are served directly by Cloudflare Pages from dist/ root
+// No need for serveStatic in Cloudflare Pages environment
 
 // Health check endpoint with comprehensive status
 app.get('/api/health', async (c) => {
@@ -256,10 +255,10 @@ app.get('/', (c) => {
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         
         <!-- Custom styles -->
-        <link href="/static/styles.css" rel="stylesheet">
+        <link href="/styles.css" rel="stylesheet">
         
         <!-- Internationalization -->
-        <script src="/static/i18n.js"></script>
+        <script src="/i18n.js"></script>
         
         <!-- Configure Tailwind theme -->
         <script>
@@ -859,7 +858,7 @@ app.get('/', (c) => {
           // Ensure CFRP object exists for inline handlers
           window.CFRP = window.CFRP || {};
         </script>
-        <script src="/static/app.js"></script>
+        <script src="/app.js"></script>
     </body>
     </html>
   `)
