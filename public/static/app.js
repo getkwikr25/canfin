@@ -4587,21 +4587,20 @@ const CFRP = {
     const alertsContainer = document.getElementById('alertsContainer')
     const statsContainer = document.getElementById('statsContainer')
     
-    // Unified modules grid - all six regulatory modules together
+    // Six separate module cards
     if (entitiesContainer) {
       entitiesContainer.innerHTML = `
-        <div class="bg-white rounded-lg shadow">
-          <div class="px-6 py-4 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-900">
-              <i class="fas fa-layer-group mr-2 text-blue-600"></i>
-              🇨🇦 Canadian Financial Regulatory Modules
-            </h3>
-            <p class="text-sm text-gray-600 mt-1">Complete coverage of specialized regulatory domains</p>
-          </div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-3">
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">
+            <i class="fas fa-layer-group mr-2 text-blue-600"></i>
+            🇨🇦 Canadian Financial Regulatory Modules
+          </h3>
+          <p class="text-sm text-gray-600 mb-4">Complete coverage of specialized regulatory domains</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <!-- Insurance Module -->
-              <div class="flex-1 min-w-0 bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showInsuranceModule()">
+              <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden" onclick="CFRP.showInsuranceModule()">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
                     <i class="fas fa-shield-alt"></i>
@@ -4700,9 +4699,9 @@ const CFRP = {
                   <div class="flex items-center" data-i18n="regulatory_intelligence"><i class="fas fa-check text-indigo-600 mr-2"></i>Regulatory Intelligence</div>
                   <div class="flex items-center" data-i18n="complete_coverage"><i class="fas fa-check text-indigo-600 mr-2"></i>Complete Coverage</div>
                 </div>
+                </div>
               </div>
             </div>
-          </div>
         </div>
       `
     }
@@ -5005,7 +5004,8 @@ const CFRP = {
             
             <div class="flex flex-wrap gap-3">
               <!-- Insurance Module -->
-              <div class="flex-1 min-w-0 bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showInsuranceModule()">
+              <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden" onclick="CFRP.showInsuranceModule()">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
                     <i class="fas fa-shield-alt"></i>
