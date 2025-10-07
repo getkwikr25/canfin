@@ -4599,7 +4599,7 @@ const CFRP = {
             <p class="text-sm text-gray-600 mt-1">Complete coverage of specialized regulatory domains</p>
           </div>
           <div class="p-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-3 gap-6">
               <!-- Insurance Module -->
               <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showInsuranceModule()">
                 <div class="text-center mb-4">
@@ -4655,7 +4655,7 @@ const CFRP = {
               <div class="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showProvincialRegulatorsModule()">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
-                    <i class="fas fa-maple-leaf"></i>
+                    <i class="fas fa-university"></i>
                   </div>
                   <h4 class="text-lg font-bold text-red-900" data-i18n="provincial_regulators">Provincial Regulators</h4>
                   <p class="text-sm text-red-700">FSRA, AMF, BCFSA, ASIC</p>
@@ -4837,7 +4837,7 @@ const CFRP = {
             <p class="text-gray-600 mb-6" data-i18n="public_modules_description">
               CFRP provides specialized regulatory modules covering all aspects of Canada's financial regulatory framework. Login to access detailed module functionality.
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-3 gap-6">
               <!-- Insurance Module -->
               <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6">
                 <div class="text-center mb-4">
@@ -4872,7 +4872,7 @@ const CFRP = {
               <div class="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
-                    <i class="fas fa-maple-leaf"></i>
+                    <i class="fas fa-university"></i>
                   </div>
                   <h4 class="text-lg font-bold text-red-900" data-i18n="provincial_regulators">Provincial Regulators</h4>
                   <p class="text-sm text-red-700">FSRA • AMF • BCFSA • ASIC</p>
@@ -5003,7 +5003,7 @@ const CFRP = {
               <p class="text-sm text-gray-600">Choose from specialized modules covering insurance, pensions, payments, provincial regulators, and securities</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-3 gap-6">
               <!-- Insurance Module -->
               <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showInsuranceModule()">
                 <div class="text-center mb-4">
@@ -5059,7 +5059,7 @@ const CFRP = {
               <div class="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showProvincialRegulatorsModule()">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
-                    <i class="fas fa-maple-leaf"></i>
+                    <i class="fas fa-university"></i>
                   </div>
                   <h4 class="text-lg font-bold text-red-900">Provincial Regulators</h4>
                   <p class="text-sm text-red-700">FSRA, AMF, BCFSA, ASIC</p>
