@@ -4822,7 +4822,7 @@ const CFRP = {
     const alertsContainer = document.getElementById('alertsContainer')
     const statsContainer = document.getElementById('statsContainer')
     
-    // Public modules overview
+    // Public modules overview - all six modules unified
     if (entitiesContainer) {
       entitiesContainer.innerHTML = `
         <div class="bg-white rounded-lg shadow">
@@ -4831,12 +4831,14 @@ const CFRP = {
               <i class="fas fa-layer-group mr-2 text-blue-600"></i>
               🇨🇦 Canadian Financial Regulatory Modules
             </h3>
+            <p class="text-sm text-gray-600 mt-1">Complete coverage of specialized regulatory domains</p>
           </div>
           <div class="p-6">
             <p class="text-gray-600 mb-6" data-i18n="public_modules_description">
               CFRP provides specialized regulatory modules covering all aspects of Canada's financial regulatory framework. Login to access detailed module functionality.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <!-- Insurance Module -->
               <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
@@ -4846,6 +4848,7 @@ const CFRP = {
                   <p class="text-sm text-blue-700">OSFI • FSRA • AMF • BCFSA</p>
                 </div>
               </div>
+              <!-- Pensions Module -->
               <div class="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
@@ -4855,6 +4858,7 @@ const CFRP = {
                   <p class="text-sm text-green-700">OSFI • Retraite Québec • FSRA</p>
                 </div>
               </div>
+              <!-- Payments Module -->
               <div class="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
@@ -4864,17 +4868,7 @@ const CFRP = {
                   <p class="text-sm text-purple-700">BoC • Payments Canada • FCAC</p>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      `
-    }
-    
-    if (filingsContainer) {
-      filingsContainer.innerHTML = `
-        <div class="bg-white rounded-lg shadow">
-          <div class="p-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <!-- Provincial Regulators Module -->
               <div class="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
@@ -4884,6 +4878,7 @@ const CFRP = {
                   <p class="text-sm text-red-700">FSRA • AMF • BCFSA • ASIC</p>
                 </div>
               </div>
+              <!-- Securities Module -->
               <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 border border-yellow-200 rounded-lg p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
@@ -4893,6 +4888,7 @@ const CFRP = {
                   <p class="text-sm text-yellow-700">OSC • AMF • CIRO • CSA</p>
                 </div>
               </div>
+              <!-- Integrated Dashboard -->
               <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200 rounded-lg p-6">
                 <div class="text-center mb-4">
                   <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
@@ -4906,6 +4902,11 @@ const CFRP = {
           </div>
         </div>
       `
+    }
+    
+    // Clear the second container - no longer needed for modules
+    if (filingsContainer) {
+      filingsContainer.innerHTML = ''
     }
     
     if (alertsContainer) {
