@@ -129,6 +129,7 @@ app.use('/api/*', cors())
 
 // Static files are served directly by Cloudflare Pages from dist/ root
 // No need for serveStatic in Cloudflare Pages environment
+// Updated paths to serve from root instead of /static/ subdirectory
 
 // Health check endpoint with comprehensive status
 app.get('/api/health', async (c) => {
