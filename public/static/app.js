@@ -4599,142 +4599,106 @@ const CFRP = {
             <p class="text-sm text-gray-600 mt-1">Complete coverage of specialized regulatory domains</p>
           </div>
           <div class="p-6">
-            <div class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <!-- Insurance Module -->
               <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showInsuranceModule()">
-                <div class="flex items-center gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl">
-                      <i class="fas fa-shield-alt"></i>
-                    </div>
+                <div class="text-center mb-4">
+                  <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
+                    <i class="fas fa-shield-alt"></i>
                   </div>
-                  <div class="flex-1">
-                    <div class="flex items-center justify-between mb-3">
-                      <h4 class="text-xl font-bold text-blue-900" data-i18n="insurance_regulation">Insurance Regulation</h4>
-                      <p class="text-sm text-blue-700 font-medium">OSFI, FSRA, AMF, BCFSA</p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 text-sm text-blue-800">
-                      <div class="flex items-center" data-i18n="federal_provincial_coverage"><i class="fas fa-check text-blue-600 mr-2"></i>Federal & Provincial Coverage</div>
-                      <div class="flex items-center" data-i18n="risk_assessment_mct"><i class="fas fa-check text-blue-600 mr-2"></i>Risk Assessment & MCT</div>
-                      <div class="flex items-center" data-i18n="market_conduct_reports"><i class="fas fa-check text-blue-600 mr-2"></i>Market Conduct Reports</div>
-                      <div class="flex items-center" data-i18n="solvency_monitoring"><i class="fas fa-check text-blue-600 mr-2"></i>Solvency Monitoring</div>
-                    </div>
-                  </div>
+                  <h4 class="text-lg font-bold text-blue-900" data-i18n="insurance_regulation">Insurance Regulation</h4>
+                  <p class="text-sm text-blue-700">OSFI, FSRA, AMF, BCFSA</p>
+                </div>
+                <div class="space-y-2 text-sm text-blue-800">
+                  <div class="flex items-center" data-i18n="federal_provincial_coverage"><i class="fas fa-check text-blue-600 mr-2"></i>Federal & Provincial Coverage</div>
+                  <div class="flex items-center" data-i18n="risk_assessment_mct"><i class="fas fa-check text-blue-600 mr-2"></i>Risk Assessment & MCT</div>
+                  <div class="flex items-center" data-i18n="market_conduct_reports"><i class="fas fa-check text-blue-600 mr-2"></i>Market Conduct Reports</div>
+                  <div class="flex items-center" data-i18n="solvency_monitoring"><i class="fas fa-check text-blue-600 mr-2"></i>Solvency Monitoring</div>
                 </div>
               </div>
               
               <!-- Pensions Module -->
               <div class="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showPensionsModule()">
-                <div class="flex items-center gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white text-2xl">
-                      <i class="fas fa-piggy-bank"></i>
-                    </div>
+                <div class="text-center mb-4">
+                  <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
+                    <i class="fas fa-piggy-bank"></i>
                   </div>
-                  <div class="flex-1">
-                    <div class="flex items-center justify-between mb-3">
-                      <h4 class="text-xl font-bold text-green-900" data-i18n="pensions_regulation">Pensions Regulation</h4>
-                      <p class="text-sm text-green-700 font-medium">OSFI, Retraite Québec, FSRA</p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 text-sm text-green-800">
-                      <div class="flex items-center" data-i18n="pension_plan_oversight"><i class="fas fa-check text-green-600 mr-2"></i>Pension Plan Oversight</div>
-                      <div class="flex items-center" data-i18n="funding_analysis"><i class="fas fa-check text-green-600 mr-2"></i>Funding Analysis</div>
-                      <div class="flex items-center" data-i18n="investment_performance"><i class="fas fa-check text-green-600 mr-2"></i>Investment Performance</div>
-                      <div class="flex items-center" data-i18n="actuarial_reports"><i class="fas fa-check text-green-600 mr-2"></i>Actuarial Reports</div>
-                    </div>
-                  </div>
+                  <h4 class="text-lg font-bold text-green-900" data-i18n="pensions_regulation">Pensions Regulation</h4>
+                  <p class="text-sm text-green-700">OSFI, Retraite Québec, FSRA</p>
+                </div>
+                <div class="space-y-2 text-sm text-green-800">
+                  <div class="flex items-center" data-i18n="pension_plan_oversight"><i class="fas fa-check text-green-600 mr-2"></i>Pension Plan Oversight</div>
+                  <div class="flex items-center" data-i18n="funding_analysis"><i class="fas fa-check text-green-600 mr-2"></i>Funding Analysis</div>
+                  <div class="flex items-center" data-i18n="investment_performance"><i class="fas fa-check text-green-600 mr-2"></i>Investment Performance</div>
+                  <div class="flex items-center" data-i18n="actuarial_reports"><i class="fas fa-check text-green-600 mr-2"></i>Actuarial Reports</div>
                 </div>
               </div>
               
               <!-- Payments Module -->
               <div class="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showPaymentsModule()">
-                <div class="flex items-center gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white text-2xl">
-                      <i class="fas fa-credit-card"></i>
-                    </div>
+                <div class="text-center mb-4">
+                  <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
+                    <i class="fas fa-credit-card"></i>
                   </div>
-                  <div class="flex-1">
-                    <div class="flex items-center justify-between mb-3">
-                      <h4 class="text-xl font-bold text-purple-900" data-i18n="payments_fintech">Payments & Fintech</h4>
-                      <p class="text-sm text-purple-700 font-medium">BoC, Payments Canada, FCAC</p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 text-sm text-purple-800">
-                      <div class="flex items-center" data-i18n="payment_service_providers"><i class="fas fa-check text-purple-600 mr-2"></i>Payment Service Providers</div>
-                      <div class="flex items-center" data-i18n="aml_kyc_compliance"><i class="fas fa-check text-purple-600 mr-2"></i>AML/KYC Compliance</div>
-                      <div class="flex items-center" data-i18n="crypto_exchanges"><i class="fas fa-check text-purple-600 mr-2"></i>Crypto Exchanges</div>
-                      <div class="flex items-center" data-i18n="transaction_monitoring"><i class="fas fa-check text-purple-600 mr-2"></i>Transaction Monitoring</div>
-                    </div>
-                  </div>
+                  <h4 class="text-lg font-bold text-purple-900" data-i18n="payments_fintech">Payments & Fintech</h4>
+                  <p class="text-sm text-purple-700">BoC, Payments Canada, FCAC</p>
+                </div>
+                <div class="space-y-2 text-sm text-purple-800">
+                  <div class="flex items-center" data-i18n="payment_service_providers"><i class="fas fa-check text-purple-600 mr-2"></i>Payment Service Providers</div>
+                  <div class="flex items-center" data-i18n="aml_kyc_compliance"><i class="fas fa-check text-purple-600 mr-2"></i>AML/KYC Compliance</div>
+                  <div class="flex items-center" data-i18n="crypto_exchanges"><i class="fas fa-check text-purple-600 mr-2"></i>Crypto Exchanges</div>
+                  <div class="flex items-center" data-i18n="transaction_monitoring"><i class="fas fa-check text-purple-600 mr-2"></i>Transaction Monitoring</div>
                 </div>
               </div>
               
               <!-- Provincial Regulators Module -->
               <div class="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showProvincialRegulatorsModule()">
-                <div class="flex items-center gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl">
-                      <i class="fas fa-maple-leaf"></i>
-                    </div>
+                <div class="text-center mb-4">
+                  <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
+                    <i class="fas fa-maple-leaf"></i>
                   </div>
-                  <div class="flex-1">
-                    <div class="flex items-center justify-between mb-3">
-                      <h4 class="text-xl font-bold text-red-900" data-i18n="provincial_regulators">Provincial Regulators</h4>
-                      <p class="text-sm text-red-700 font-medium">FSRA, AMF, BCFSA, ASIC</p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 text-sm text-red-800">
-                      <div class="flex items-center" data-i18n="multi_jurisdiction_filing"><i class="fas fa-check text-red-600 mr-2"></i>Multi-Jurisdiction Filing</div>
-                      <div class="flex items-center" data-i18n="cross_border_coordination"><i class="fas fa-check text-red-600 mr-2"></i>Cross-Border Coordination</div>
-                      <div class="flex items-center" data-i18n="french_language_support"><i class="fas fa-check text-red-600 mr-2"></i>🇫🇷 French Language Support</div>
-                      <div class="flex items-center" data-i18n="provincial_compliance"><i class="fas fa-check text-red-600 mr-2"></i>Provincial Compliance</div>
-                    </div>
-                  </div>
+                  <h4 class="text-lg font-bold text-red-900" data-i18n="provincial_regulators">Provincial Regulators</h4>
+                  <p class="text-sm text-red-700">FSRA, AMF, BCFSA, ASIC</p>
+                </div>
+                <div class="space-y-2 text-sm text-red-800">
+                  <div class="flex items-center" data-i18n="multi_jurisdiction_filing"><i class="fas fa-check text-red-600 mr-2"></i>Multi-Jurisdiction Filing</div>
+                  <div class="flex items-center" data-i18n="cross_border_coordination"><i class="fas fa-check text-red-600 mr-2"></i>Cross-Border Coordination</div>
+                  <div class="flex items-center" data-i18n="french_language_support"><i class="fas fa-check text-red-600 mr-2"></i>🇫🇷 French Language Support</div>
+                  <div class="flex items-center" data-i18n="provincial_compliance"><i class="fas fa-check text-red-600 mr-2"></i>Provincial Compliance</div>
                 </div>
               </div>
               
               <!-- Securities Module -->
               <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 border border-yellow-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showSecuritiesModule()">
-                <div class="flex items-center gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center text-white text-2xl">
-                      <i class="fas fa-chart-bar"></i>
-                    </div>
+                <div class="text-center mb-4">
+                  <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
+                    <i class="fas fa-chart-bar"></i>
                   </div>
-                  <div class="flex-1">
-                    <div class="flex items-center justify-between mb-3">
-                      <h4 class="text-xl font-bold text-yellow-900" data-i18n="securities_regulation">Securities Regulation</h4>
-                      <p class="text-sm text-yellow-700 font-medium">OSC, AMF, CIRO, CSA</p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 text-sm text-yellow-800">
-                      <div class="flex items-center" data-i18n="sedar_plus_integration"><i class="fas fa-check text-yellow-600 mr-2"></i>SEDAR+ Integration</div>
-                      <div class="flex items-center" data-i18n="market_surveillance"><i class="fas fa-check text-yellow-600 mr-2"></i>Market Surveillance</div>
-                      <div class="flex items-center" data-i18n="insider_trading_detection"><i class="fas fa-check text-yellow-600 mr-2"></i>Insider Trading Detection</div>
-                      <div class="flex items-center" data-i18n="investment_funds"><i class="fas fa-check text-yellow-600 mr-2"></i>Investment Funds</div>
-                    </div>
-                  </div>
+                  <h4 class="text-lg font-bold text-yellow-900" data-i18n="securities_regulation">Securities Regulation</h4>
+                  <p class="text-sm text-yellow-700">OSC, AMF, CIRO, CSA</p>
+                </div>
+                <div class="space-y-2 text-sm text-yellow-800">
+                  <div class="flex items-center" data-i18n="sedar_plus_integration"><i class="fas fa-check text-yellow-600 mr-2"></i>SEDAR+ Integration</div>
+                  <div class="flex items-center" data-i18n="market_surveillance"><i class="fas fa-check text-yellow-600 mr-2"></i>Market Surveillance</div>
+                  <div class="flex items-center" data-i18n="insider_trading_detection"><i class="fas fa-check text-yellow-600 mr-2"></i>Insider Trading Detection</div>
+                  <div class="flex items-center" data-i18n="investment_funds"><i class="fas fa-check text-yellow-600 mr-2"></i>Investment Funds</div>
                 </div>
               </div>
               
               <!-- Comprehensive Dashboard -->
               <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showComprehensiveModulesDashboard()">
-                <div class="flex items-center gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white text-2xl">
-                      <i class="fas fa-tachometer-alt"></i>
-                    </div>
+                <div class="text-center mb-4">
+                  <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
+                    <i class="fas fa-tachometer-alt"></i>
                   </div>
-                  <div class="flex-1">
-                    <div class="flex items-center justify-between mb-3">
-                      <h4 class="text-xl font-bold text-indigo-900" data-i18n="integrated_dashboard">Integrated Dashboard</h4>
-                      <p class="text-sm text-indigo-700 font-medium" data-i18n="all_modules_combined">All Modules Combined</p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 text-sm text-indigo-800">
-                      <div class="flex items-center" data-i18n="cross_module_analytics"><i class="fas fa-check text-indigo-600 mr-2"></i>Cross-Module Analytics</div>
-                      <div class="flex items-center" data-i18n="unified_reporting"><i class="fas fa-check text-indigo-600 mr-2"></i>Unified Reporting</div>
-                      <div class="flex items-center" data-i18n="regulatory_intelligence"><i class="fas fa-check text-indigo-600 mr-2"></i>Regulatory Intelligence</div>
-                      <div class="flex items-center" data-i18n="complete_coverage"><i class="fas fa-check text-indigo-600 mr-2"></i>Complete Coverage</div>
-                    </div>
-                  </div>
+                  <h4 class="text-lg font-bold text-indigo-900" data-i18n="integrated_dashboard">Integrated Dashboard</h4>
+                  <p class="text-sm text-indigo-700" data-i18n="all_modules_combined">All Modules Combined</p>
+                </div>
+                <div class="space-y-2 text-sm text-indigo-800">
+                  <div class="flex items-center" data-i18n="cross_module_analytics"><i class="fas fa-check text-indigo-600 mr-2"></i>Cross-Module Analytics</div>
+                  <div class="flex items-center" data-i18n="unified_reporting"><i class="fas fa-check text-indigo-600 mr-2"></i>Unified Reporting</div>
+                  <div class="flex items-center" data-i18n="regulatory_intelligence"><i class="fas fa-check text-indigo-600 mr-2"></i>Regulatory Intelligence</div>
+                  <div class="flex items-center" data-i18n="complete_coverage"><i class="fas fa-check text-indigo-600 mr-2"></i>Complete Coverage</div>
                 </div>
               </div>
             </div>
@@ -4873,89 +4837,65 @@ const CFRP = {
             <p class="text-gray-600 mb-6" data-i18n="public_modules_description">
               CFRP provides specialized regulatory modules covering all aspects of Canada's financial regulatory framework. Login to access detailed module functionality.
             </p>
-            <div class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <!-- Insurance Module -->
               <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6">
-                <div class="flex items-center gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl">
-                      <i class="fas fa-shield-alt"></i>
-                    </div>
+                <div class="text-center mb-4">
+                  <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
+                    <i class="fas fa-shield-alt"></i>
                   </div>
-                  <div class="flex-1">
-                    <h4 class="text-xl font-bold text-blue-900 mb-2" data-i18n="insurance_regulation">Insurance Regulation</h4>
-                    <p class="text-sm text-blue-700 font-medium">OSFI • FSRA • AMF • BCFSA</p>
-                  </div>
+                  <h4 class="text-lg font-bold text-blue-900" data-i18n="insurance_regulation">Insurance Regulation</h4>
+                  <p class="text-sm text-blue-700">OSFI • FSRA • AMF • BCFSA</p>
                 </div>
               </div>
               <!-- Pensions Module -->
               <div class="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-6">
-                <div class="flex items-center gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white text-2xl">
-                      <i class="fas fa-piggy-bank"></i>
-                    </div>
+                <div class="text-center mb-4">
+                  <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
+                    <i class="fas fa-piggy-bank"></i>
                   </div>
-                  <div class="flex-1">
-                    <h4 class="text-xl font-bold text-green-900 mb-2" data-i18n="pensions_regulation">Pensions Regulation</h4>
-                    <p class="text-sm text-green-700 font-medium">OSFI • Retraite Québec • FSRA</p>
-                  </div>
+                  <h4 class="text-lg font-bold text-green-900" data-i18n="pensions_regulation">Pensions Regulation</h4>
+                  <p class="text-sm text-green-700">OSFI • Retraite Québec • FSRA</p>
                 </div>
               </div>
               <!-- Payments Module -->
               <div class="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-6">
-                <div class="flex items-center gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white text-2xl">
-                      <i class="fas fa-credit-card"></i>
-                    </div>
+                <div class="text-center mb-4">
+                  <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
+                    <i class="fas fa-credit-card"></i>
                   </div>
-                  <div class="flex-1">
-                    <h4 class="text-xl font-bold text-purple-900 mb-2" data-i18n="payments_fintech">Payments & Fintech</h4>
-                    <p class="text-sm text-purple-700 font-medium">BoC • Payments Canada • FCAC</p>
-                  </div>
+                  <h4 class="text-lg font-bold text-purple-900" data-i18n="payments_fintech">Payments & Fintech</h4>
+                  <p class="text-sm text-purple-700">BoC • Payments Canada • FCAC</p>
                 </div>
               </div>
               <!-- Provincial Regulators Module -->
               <div class="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-6">
-                <div class="flex items-center gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl">
-                      <i class="fas fa-maple-leaf"></i>
-                    </div>
+                <div class="text-center mb-4">
+                  <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
+                    <i class="fas fa-maple-leaf"></i>
                   </div>
-                  <div class="flex-1">
-                    <h4 class="text-xl font-bold text-red-900 mb-2" data-i18n="provincial_regulators">Provincial Regulators</h4>
-                    <p class="text-sm text-red-700 font-medium">FSRA • AMF • BCFSA • ASIC</p>
-                  </div>
+                  <h4 class="text-lg font-bold text-red-900" data-i18n="provincial_regulators">Provincial Regulators</h4>
+                  <p class="text-sm text-red-700">FSRA • AMF • BCFSA • ASIC</p>
                 </div>
               </div>
               <!-- Securities Module -->
               <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 border border-yellow-200 rounded-lg p-6">
-                <div class="flex items-center gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center text-white text-2xl">
-                      <i class="fas fa-chart-bar"></i>
-                    </div>
+                <div class="text-center mb-4">
+                  <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
+                    <i class="fas fa-chart-bar"></i>
                   </div>
-                  <div class="flex-1">
-                    <h4 class="text-xl font-bold text-yellow-900 mb-2" data-i18n="securities_regulation">Securities Regulation</h4>
-                    <p class="text-sm text-yellow-700 font-medium">OSC • AMF • CIRO • CSA</p>
-                  </div>
+                  <h4 class="text-lg font-bold text-yellow-900" data-i18n="securities_regulation">Securities Regulation</h4>
+                  <p class="text-sm text-yellow-700">OSC • AMF • CIRO • CSA</p>
                 </div>
               </div>
               <!-- Integrated Dashboard -->
               <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200 rounded-lg p-6">
-                <div class="flex items-center gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white text-2xl">
-                      <i class="fas fa-tachometer-alt"></i>
-                    </div>
+                <div class="text-center mb-4">
+                  <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-3">
+                    <i class="fas fa-tachometer-alt"></i>
                   </div>
-                  <div class="flex-1">
-                    <h4 class="text-xl font-bold text-indigo-900 mb-2" data-i18n="integrated_dashboard">Integrated Dashboard</h4>
-                    <p class="text-sm text-indigo-700 font-medium" data-i18n="unified_view">Unified View</p>
-                  </div>
+                  <h4 class="text-lg font-bold text-indigo-900" data-i18n="integrated_dashboard">Integrated Dashboard</h4>
+                  <p class="text-sm text-indigo-700" data-i18n="unified_view">Unified View</p>
                 </div>
               </div>
             </div>
@@ -5063,7 +5003,7 @@ const CFRP = {
               <p class="text-sm text-gray-600">Choose from specialized modules covering insurance, pensions, payments, provincial regulators, and securities</p>
             </div>
             
-            <div class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <!-- Insurance Module -->
               <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showInsuranceModule()">
                 <div class="text-center mb-4">
