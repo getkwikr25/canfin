@@ -4587,15 +4587,16 @@ const CFRP = {
     const alertsContainer = document.getElementById('alertsContainer')
     const statsContainer = document.getElementById('statsContainer')
     
-    // Main modules grid - takes full width
+    // Unified modules grid - all six regulatory modules together
     if (entitiesContainer) {
       entitiesContainer.innerHTML = `
         <div class="bg-white rounded-lg shadow">
           <div class="px-6 py-4 border-b border-gray-200">
             <h3 class="text-lg font-semibold text-gray-900">
               <i class="fas fa-layer-group mr-2 text-blue-600"></i>
-              🇨🇦 Specialized Regulatory Modules
+              🇨🇦 Canadian Financial Regulatory Modules
             </h3>
+            <p class="text-sm text-gray-600 mt-1">Complete coverage of specialized regulatory domains</p>
           </div>
           <div class="p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -4649,24 +4650,7 @@ const CFRP = {
                   <div class="flex items-center" data-i18n="transaction_monitoring"><i class="fas fa-check text-purple-600 mr-2"></i>Transaction Monitoring</div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      `
-    }
-    
-    // Second row of modules
-    if (filingsContainer) {
-      filingsContainer.innerHTML = `
-        <div class="bg-white rounded-lg shadow">
-          <div class="px-6 py-4 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-900">
-              <i class="fas fa-university mr-2 text-blue-600"></i>
-              Additional Regulatory Coverage
-            </h3>
-          </div>
-          <div class="p-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              
               <!-- Provincial Regulators Module -->
               <div class="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showProvincialRegulatorsModule()">
                 <div class="text-center mb-4">
@@ -4721,6 +4705,11 @@ const CFRP = {
           </div>
         </div>
       `
+    }
+    
+    // Clear the second container - no longer needed for modules
+    if (filingsContainer) {
+      filingsContainer.innerHTML = ''
     }
     
     // Module Status and Quick Actions
