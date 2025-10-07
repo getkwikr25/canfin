@@ -4599,7 +4599,7 @@ const CFRP = {
             <p class="text-sm text-gray-600 mt-1">Complete coverage of specialized regulatory domains</p>
           </div>
           <div class="p-6">
-            <div class="grid grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
               <!-- Insurance Module -->
               <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showInsuranceModule()">
                 <div class="text-center mb-4">
@@ -4837,7 +4837,7 @@ const CFRP = {
             <p class="text-gray-600 mb-6" data-i18n="public_modules_description">
               CFRP provides specialized regulatory modules covering all aspects of Canada's financial regulatory framework. Login to access detailed module functionality.
             </p>
-            <div class="grid grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
               <!-- Insurance Module -->
               <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6">
                 <div class="text-center mb-4">
@@ -5003,7 +5003,7 @@ const CFRP = {
               <p class="text-sm text-gray-600">Choose from specialized modules covering insurance, pensions, payments, provincial regulators, and securities</p>
             </div>
             
-            <div class="grid grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
               <!-- Insurance Module -->
               <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer" onclick="CFRP.showInsuranceModule()">
                 <div class="text-center mb-4">
