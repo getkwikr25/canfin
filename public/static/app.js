@@ -4597,7 +4597,7 @@ const CFRP = {
           </h3>
           <p class="text-sm text-gray-600 mb-4">Complete coverage of specialized regulatory domains</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-6 gap-3">
               <!-- Insurance Module -->
               <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden" onclick="CFRP.showInsuranceModule()">
                 <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6">
