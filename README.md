@@ -85,12 +85,14 @@ CFRP is a **working regulatory platform** that enables real financial supervisio
 - ✅ Client borrowing ethics monitoring
 - ✅ Consumer protection intelligence dashboard
 
-**🧩 Specialized Regulatory Modules**:
+**🧩 Specialized Regulatory Modules** (Improved Layout):
 - ✅ **Insurance Module**: OSFI, FSRA, AMF, BCFSA coverage with MCT ratios and solvency monitoring
 - ✅ **Pensions Module**: Federal/provincial pension oversight, funding analysis, investment performance
 - ✅ **Payments Module**: Bank of Canada, Payments Canada, FCAC regulation of PSPs and fintech
 - ✅ **Provincial Regulators**: Multi-jurisdiction coordination with full French language support
 - ✅ **Securities Module**: OSC, AMF Securities, CIRO with SEDAR+ integration and market surveillance
+- ✅ **Integrated Dashboard**: Cross-module analytics with unified reporting and regulatory intelligence
+- ✅ **Unified Layout**: All six Canadian Financial Regulatory Modules grouped together for better organization
 
 **👥 Role-Based Access Control**:
 - ✅ Institution-specific data access (RBC sees only RBC data)
@@ -328,6 +330,8 @@ npm run db:console:local
 - **Payments & Fintech**: Payment service providers and digital currency regulation
 - **Provincial Coordination**: Multi-jurisdiction filing and cross-border regulatory coordination
 - **Securities Regulation**: Investment industry oversight with market surveillance
+- **Integrated Dashboard**: Cross-module analytics with unified reporting and regulatory intelligence
+- **Unified Module Organization**: All six regulatory modules consolidated in single cohesive layout
 - **Bilingual Support**: ✅ **FULLY WORKING** Complete French/English translation system with real-time language switching
 
 ### 🔄 **Enhancement Opportunities**
